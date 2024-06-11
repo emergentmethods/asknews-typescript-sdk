@@ -1,11 +1,11 @@
 {
   "name": "@emergentmethods/asknews-typescript-sdk",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Typescript SDK for AskNews API",
   "author": "Emergent Methods <contact@emergentmethods.ai>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/emergentmethods/asknews-typescript-sdk.git"
+    "url": "git+https://github.com/emergentmethods/asknews-typescript-sdk.git"
   },
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
