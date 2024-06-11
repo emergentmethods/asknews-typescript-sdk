@@ -1,12 +1,23 @@
 {
   "name": "@emergentmethods/asknews-typescript-sdk",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Typescript SDK for AskNews API",
   "author": "Emergent Methods <contact@emergentmethods.ai>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emergentmethods/asknews-typescript-sdk.git"
   },
+  "homepage": "https://docs.asknews.app",
+  "keywords": [
+    "newsapi",
+    "llm",
+    "rag",
+    "syntheticdata",
+    "news",
+    "asknews"
+  ],
+  "bugs": "https://github.com/emergentmethods/asknews-typescript-sdk/issues",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "module": "./dist/esm/index.js",
