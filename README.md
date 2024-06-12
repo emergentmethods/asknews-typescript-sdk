@@ -1,4 +1,4 @@
-## @emergentmethods/asknews-typescript-sdk@0.1.12
+## @emergentmethods/asknews-typescript-sdk@0.1.13
 
 Typescript SDK for the AskNews API.
 This SDK utilizes [Fetch API](https://fetch.spec.whatwg.org/). The generated Node module can be used in the following environments:
@@ -21,32 +21,29 @@ It can be used in both TypeScript and JavaScript. In TypeScript, the definition 
 ### Installation
 
 ```
-npm install @emergentmethods/asknews-typescript-sdk@0.1.12 --save
+npm install @emergentmethods/asknews-typescript-sdk@0.1.13 --save
 ```
 
 ## Usage
 
 ```ts
-import { Configuration, NewsApi } from "@emergentmethods/asknews-typescript-sdk";
+import { AskNewsSDK } from "@emergentmethods/asknews-typescript-sdk";
 
-const configuration = new Configuration({
+const ask = new AskNewsSDK({
   clientId: "YOUR-CLIENT-ID",
   clientSecret: "YOUR-CLIENT-SECRET",
   scopes: ["news"],
 });
 
-const newsApi = new NewsApi(configuration);
-
 // prompt-optimized string ready to go for any LLM:
 const newsContext = (
-  await newsApi.searchNews({
+  await ask.news.searchNews({
     query: "Effect of fed policy on tech sector",
     returnType: "string",
   })
 ).asString;
 
 console.log(newsContext);
-
 ```
 
 And you will have a prompt-optimized string ready to go for any LLM.
