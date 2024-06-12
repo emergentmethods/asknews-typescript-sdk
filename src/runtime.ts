@@ -96,10 +96,19 @@ export const DefaultConfig = new Configuration();
 export class BaseAPI {
 
     private static readonly jsonRegex = new RegExp('^(:?application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(:?;.*)?$', 'i');
+    private configuration: Configuration;
     private middleware: Middleware[];
 
-    constructor(protected configuration = DefaultConfig) {
-        this.middleware = configuration.middleware;
+    constructor(
+      protected _configuration:
+        | Configuration
+        | { [key: string]: string | string[] } = DefaultConfig,
+    ) {
+      if (!(_configuration instanceof Configuration)) {
+        _configuration = new Configuration(_configuration);
+      }
+      this.middleware = _configuration.middleware;
+      this.configuration = _configuration;
     }
 
     withMiddleware<T extends BaseAPI>(this: T, ...middlewares: Middleware[]) {
