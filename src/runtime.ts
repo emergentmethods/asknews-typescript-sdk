@@ -167,7 +167,9 @@ export class BaseAPI {
                 }),
             });
             if (response.status !== 200) {
-                throw new ResponseError(response, 'Failed to get access token');
+                const responseCode = response.status;
+                const responseText = await response.text();
+                throw new ResponseError(`Failed to get access token\nError code: ${responseCode}\nError message: ${responseText}`)
             }
             const json = await response.json();
             this.configuration.accessToken = {
@@ -185,7 +187,9 @@ export class BaseAPI {
         } else if (response && (response.status === 401 || response.status === 403)) {
             throw new UnauthorizedError(response, 'Please check your credentials or scopes');
         }
-        throw new ResponseError(response, 'Response returned an error code');
+        const responseCode = response.status;
+        const responseText = await response.text();
+        throw new ResponseError(`Response returned an error code: ${responseCode}\nError message: ${responseText}`)
     }
 
     private async createFetchParams(context: RequestOpts, initOverrides?: RequestInit | InitOverrideFunction) {
@@ -310,7 +314,7 @@ function isFormData(value: any): value is FormData {
 
 export class ResponseError extends Error {
     override name: "ResponseError" = "ResponseError";
-    constructor(public response: Response, msg?: string) {
+    constructor(msg?: string) {
         super(msg);
     }
 }
