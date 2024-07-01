@@ -16,27 +16,27 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface User
+ * @interface Choice
  */
-export interface User {
+export interface Choice {
 }
 
 /**
- * Check if a given object implements the User interface.
+ * Check if a given object implements the Choice interface.
  */
-export function instanceOfUser(value: object): boolean {
+export function instanceOfChoice(value: object): boolean {
     return true;
 }
 
-export function UserFromJSON(json: any): User {
-    return UserFromJSONTyped(json, false);
+export function ChoiceFromJSON(json: any): Choice {
+    return ChoiceFromJSONTyped(json, false);
 }
 
-export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User {
+export function ChoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Choice {
     return json;
 }
 
-export function UserToJSON(value?: User | null): any {
+export function ChoiceToJSON(value?: Choice | null): any {
     return value;
 }
 
