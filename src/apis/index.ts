@@ -18,13 +18,13 @@ export * from './StoriesApi';
 
 export class AskNewsSDK {
   protected configuration: runtime.Configuration;
-  protected analytics: AnalyticsApi;
-  protected chat: ChatApi;
-  protected forecast: ForecastApi;
-  protected news: NewsApi;
-  protected ping: PingApi;
-  protected reddit: RedditApi;
-  protected stories: StoriesApi;
+  public analytics: AnalyticsApi;
+  public chat: ChatApi;
+  public forecast: ForecastApi;
+  public news: NewsApi;
+  public ping: PingApi;
+  public reddit: RedditApi;
+  public stories: StoriesApi;
 
   constructor(
     _configuration:
