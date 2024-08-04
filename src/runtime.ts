@@ -27,6 +27,7 @@ export interface ConfigurationParameters {
     accessToken?: AccessToken; // parameter for oauth2 security
     headers?: HTTPHeaders; // header params we want to use on every request
     credentials?: RequestCredentials; // value for the credentials param we want to use on each request
+    debug?: boolean; // enable debug mode
 }
 
 export interface AccessToken {
@@ -85,6 +86,14 @@ export class Configuration {
 
     get credentials(): RequestCredentials | undefined {
         return this.configuration.credentials;
+    }
+
+    get debug(): boolean {
+        return this.configuration.debug || false;
+    }
+
+    set debug(debug: boolean) {
+        this.configuration.debug = debug;
     }
 }
 
@@ -149,11 +158,17 @@ export class BaseAPI {
             const now = (new Date()).getTime();
             const buffer = 10 * 1000;
             if (this.configuration.accessToken.expires - buffer < now) {
+                if (this.configuration.debug) {
+                    console.log('Access token has expired. Removing it from the configuration');
+                }
                 this.configuration.accessToken = undefined;
             }
         }
 
         if (!this.configuration.accessToken && this.configuration.clientId && this.configuration.clientSecret && this.configuration.scopes) {
+            if (this.configuration.debug) {
+                console.log('Requesting access token using client credentials');
+            }
             const token = btoa(`${this.configuration.clientId}:${this.configuration.clientSecret}`);
             const response = await fetch(AUTH_URL, {
                 headers: new Headers({
@@ -171,6 +186,9 @@ export class BaseAPI {
                 const responseText = await response.text();
                 throw new ResponseError(`Failed to get access token\nError code: ${responseCode}\nError message: ${responseText}`)
             }
+            if (this.configuration.debug) {
+                console.log('Access token received');
+            }
             const json = await response.json();
             this.configuration.accessToken = {
                 tokenType: json.token_type,
@@ -178,17 +196,39 @@ export class BaseAPI {
                 expires: (new Date()).getTime() + json.expires_in * 1000,
                 scopes: json.scope.split(' '),
             };
+            if (this.configuration.debug) {
+                console.log('Access token stored in the configuration');
+            }
         }
 
         const { url, init } = await this.createFetchParams(context, initOverrides);
+        if (this.configuration.debug) {
+            console.log(`Requesting ${url}`);
+            console.log('Headers:', init.headers);
+            console.log('Request body:', init.body);
+        }
         const response = await this.fetchApi(url, init);
+        if (this.configuration.debug) {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+        }
         if (response && response.status >= 200 && response.status < 300) {
+            if (this.configuration.debug) {
+                console.log('Request successful, returning response');
+            }
             return response;
         } else if (response && (response.status === 401 || response.status === 403)) {
+            if (this.configuration.debug) {
+                console.log('Request failed with 401/403 status code');
+            }
             throw new UnauthorizedError(response, 'Please check your credentials or scopes');
         }
         const responseCode = response.status;
         const responseText = await response.text();
+        if (this.configuration.debug) {
+            console.log('Request failed with status code', responseCode);
+            console.log('Response body:', responseText);
+        }
         throw new ResponseError(`Response returned an error code: ${responseCode}\nError message: ${responseText}`)
     }
 
