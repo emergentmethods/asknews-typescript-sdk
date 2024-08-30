@@ -16,37 +16,37 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface AbcAPIErrorModel17
+ * @interface AbcAPIErrorModel35
  */
-export interface AbcAPIErrorModel17 {
+export interface AbcAPIErrorModel35 {
     /**
      * 
      * @type {number}
-     * @memberof AbcAPIErrorModel17
+     * @memberof AbcAPIErrorModel35
      */
     code: number;
     /**
      * 
      * @type {string}
-     * @memberof AbcAPIErrorModel17
+     * @memberof AbcAPIErrorModel35
      */
     detail: string;
 }
 
 /**
- * Check if a given object implements the AbcAPIErrorModel17 interface.
+ * Check if a given object implements the AbcAPIErrorModel35 interface.
  */
-export function instanceOfAbcAPIErrorModel17(value: object): boolean {
+export function instanceOfAbcAPIErrorModel35(value: object): boolean {
     if (!('code' in value)) return false;
     if (!('detail' in value)) return false;
     return true;
 }
 
-export function AbcAPIErrorModel17FromJSON(json: any): AbcAPIErrorModel17 {
-    return AbcAPIErrorModel17FromJSONTyped(json, false);
+export function AbcAPIErrorModel35FromJSON(json: any): AbcAPIErrorModel35 {
+    return AbcAPIErrorModel35FromJSONTyped(json, false);
 }
 
-export function AbcAPIErrorModel17FromJSONTyped(json: any, ignoreDiscriminator: boolean): AbcAPIErrorModel17 {
+export function AbcAPIErrorModel35FromJSONTyped(json: any, ignoreDiscriminator: boolean): AbcAPIErrorModel35 {
     if (json == null) {
         return json;
     }
@@ -57,7 +57,7 @@ export function AbcAPIErrorModel17FromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function AbcAPIErrorModel17ToJSON(value?: AbcAPIErrorModel17 | null): any {
+export function AbcAPIErrorModel35ToJSON(value?: AbcAPIErrorModel35 | null): any {
     if (value == null) {
         return value;
     }

@@ -7,6 +7,8 @@ import { ChatApi } from "./ChatApi";
 export * from './ChatApi';
 import { ForecastApi } from "./ForecastApi";
 export * from './ForecastApi';
+import { GraphApi } from "./GraphApi";
+export * from './GraphApi';
 import { NewsApi } from "./NewsApi";
 export * from './NewsApi';
 import { PingApi } from "./PingApi";
@@ -21,6 +23,7 @@ export class AskNewsSDK {
   public analytics: AnalyticsApi;
   public chat: ChatApi;
   public forecast: ForecastApi;
+  public graph: GraphApi;
   public news: NewsApi;
   public ping: PingApi;
   public reddit: RedditApi;
@@ -38,6 +41,7 @@ export class AskNewsSDK {
     this.analytics = new AnalyticsApi(_configuration);
     this.chat = new ChatApi(_configuration);
     this.forecast = new ForecastApi(_configuration);
+    this.graph = new GraphApi(_configuration);
     this.news = new NewsApi(_configuration);
     this.ping = new PingApi(_configuration);
     this.reddit = new RedditApi(_configuration);
