@@ -59,6 +59,7 @@ export * from './CreateChatCompletionResponseStreamChoice1';
 export * from './CreateChatCompletionResponseUsage';
 export * from './CreateChatCompletionResponseUsage1';
 export * from './DisplayImageUrl';
+export * from './DomainUrl';
 export * from './Entities';
 export * from './FinanceResponse';
 export * from './FinanceResponseTimeSeries';
