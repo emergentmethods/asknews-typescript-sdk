@@ -94,4 +94,5 @@ export * from './ValidationErrorItem';
 export * from './ValidationErrorLocInner';
 export * from './ValidationErrorModel';
 export * from './Value';
+export * from './WebSearchResponse';
 export * from './WebSearchResult';

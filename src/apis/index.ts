@@ -17,6 +17,8 @@ import { RedditApi } from "./RedditApi";
 export * from './RedditApi';
 import { StoriesApi } from "./StoriesApi";
 export * from './StoriesApi';
+import { WebsearchApi } from "./WebsearchApi";
+export * from './WebsearchApi';
 
 export class AskNewsSDK {
   protected configuration: runtime.Configuration;
@@ -28,6 +30,7 @@ export class AskNewsSDK {
   public ping: PingApi;
   public reddit: RedditApi;
   public stories: StoriesApi;
+  public websearch: WebsearchApi;
 
   constructor(
     _configuration:
@@ -46,5 +49,6 @@ export class AskNewsSDK {
     this.ping = new PingApi(_configuration);
     this.reddit = new RedditApi(_configuration);
     this.stories = new StoriesApi(_configuration);
+    this.websearch = new WebsearchApi(_configuration);
   }
 }
