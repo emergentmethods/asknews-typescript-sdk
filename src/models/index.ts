@@ -61,6 +61,7 @@ export * from './CreateChatCompletionResponseUsage1';
 export * from './DisplayImageUrl';
 export * from './DomainUrl';
 export * from './Entities';
+export * from './FilterParams';
 export * from './FinanceResponse';
 export * from './FinanceResponseTimeSeries';
 export * from './FinanceResponseTimeSeriesData';
