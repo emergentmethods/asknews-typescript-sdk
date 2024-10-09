@@ -13,6 +13,8 @@ import { NewsApi } from "./NewsApi";
 export * from './NewsApi';
 import { PingApi } from "./PingApi";
 export * from './PingApi';
+import { ProfileApi } from "./ProfileApi";
+export * from './ProfileApi';
 import { RedditApi } from "./RedditApi";
 export * from './RedditApi';
 import { StoriesApi } from "./StoriesApi";
@@ -28,6 +30,7 @@ export class AskNewsSDK {
   public graph: GraphApi;
   public news: NewsApi;
   public ping: PingApi;
+  public profile: ProfileApi;
   public reddit: RedditApi;
   public stories: StoriesApi;
   public websearch: WebsearchApi;
@@ -47,6 +50,7 @@ export class AskNewsSDK {
     this.graph = new GraphApi(_configuration);
     this.news = new NewsApi(_configuration);
     this.ping = new PingApi(_configuration);
+    this.profile = new ProfileApi(_configuration);
     this.reddit = new RedditApi(_configuration);
     this.stories = new StoriesApi(_configuration);
     this.websearch = new WebsearchApi(_configuration);
