@@ -100,6 +100,7 @@ export * from './StoriesResponse';
 export * from './StoryResponse';
 export * from './StoryUpdate';
 export * from './StoryUpdateDisplayImageUrlsInner';
+export * from './ThreadId';
 export * from './User';
 export * from './UserProfile';
 export * from './UserProfileSubscription';

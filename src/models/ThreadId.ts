@@ -16,27 +16,27 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Offset3
+ * @interface ThreadId
  */
-export interface Offset3 {
+export interface ThreadId {
 }
 
 /**
- * Check if a given object implements the Offset3 interface.
+ * Check if a given object implements the ThreadId interface.
  */
-export function instanceOfOffset3(value: object): boolean {
+export function instanceOfThreadId(value: object): boolean {
     return true;
 }
 
-export function Offset3FromJSON(json: any): Offset3 {
-    return Offset3FromJSONTyped(json, false);
+export function ThreadIdFromJSON(json: any): ThreadId {
+    return ThreadIdFromJSONTyped(json, false);
 }
 
-export function Offset3FromJSONTyped(json: any, ignoreDiscriminator: boolean): Offset3 {
+export function ThreadIdFromJSONTyped(json: any, ignoreDiscriminator: boolean): ThreadId {
     return json;
 }
 
-export function Offset3ToJSON(value?: Offset3 | null): any {
+export function ThreadIdToJSON(value?: ThreadId | null): any {
     return value;
 }
 
