@@ -70,6 +70,7 @@ export * from './FinanceResponse';
 export * from './FinanceResponseTimeSeries';
 export * from './FinanceResponseTimeSeriesData';
 export * from './ForecastResponse';
+export * from './GeoCoordinate';
 export * from './GraphResponse';
 export * from './HTTPValidationError';
 export * from './IntraClusterStatistics';
