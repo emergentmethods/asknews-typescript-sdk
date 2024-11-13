@@ -526,3 +526,11 @@ export class TextApiResponse {
         return await this.raw.text();
     };
 }
+
+export class StreamApiResponse {
+    constructor(public raw: Response) {}
+
+    async value(): Promise<ReadableStream> {
+        return this.raw.body!;
+    };
+}

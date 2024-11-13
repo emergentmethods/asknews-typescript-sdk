@@ -47,7 +47,7 @@ export class ForecastApi extends runtime.BaseAPI {
      * Make an expert forecast for a news event.  This endpoint reaches into the news archive, looking back `lookback` days to extract the most relevant news articles, building a timeline of events, and then making an expert forecast.  This endpoint is more expensive than the search endpoint, it is calling gpt-4o or claude 3-5 on approx 15k tokens to build the forecast. This endpoint counts toward \"deep\" calls in the billing system.  It returns the forecast, the reasoning, and the sources.
      * Make an expert forecast for a news event.
      */
-    async getForecastRaw(requestParameters: GetForecastRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ForecastResponse>> {
+    async getForecastRaw(requestParameters: GetForecastRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ForecastResponse> > {
         if (requestParameters['query'] == null) {
             throw new runtime.RequiredError(
                 'query',
@@ -105,6 +105,7 @@ export class ForecastApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ForecastResponseFromJSON(jsonValue));
     }

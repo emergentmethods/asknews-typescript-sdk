@@ -39,7 +39,7 @@ export class WebsearchApi extends runtime.BaseAPI {
      * Run a live websearch on a set of queries, get back a fully structured and LLM-distilled response (in addition to the raw text if you need that as well).  Your response includes as_string and as_dicts, where as_string is a prompt-optimized distillation of the information, done by an LLM. as_dicts contains all the details necessary to feed into other parts of your application.
      * Run a live websearch.
      */
-    async liveWebSearchRaw(requestParameters: LiveWebSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebSearchResponse>> {
+    async liveWebSearchRaw(requestParameters: LiveWebSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebSearchResponse> > {
         if (requestParameters['queries'] == null) {
             throw new runtime.RequiredError(
                 'queries',
@@ -65,6 +65,7 @@ export class WebsearchApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebSearchResponseFromJSON(jsonValue));
     }

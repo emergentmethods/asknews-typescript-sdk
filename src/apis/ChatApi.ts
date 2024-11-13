@@ -69,7 +69,7 @@ export class ChatApi extends runtime.BaseAPI {
      * Get the chat completions for a given user message. This endpoint follows the OpenAI API spec. It includes a couple extra params, which include:  - **journalist_mode**: Whether to activate an auto prompt that is more keen on AP styling, citations, and fair reporting. Setting to false, you get a vanilla LLM with the news pre added to the system prompt. No other prompting. - **inline_citations**: Decides how you want the bot to cite sources. It can use brackets, or it can also include the markdown with URL automatically. - **asknews_watermark**: Whether to include the AskNews watermark in the response.
      * Get chat completions from a news-infused AI assistant
      */
-    async getChatCompletionsRaw(requestParameters: GetChatCompletionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateChatCompletionResponse1>> {
+    async getChatCompletionsRaw(requestParameters: GetChatCompletionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateChatCompletionResponse1>  | runtime.StreamApiResponse> {
         if (requestParameters['createChatCompletionRequest'] == null) {
             throw new runtime.RequiredError(
                 'createChatCompletionRequest',
@@ -91,6 +91,10 @@ export class ChatApi extends runtime.BaseAPI {
             body: CreateChatCompletionRequestToJSON(requestParameters['createChatCompletionRequest']),
         }, initOverrides);
 
+        if ('createChatCompletionRequest' in requestParameters && requestParameters['createChatCompletionRequest'] != null && 'stream' in requestParameters['createChatCompletionRequest'] && requestParameters['createChatCompletionRequest']['stream'] === true) {
+            return new runtime.StreamApiResponse(response);
+        }
+
         return new runtime.JSONApiResponse(response, (jsonValue) => CreateChatCompletionResponse1FromJSON(jsonValue));
     }
 
@@ -98,7 +102,7 @@ export class ChatApi extends runtime.BaseAPI {
      * Get the chat completions for a given user message. This endpoint follows the OpenAI API spec. It includes a couple extra params, which include:  - **journalist_mode**: Whether to activate an auto prompt that is more keen on AP styling, citations, and fair reporting. Setting to false, you get a vanilla LLM with the news pre added to the system prompt. No other prompting. - **inline_citations**: Decides how you want the bot to cite sources. It can use brackets, or it can also include the markdown with URL automatically. - **asknews_watermark**: Whether to include the AskNews watermark in the response.
      * Get chat completions from a news-infused AI assistant
      */
-    async getChatCompletions(requestParameters: GetChatCompletionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateChatCompletionResponse1> {
+    async getChatCompletions(requestParameters: GetChatCompletionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateChatCompletionResponse1 | ReadableStream<any>> {
         const response = await this.getChatCompletionsRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -107,7 +111,7 @@ export class ChatApi extends runtime.BaseAPI {
      * Get the headline example questions related to the given queries.
      * Get example headline questions
      */
-    async getHeadlineQuestionsRaw(requestParameters: GetHeadlineQuestionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<string> | null; }>> {
+    async getHeadlineQuestionsRaw(requestParameters: GetHeadlineQuestionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<string> | null; }> > {
         const queryParameters: any = {};
 
         if (requestParameters['queries'] != null) {
@@ -122,6 +126,7 @@ export class ChatApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -139,7 +144,7 @@ export class ChatApi extends runtime.BaseAPI {
      * List the available chat models.
      * List available chat models
      */
-    async listChatModelsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListModelResponse>> {
+    async listChatModelsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListModelResponse> > {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -150,6 +155,7 @@ export class ChatApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ListModelResponseFromJSON(jsonValue));
     }

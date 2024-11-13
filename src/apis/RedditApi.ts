@@ -59,7 +59,7 @@ export class RedditApi extends runtime.BaseAPI {
      * Go to Reddit, search threads, summarize the threads, return analysis. `deep`=True is a live web scrape, AskNews searches Reddit, finds threads, summarizes them, analyzes them, and returns the results. `deep`=False is a search in AskNews\' existing database of Reddit threads.
      * Search Reddit, summarize threads, and return analysis.
      */
-    async searchRedditRaw(requestParameters: SearchRedditRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RedditResponse>> {
+    async searchRedditRaw(requestParameters: SearchRedditRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RedditResponse> > {
         if (requestParameters['keywords'] == null) {
             throw new runtime.RequiredError(
                 'keywords',
@@ -105,6 +105,7 @@ export class RedditApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RedditResponseFromJSON(jsonValue));
     }

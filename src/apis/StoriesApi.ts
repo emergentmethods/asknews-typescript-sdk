@@ -103,7 +103,7 @@ export class StoriesApi extends runtime.BaseAPI {
      * Filter on our custom, in-house written, stories/events/narratives.  These stories are based on clusters of articles (which come through this endpoint as well, so you can consider this a clustering endpoint). We write stories and track them through time.  The enrichments include a full Reddit overview (including all the thread metadata), as well as descriptions of the reporting voice, the key takeaways, contradictions, all the entities, and much, much more.  You can see this data in action, and filter it similarly at `https://asknews.app/stories`
      * Filter and search for top news narratives
      */
-    async getStoriesRaw(requestParameters: GetStoriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StoriesResponse>> {
+    async getStoriesRaw(requestParameters: GetStoriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StoriesResponse> > {
         const queryParameters: any = {};
 
         if (requestParameters['query'] != null) {
@@ -195,6 +195,7 @@ export class StoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
+
         return new runtime.JSONApiResponse(response, (jsonValue) => StoriesResponseFromJSON(jsonValue));
     }
 
@@ -211,7 +212,7 @@ export class StoriesApi extends runtime.BaseAPI {
      * Get a single news story given its UUID.
      * Get a story containing updates
      */
-    async getStoryRaw(requestParameters: GetStoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StoryResponse>> {
+    async getStoryRaw(requestParameters: GetStoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StoryResponse> > {
         if (requestParameters['storyId'] == null) {
             throw new runtime.RequiredError(
                 'storyId',
@@ -253,6 +254,7 @@ export class StoriesApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoryResponseFromJSON(jsonValue));
     }

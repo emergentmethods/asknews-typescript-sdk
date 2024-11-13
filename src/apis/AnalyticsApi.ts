@@ -56,7 +56,7 @@ export class AnalyticsApi extends runtime.BaseAPI {
      * Get the news sentiment for a given asset during a provided period of time.  This endpoint is good for narrow AI, like using in combination with a regressor to forecast prices etc.
      * Get a timeseries of finance news sentiment for assets
      */
-    async getAssetSentimentRaw(requestParameters: GetAssetSentimentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FinanceResponse>> {
+    async getAssetSentimentRaw(requestParameters: GetAssetSentimentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FinanceResponse> > {
         if (requestParameters['asset'] == null) {
             throw new runtime.RequiredError(
                 'asset',
@@ -90,6 +90,7 @@ export class AnalyticsApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FinanceResponseFromJSON(jsonValue));
     }

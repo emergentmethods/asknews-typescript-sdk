@@ -133,7 +133,7 @@ export class NewsApi extends runtime.BaseAPI {
      * Get a single article given a UUID.
      * Get an article by its UUID
      */
-    async getArticleRaw(requestParameters: GetArticleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SearchResponseDictItem>> {
+    async getArticleRaw(requestParameters: GetArticleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SearchResponseDictItem> > {
         if (requestParameters['articleId'] == null) {
             throw new runtime.RequiredError(
                 'articleId',
@@ -152,6 +152,7 @@ export class NewsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
+
         return new runtime.JSONApiResponse(response, (jsonValue) => SearchResponseDictItemFromJSON(jsonValue));
     }
 
@@ -168,7 +169,7 @@ export class NewsApi extends runtime.BaseAPI {
      * This endpoint is primarly used for transparency and monitoring the diversity of the data.  Visualized at `https://asknews.app/transparency`.  Get the distribution of sources/languages/countries underlying AskNews content.
      * Get the sources underlying AskNews
      */
-    async getSourcesReportRaw(requestParameters: GetSourcesReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SourceReportItem>>> {
+    async getSourcesReportRaw(requestParameters: GetSourcesReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SourceReportItem>> > {
         const queryParameters: any = {};
 
         if (requestParameters['nPoints'] != null) {
@@ -200,6 +201,7 @@ export class NewsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
+
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SourceReportItemFromJSON));
     }
 
@@ -216,7 +218,7 @@ export class NewsApi extends runtime.BaseAPI {
      * Search for any news, up to the last 5 minutes or in our extensive historical archive filled with 100s of millions of articles.  Geared toward low-latency applications, where time is of the essence. For example, this endpoint is commonly used for quickly getting news context for an LLM.  This endpoint is also commonly used for synthetic data curation. For example, say you are fine-tuning a model for sports. You could filter  with `classification=\"Sports\"` and build a dataset of sports articles.  News articles come with an abundance of valuable metadata, including full summaries, sentiment, entities, reporting voice, page rank, language, and much much more.  An example of this data in action can be found and interacted with at `https://asknews.app/chat`
      * Search for enriched real-time news context
      */
-    async searchNewsRaw(requestParameters: SearchNewsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SearchResponse>> {
+    async searchNewsRaw(requestParameters: SearchNewsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SearchResponse> > {
         const queryParameters: any = {};
 
         if (requestParameters['query'] != null) {
@@ -347,6 +349,7 @@ export class NewsApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SearchResponseFromJSON(jsonValue));
     }
