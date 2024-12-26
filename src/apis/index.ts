@@ -3,6 +3,8 @@
 import * as runtime from "../runtime";
 import { AnalyticsApi } from "./AnalyticsApi";
 export * from './AnalyticsApi';
+import { AutofilterApi } from "./AutofilterApi";
+export * from './AutofilterApi';
 import { ChatApi } from "./ChatApi";
 export * from './ChatApi';
 import { ForecastApi } from "./ForecastApi";
@@ -25,6 +27,7 @@ export * from './WebsearchApi';
 export class AskNewsSDK {
   protected configuration: runtime.Configuration;
   public analytics: AnalyticsApi;
+  public autofilter: AutofilterApi;
   public chat: ChatApi;
   public forecast: ForecastApi;
   public graph: GraphApi;
@@ -45,6 +48,7 @@ export class AskNewsSDK {
     }
     this.configuration = _configuration;
     this.analytics = new AnalyticsApi(_configuration);
+    this.autofilter = new AutofilterApi(_configuration);
     this.chat = new ChatApi(_configuration);
     this.forecast = new ForecastApi(_configuration);
     this.graph = new GraphApi(_configuration);
