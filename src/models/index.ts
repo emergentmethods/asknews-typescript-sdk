@@ -66,6 +66,7 @@ export * from './DisplayImageUrl';
 export * from './DomainUrl';
 export * from './Entities';
 export * from './FilterParams';
+export * from './FilterParamsMetadata';
 export * from './FilterParamsResponse';
 export * from './FinanceResponse';
 export * from './FinanceResponseTimeSeries';

@@ -13,6 +13,19 @@
  */
 
 import { mapValues } from '../runtime';
+import type { FilterParams } from './FilterParams';
+import {
+    FilterParamsFromJSON,
+    FilterParamsFromJSONTyped,
+    FilterParamsToJSON,
+} from './FilterParams';
+import type { FilterParamsMetadata } from './FilterParamsMetadata';
+import {
+    FilterParamsMetadataFromJSON,
+    FilterParamsMetadataFromJSONTyped,
+    FilterParamsMetadataToJSON,
+} from './FilterParamsMetadata';
+
 /**
  * 
  * @export
@@ -21,185 +34,24 @@ import { mapValues } from '../runtime';
 export interface FilterParamsResponse {
     /**
      * 
-     * @type {string}
+     * @type {FilterParams}
      * @memberof FilterParamsResponse
      */
-    query?: string;
+    filterParams: FilterParams;
     /**
      * 
-     * @type {Array<string>}
+     * @type {FilterParamsMetadata}
      * @memberof FilterParamsResponse
      */
-    categories?: Array<FilterParamsResponseCategoriesEnum>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilterParamsResponse
-     */
-    reportingVoice?: Array<FilterParamsResponseReportingVoiceEnum>;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilterParamsResponse
-     */
-    strategy?: FilterParamsResponseStrategyEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof FilterParamsResponse
-     */
-    hoursBack?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilterParamsResponse
-     */
-    stringGuarantee?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilterParamsResponse
-     */
-    stringGuaranteeOp?: FilterParamsResponseStringGuaranteeOpEnum;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilterParamsResponse
-     */
-    reverseStringGuarantee?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilterParamsResponse
-     */
-    entityGuarantee?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilterParamsResponse
-     */
-    entityGuaranteeOp?: FilterParamsResponseEntityGuaranteeOpEnum;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilterParamsResponse
-     */
-    countries?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilterParamsResponse
-     */
-    continents?: Array<FilterParamsResponseContinentsEnum>;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilterParamsResponse
-     */
-    sentiment?: FilterParamsResponseSentimentEnum;
+    metadata: FilterParamsMetadata;
 }
-
-
-/**
- * @export
- */
-export const FilterParamsResponseCategoriesEnum = {
-    All: 'All',
-    Business: 'Business',
-    Crime: 'Crime',
-    Politics: 'Politics',
-    Science: 'Science',
-    Sports: 'Sports',
-    Technology: 'Technology',
-    Military: 'Military',
-    Health: 'Health',
-    Entertainment: 'Entertainment',
-    Finance: 'Finance',
-    Culture: 'Culture',
-    Climate: 'Climate',
-    Environment: 'Environment',
-    World: 'World'
-} as const;
-export type FilterParamsResponseCategoriesEnum = typeof FilterParamsResponseCategoriesEnum[keyof typeof FilterParamsResponseCategoriesEnum];
-
-/**
- * @export
- */
-export const FilterParamsResponseReportingVoiceEnum = {
-    Objective: 'Objective',
-    Subjective: 'Subjective',
-    Investigative: 'Investigative',
-    Narrative: 'Narrative',
-    Analytical: 'Analytical',
-    Advocacy: 'Advocacy',
-    Conversational: 'Conversational',
-    Satirical: 'Satirical',
-    Emotive: 'Emotive',
-    Explanatory: 'Explanatory',
-    Persuasive: 'Persuasive',
-    Sensational: 'Sensational',
-    Unknown: 'Unknown',
-    All: 'all'
-} as const;
-export type FilterParamsResponseReportingVoiceEnum = typeof FilterParamsResponseReportingVoiceEnum[keyof typeof FilterParamsResponseReportingVoiceEnum];
-
-/**
- * @export
- */
-export const FilterParamsResponseStrategyEnum = {
-    LatestNews: 'latest news',
-    NewsKnowledge: 'news knowledge',
-    Default: 'default'
-} as const;
-export type FilterParamsResponseStrategyEnum = typeof FilterParamsResponseStrategyEnum[keyof typeof FilterParamsResponseStrategyEnum];
-
-/**
- * @export
- */
-export const FilterParamsResponseStringGuaranteeOpEnum = {
-    And: 'AND',
-    Or: 'OR'
-} as const;
-export type FilterParamsResponseStringGuaranteeOpEnum = typeof FilterParamsResponseStringGuaranteeOpEnum[keyof typeof FilterParamsResponseStringGuaranteeOpEnum];
-
-/**
- * @export
- */
-export const FilterParamsResponseEntityGuaranteeOpEnum = {
-    And: 'AND',
-    Or: 'OR'
-} as const;
-export type FilterParamsResponseEntityGuaranteeOpEnum = typeof FilterParamsResponseEntityGuaranteeOpEnum[keyof typeof FilterParamsResponseEntityGuaranteeOpEnum];
-
-/**
- * @export
- */
-export const FilterParamsResponseContinentsEnum = {
-    Africa: 'Africa',
-    Asia: 'Asia',
-    Oceania: 'Oceania',
-    Europe: 'Europe',
-    MiddleEast: 'Middle East',
-    NorthAmerica: 'North America',
-    SouthAmerica: 'South America'
-} as const;
-export type FilterParamsResponseContinentsEnum = typeof FilterParamsResponseContinentsEnum[keyof typeof FilterParamsResponseContinentsEnum];
-
-/**
- * @export
- */
-export const FilterParamsResponseSentimentEnum = {
-    Negative: 'negative',
-    Neutral: 'neutral',
-    Positive: 'positive'
-} as const;
-export type FilterParamsResponseSentimentEnum = typeof FilterParamsResponseSentimentEnum[keyof typeof FilterParamsResponseSentimentEnum];
-
 
 /**
  * Check if a given object implements the FilterParamsResponse interface.
  */
 export function instanceOfFilterParamsResponse(value: object): boolean {
+    if (!('filterParams' in value)) return false;
+    if (!('metadata' in value)) return false;
     return true;
 }
 
@@ -213,19 +65,8 @@ export function FilterParamsResponseFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'query': json['query'] == null ? undefined : json['query'],
-        'categories': json['categories'] == null ? undefined : json['categories'],
-        'reportingVoice': json['reporting_voice'] == null ? undefined : json['reporting_voice'],
-        'strategy': json['strategy'] == null ? undefined : json['strategy'],
-        'hoursBack': json['hours_back'] == null ? undefined : json['hours_back'],
-        'stringGuarantee': json['string_guarantee'] == null ? undefined : json['string_guarantee'],
-        'stringGuaranteeOp': json['string_guarantee_op'] == null ? undefined : json['string_guarantee_op'],
-        'reverseStringGuarantee': json['reverse_string_guarantee'] == null ? undefined : json['reverse_string_guarantee'],
-        'entityGuarantee': json['entity_guarantee'] == null ? undefined : json['entity_guarantee'],
-        'entityGuaranteeOp': json['entity_guarantee_op'] == null ? undefined : json['entity_guarantee_op'],
-        'countries': json['countries'] == null ? undefined : json['countries'],
-        'continents': json['continents'] == null ? undefined : json['continents'],
-        'sentiment': json['sentiment'] == null ? undefined : json['sentiment'],
+        'filterParams': FilterParamsFromJSON(json['filter_params']),
+        'metadata': FilterParamsMetadataFromJSON(json['metadata']),
     };
 }
 
@@ -235,19 +76,8 @@ export function FilterParamsResponseToJSON(value?: FilterParamsResponse | null):
     }
     return {
         
-        'query': value['query'],
-        'categories': value['categories'],
-        'reporting_voice': value['reportingVoice'],
-        'strategy': value['strategy'],
-        'hours_back': value['hoursBack'],
-        'string_guarantee': value['stringGuarantee'],
-        'string_guarantee_op': value['stringGuaranteeOp'],
-        'reverse_string_guarantee': value['reverseStringGuarantee'],
-        'entity_guarantee': value['entityGuarantee'],
-        'entity_guarantee_op': value['entityGuaranteeOp'],
-        'countries': value['countries'],
-        'continents': value['continents'],
-        'sentiment': value['sentiment'],
+        'filter_params': FilterParamsToJSON(value['filterParams']),
+        'metadata': FilterParamsMetadataToJSON(value['metadata']),
     };
 }
 
