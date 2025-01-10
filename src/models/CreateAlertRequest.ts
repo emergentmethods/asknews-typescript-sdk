@@ -39,7 +39,7 @@ export interface CreateAlertRequest {
      */
     query?: string;
     /**
-     * The cron schedule for the alert. For example every 15 minutes is '*/15 * * * *'. See https://crontab.run/ for more examples
+     * The cron schedule for the alert. For example hourly is '0 * * * *'. See https://crontab.run/ for more examples
      * @type {string}
      * @memberof CreateAlertRequest
      */
