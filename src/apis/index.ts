@@ -1,6 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import * as runtime from "../runtime";
+import { AlertsApi } from "./AlertsApi";
+export * from './AlertsApi';
 import { AnalyticsApi } from "./AnalyticsApi";
 export * from './AnalyticsApi';
 import { AutofilterApi } from "./AutofilterApi";
@@ -26,6 +28,7 @@ export * from './WebsearchApi';
 
 export class AskNewsSDK {
   protected configuration: runtime.Configuration;
+  public alerts: AlertsApi;
   public analytics: AnalyticsApi;
   public autofilter: AutofilterApi;
   public chat: ChatApi;
@@ -47,6 +50,7 @@ export class AskNewsSDK {
       _configuration = new runtime.Configuration(_configuration);
     }
     this.configuration = _configuration;
+    this.alerts = new AlertsApi(_configuration);
     this.analytics = new AnalyticsApi(_configuration);
     this.autofilter = new AutofilterApi(_configuration);
     this.chat = new ChatApi(_configuration);
