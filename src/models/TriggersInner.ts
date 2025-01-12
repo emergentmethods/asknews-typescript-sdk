@@ -26,13 +26,6 @@ import {
     GoogleDocsActionFromJSONTyped,
     GoogleDocsActionToJSON,
 } from './GoogleDocsAction';
-import type { ReportAction } from './ReportAction';
-import {
-    instanceOfReportAction,
-    ReportActionFromJSON,
-    ReportActionFromJSONTyped,
-    ReportActionToJSON,
-} from './ReportAction';
 import type { WebhookAction } from './WebhookAction';
 import {
     instanceOfWebhookAction,
@@ -46,7 +39,7 @@ import {
  * 
  * @export
  */
-export type TriggersInner = { action: 'email' } & EmailAction | { action: 'google_docs' } & GoogleDocsAction | { action: 'report' } & ReportAction | { action: 'webhook' } & WebhookAction;
+export type TriggersInner = { action: 'email' } & EmailAction | { action: 'google_docs' } & GoogleDocsAction | { action: 'webhook' } & WebhookAction;
 
 export function TriggersInnerFromJSON(json: any): TriggersInner {
     return TriggersInnerFromJSONTyped(json, false);
@@ -61,8 +54,6 @@ export function TriggersInnerFromJSONTyped(json: any, ignoreDiscriminator: boole
             return Object.assign({}, EmailActionFromJSONTyped(json, true), { action: 'email' });
         case 'google_docs':
             return Object.assign({}, GoogleDocsActionFromJSONTyped(json, true), { action: 'google_docs' });
-        case 'report':
-            return Object.assign({}, ReportActionFromJSONTyped(json, true), { action: 'report' });
         case 'webhook':
             return Object.assign({}, WebhookActionFromJSONTyped(json, true), { action: 'webhook' });
         default:
@@ -79,8 +70,6 @@ export function TriggersInnerToJSON(value?: TriggersInner | null): any {
             return EmailActionToJSON(value);
         case 'google_docs':
             return GoogleDocsActionToJSON(value);
-        case 'report':
-            return ReportActionToJSON(value);
         case 'webhook':
             return WebhookActionToJSON(value);
         default:

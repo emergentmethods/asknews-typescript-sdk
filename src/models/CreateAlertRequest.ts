@@ -19,6 +19,12 @@ import {
     FilterParamsFromJSONTyped,
     FilterParamsToJSON,
 } from './FilterParams';
+import type { ReportRequest } from './ReportRequest';
+import {
+    ReportRequestFromJSON,
+    ReportRequestFromJSONTyped,
+    ReportRequestToJSON,
+} from './ReportRequest';
 import type { TriggersInner } from './TriggersInner';
 import {
     TriggersInnerFromJSON,
@@ -62,6 +68,12 @@ export interface CreateAlertRequest {
      * @memberof CreateAlertRequest
      */
     filterParams?: FilterParams;
+    /**
+     * 
+     * @type {ReportRequest}
+     * @memberof CreateAlertRequest
+     */
+    report?: ReportRequest;
     /**
      * 
      * @type {Array<TriggersInner>}
@@ -124,6 +136,7 @@ export function CreateAlertRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'model': json['model'],
         'shareLink': json['share_link'] == null ? undefined : json['share_link'],
         'filterParams': json['filter_params'] == null ? undefined : FilterParamsFromJSON(json['filter_params']),
+        'report': json['report'] == null ? undefined : ReportRequestFromJSON(json['report']),
         'triggers': ((json['triggers'] as Array<any>).map(TriggersInnerFromJSON)),
         'alwaysTrigger': json['always_trigger'] == null ? undefined : json['always_trigger'],
         'repeat': json['repeat'] == null ? undefined : json['repeat'],
@@ -142,6 +155,7 @@ export function CreateAlertRequestToJSON(value?: CreateAlertRequest | null): any
         'model': value['model'],
         'share_link': value['shareLink'],
         'filter_params': FilterParamsToJSON(value['filterParams']),
+        'report': ReportRequestToJSON(value['report']),
         'triggers': ((value['triggers'] as Array<any>).map(TriggersInnerToJSON)),
         'always_trigger': value['alwaysTrigger'],
         'repeat': value['repeat'],

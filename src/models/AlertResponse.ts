@@ -75,6 +75,12 @@ export interface AlertResponse {
     filterParams?: object;
     /**
      * 
+     * @type {object}
+     * @memberof AlertResponse
+     */
+    report?: object;
+    /**
+     * 
      * @type {Array<object>}
      * @memberof AlertResponse
      */
@@ -130,6 +136,7 @@ export function AlertResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         'model': json['model'],
         'shareLink': json['share_link'] == null ? undefined : json['share_link'],
         'filterParams': json['filter_params'] == null ? undefined : json['filter_params'],
+        'report': json['report'] == null ? undefined : json['report'],
         'triggers': json['triggers'],
         'alwaysTrigger': json['always_trigger'] == null ? undefined : json['always_trigger'],
         'repeat': json['repeat'] == null ? undefined : json['repeat'],
@@ -152,6 +159,7 @@ export function AlertResponseToJSON(value?: AlertResponse | null): any {
         'model': value['model'],
         'share_link': value['shareLink'],
         'filter_params': value['filterParams'],
+        'report': value['report'],
         'triggers': value['triggers'],
         'always_trigger': value['alwaysTrigger'],
         'repeat': value['repeat'],
