@@ -18,6 +18,7 @@ import type {
   AlertResponse,
   CreateAlertRequest,
   HTTPValidationError,
+  PaginatedResponseAlertLog,
   PaginatedResponseAlertResponse,
   UpdateAlertRequest,
 } from '../models/index';
@@ -28,6 +29,8 @@ import {
     CreateAlertRequestToJSON,
     HTTPValidationErrorFromJSON,
     HTTPValidationErrorToJSON,
+    PaginatedResponseAlertLogFromJSON,
+    PaginatedResponseAlertLogToJSON,
     PaginatedResponseAlertResponseFromJSON,
     PaginatedResponseAlertResponseToJSON,
     UpdateAlertRequestFromJSON,
@@ -44,6 +47,13 @@ export interface DeleteAlertRequest {
 
 export interface GetAlertRequest {
     alertId: string;
+}
+
+export interface GetAlertLogsRequest {
+    alertId: string;
+    page?: number;
+    perPage?: number;
+    all?: boolean;
 }
 
 export interface GetAlertsRequest {
@@ -172,6 +182,54 @@ export class AlertsApi extends runtime.BaseAPI {
      */
     async getAlert(requestParameters: GetAlertRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AlertResponse> {
         const response = await this.getAlertRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get alert logs.
+     * Get alert logs
+     */
+    async getAlertLogsRaw(requestParameters: GetAlertLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginatedResponseAlertLog> > {
+        if (requestParameters['alertId'] == null) {
+            throw new runtime.RequiredError(
+                'alertId',
+                'Required parameter "alertId" was null or undefined when calling getAlertLogs().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['perPage'] != null) {
+            queryParameters['per_page'] = requestParameters['perPage'];
+        }
+
+        if (requestParameters['all'] != null) {
+            queryParameters['all'] = requestParameters['all'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/v1/chat/alerts/{alert_id}/logs`.replace(`{${"alert_id"}}`, encodeURIComponent(String(requestParameters['alertId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginatedResponseAlertLogFromJSON(jsonValue));
+    }
+
+    /**
+     * Get alert logs.
+     * Get alert logs
+     */
+    async getAlertLogs(requestParameters: GetAlertLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginatedResponseAlertLog> {
+        const response = await this.getAlertLogsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
