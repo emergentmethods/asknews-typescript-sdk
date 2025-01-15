@@ -15,10 +15,10 @@
 
 import * as runtime from '../runtime';
 import type {
-  AbcAPIErrorModel17,
-  AbcAPIErrorModel18,
-  AbcAPIErrorModel19,
-  AbcAPIErrorModel20,
+  AbcAPIErrorModel21,
+  AbcAPIErrorModel22,
+  AbcAPIErrorModel23,
+  AbcAPIErrorModel24,
   AsknewsApiErrorsAPIErrorModel,
   CreateChatCompletionRequest,
   CreateChatCompletionResponse1,
@@ -28,14 +28,14 @@ import type {
   ValidationErrorModel,
 } from '../models/index';
 import {
-    AbcAPIErrorModel17FromJSON,
-    AbcAPIErrorModel17ToJSON,
-    AbcAPIErrorModel18FromJSON,
-    AbcAPIErrorModel18ToJSON,
-    AbcAPIErrorModel19FromJSON,
-    AbcAPIErrorModel19ToJSON,
-    AbcAPIErrorModel20FromJSON,
-    AbcAPIErrorModel20ToJSON,
+    AbcAPIErrorModel21FromJSON,
+    AbcAPIErrorModel21ToJSON,
+    AbcAPIErrorModel22FromJSON,
+    AbcAPIErrorModel22ToJSON,
+    AbcAPIErrorModel23FromJSON,
+    AbcAPIErrorModel23ToJSON,
+    AbcAPIErrorModel24FromJSON,
+    AbcAPIErrorModel24ToJSON,
     AsknewsApiErrorsAPIErrorModelFromJSON,
     AsknewsApiErrorsAPIErrorModelToJSON,
     CreateChatCompletionRequestFromJSON,

@@ -23,7 +23,11 @@ import type {
   AbcAPIErrorModel14,
   AbcAPIErrorModel15,
   AbcAPIErrorModel16,
+  AbcAPIErrorModel17,
+  AbcAPIErrorModel18,
+  AbcAPIErrorModel19,
   AbcAPIErrorModel2,
+  AbcAPIErrorModel20,
   AbcAPIErrorModel3,
   AbcAPIErrorModel4,
   AbcAPIErrorModel9,
@@ -53,8 +57,16 @@ import {
     AbcAPIErrorModel15ToJSON,
     AbcAPIErrorModel16FromJSON,
     AbcAPIErrorModel16ToJSON,
+    AbcAPIErrorModel17FromJSON,
+    AbcAPIErrorModel17ToJSON,
+    AbcAPIErrorModel18FromJSON,
+    AbcAPIErrorModel18ToJSON,
+    AbcAPIErrorModel19FromJSON,
+    AbcAPIErrorModel19ToJSON,
     AbcAPIErrorModel2FromJSON,
     AbcAPIErrorModel2ToJSON,
+    AbcAPIErrorModel20FromJSON,
+    AbcAPIErrorModel20ToJSON,
     AbcAPIErrorModel3FromJSON,
     AbcAPIErrorModel3ToJSON,
     AbcAPIErrorModel4FromJSON,
@@ -81,6 +93,10 @@ import {
 
 export interface GetArticleRequest {
     articleId: string;
+}
+
+export interface GetArticlesRequest {
+    articleIds: string;
 }
 
 export interface GetSourcesReportRequest {
@@ -164,6 +180,46 @@ export class NewsApi extends runtime.BaseAPI {
      */
     async getArticle(requestParameters: GetArticleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SearchResponseDictItem> {
         const response = await this.getArticleRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get articles given a list of UUIDs.
+     * Get multiple articles by UUID
+     */
+    async getArticlesRaw(requestParameters: GetArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SearchResponseDictItem>> > {
+        if (requestParameters['articleIds'] == null) {
+            throw new runtime.RequiredError(
+                'articleIds',
+                'Required parameter "articleIds" was null or undefined when calling getArticles().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['articleIds'] != null) {
+            queryParameters['article_ids'] = requestParameters['articleIds'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/v1/news`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SearchResponseDictItemFromJSON));
+    }
+
+    /**
+     * Get articles given a list of UUIDs.
+     * Get multiple articles by UUID
+     */
+    async getArticles(requestParameters: GetArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SearchResponseDictItem>> {
+        const response = await this.getArticlesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
