@@ -63,10 +63,22 @@ export interface AlertLog {
     report?: string;
     /**
      * 
+     * @type {string}
+     * @memberof AlertLog
+     */
+    reportUrl?: string;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof AlertLog
      */
     articleIds: Array<string>;
+    /**
+     * 
+     * @type {object}
+     * @memberof AlertLog
+     */
+    webhook?: object;
 }
 
 /**
@@ -100,7 +112,9 @@ export function AlertLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'alert': json['alert'],
         'reasoning': json['reasoning'],
         'report': json['report'] == null ? undefined : json['report'],
+        'reportUrl': json['report_url'] == null ? undefined : json['report_url'],
         'articleIds': json['article_ids'],
+        'webhook': json['webhook'] == null ? undefined : json['webhook'],
     };
 }
 
@@ -117,7 +131,9 @@ export function AlertLogToJSON(value?: AlertLog | null): any {
         'alert': value['alert'],
         'reasoning': value['reasoning'],
         'report': value['report'],
+        'report_url': value['reportUrl'],
         'article_ids': value['articleIds'],
+        'webhook': value['webhook'],
     };
 }
 

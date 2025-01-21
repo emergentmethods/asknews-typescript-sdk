@@ -39,8 +39,10 @@ export interface ReportRequest {
  */
 export const ReportRequestModelEnum = {
     Gpt4o: 'gpt-4o',
+    Gpt4oMini: 'gpt-4o-mini',
     Claude35SonnetLatest: 'claude-3-5-sonnet-latest',
-    MetaLlamaMetaLlama31405BInstruct: 'meta-llama/Meta-Llama-3.1-405B-Instruct'
+    MetaLlamaMetaLlama31405BInstruct: 'meta-llama/Meta-Llama-3.1-405B-Instruct',
+    MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct'
 } as const;
 export type ReportRequestModelEnum = typeof ReportRequestModelEnum[keyof typeof ReportRequestModelEnum];
 

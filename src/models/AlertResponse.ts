@@ -39,6 +39,12 @@ export interface AlertResponse {
     updatedAt?: Date;
     /**
      * 
+     * @type {Date}
+     * @memberof AlertResponse
+     */
+    expiresAt?: Date;
+    /**
+     * 
      * @type {string}
      * @memberof AlertResponse
      */
@@ -130,6 +136,7 @@ export function AlertResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         'id': json['id'],
         'createdAt': json['created_at'] == null ? undefined : (new Date(json['created_at'])),
         'updatedAt': json['updated_at'] == null ? undefined : (new Date(json['updated_at'])),
+        'expiresAt': json['expires_at'] == null ? undefined : (new Date(json['expires_at'])),
         'userId': json['user_id'],
         'query': json['query'] == null ? undefined : json['query'],
         'cron': json['cron'],
@@ -153,6 +160,7 @@ export function AlertResponseToJSON(value?: AlertResponse | null): any {
         'id': value['id'],
         'created_at': value['createdAt'] == null ? undefined : ((value['createdAt'] as any).toISOString()),
         'updated_at': value['updatedAt'] == null ? undefined : ((value['updatedAt'] as any).toISOString()),
+        'expires_at': value['expiresAt'] == null ? undefined : ((value['expiresAt'] as any).toISOString()),
         'user_id': value['userId'],
         'query': value['query'],
         'cron': value['cron'],

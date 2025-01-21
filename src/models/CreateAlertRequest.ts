@@ -98,6 +98,12 @@ export interface CreateAlertRequest {
      * @memberof CreateAlertRequest
      */
     active?: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CreateAlertRequest
+     */
+    expiresAt?: Date;
 }
 
 
@@ -141,6 +147,7 @@ export function CreateAlertRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'alwaysTrigger': json['always_trigger'] == null ? undefined : json['always_trigger'],
         'repeat': json['repeat'] == null ? undefined : json['repeat'],
         'active': json['active'] == null ? undefined : json['active'],
+        'expiresAt': json['expires_at'] == null ? undefined : (new Date(json['expires_at'])),
     };
 }
 
@@ -160,6 +167,7 @@ export function CreateAlertRequestToJSON(value?: CreateAlertRequest | null): any
         'always_trigger': value['alwaysTrigger'],
         'repeat': value['repeat'],
         'active': value['active'],
+        'expires_at': value['expiresAt'] == null ? undefined : ((value['expiresAt'] as any).toISOString()),
     };
 }
 
