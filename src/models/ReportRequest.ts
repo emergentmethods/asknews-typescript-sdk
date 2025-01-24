@@ -31,6 +31,12 @@ export interface ReportRequest {
      * @memberof ReportRequest
      */
     model?: ReportRequestModelEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReportRequest
+     */
+    logoUrl?: string;
 }
 
 
@@ -66,6 +72,7 @@ export function ReportRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'prompt': json['prompt'] == null ? undefined : json['prompt'],
         'model': json['model'] == null ? undefined : json['model'],
+        'logoUrl': json['logo_url'] == null ? undefined : json['logo_url'],
     };
 }
 
@@ -77,6 +84,7 @@ export function ReportRequestToJSON(value?: ReportRequest | null): any {
         
         'prompt': value['prompt'],
         'model': value['model'],
+        'logo_url': value['logoUrl'],
     };
 }
 
