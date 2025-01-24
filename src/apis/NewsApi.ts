@@ -96,7 +96,7 @@ export interface GetArticleRequest {
 }
 
 export interface GetArticlesRequest {
-    articleIds: string;
+    articleIds: Array<string>;
 }
 
 export interface GetSourcesReportRequest {
