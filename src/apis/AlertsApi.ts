@@ -51,6 +51,7 @@ export interface GetAlertRequest {
 
 export interface GetAlertLogsRequest {
     alertId: string;
+    userId?: string;
     page?: number;
     perPage?: number;
     all?: boolean;
@@ -198,6 +199,10 @@ export class AlertsApi extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters['userId'] != null) {
+            queryParameters['user_id'] = requestParameters['userId'];
+        }
 
         if (requestParameters['page'] != null) {
             queryParameters['page'] = requestParameters['page'];
