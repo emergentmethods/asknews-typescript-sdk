@@ -51,10 +51,11 @@ export interface GetAlertRequest {
 
 export interface GetAlertLogsRequest {
     alertId: string;
-    userId?: string;
     page?: number;
     perPage?: number;
     all?: boolean;
+    startTimestamp?: number;
+    endTimestamp?: number;
 }
 
 export interface GetAlertsRequest {
@@ -200,10 +201,6 @@ export class AlertsApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters['userId'] != null) {
-            queryParameters['user_id'] = requestParameters['userId'];
-        }
-
         if (requestParameters['page'] != null) {
             queryParameters['page'] = requestParameters['page'];
         }
@@ -214,6 +211,14 @@ export class AlertsApi extends runtime.BaseAPI {
 
         if (requestParameters['all'] != null) {
             queryParameters['all'] = requestParameters['all'];
+        }
+
+        if (requestParameters['startTimestamp'] != null) {
+            queryParameters['start_timestamp'] = requestParameters['startTimestamp'];
+        }
+
+        if (requestParameters['endTimestamp'] != null) {
+            queryParameters['end_timestamp'] = requestParameters['endTimestamp'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
