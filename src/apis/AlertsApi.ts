@@ -65,6 +65,16 @@ export interface GetAlertsRequest {
     all?: boolean;
 }
 
+export interface GetAllAlertLogsRequest {
+    alertId?: string;
+    userId?: string;
+    page?: number;
+    perPage?: number;
+    all?: boolean;
+    startTimestamp?: number;
+    endTimestamp?: number;
+}
+
 export interface PutAlertRequest {
     alertId: string;
     updateAlertRequest: UpdateAlertRequest;
@@ -286,6 +296,63 @@ export class AlertsApi extends runtime.BaseAPI {
      */
     async getAlerts(requestParameters: GetAlertsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginatedResponseAlertResponse> {
         const response = await this.getAlertsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get all alert logs.
+     * Get all alert logs
+     */
+    async getAllAlertLogsRaw(requestParameters: GetAllAlertLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginatedResponseAlertLog> > {
+        const queryParameters: any = {};
+
+        if (requestParameters['alertId'] != null) {
+            queryParameters['alert_id'] = requestParameters['alertId'];
+        }
+
+        if (requestParameters['userId'] != null) {
+            queryParameters['user_id'] = requestParameters['userId'];
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['perPage'] != null) {
+            queryParameters['per_page'] = requestParameters['perPage'];
+        }
+
+        if (requestParameters['all'] != null) {
+            queryParameters['all'] = requestParameters['all'];
+        }
+
+        if (requestParameters['startTimestamp'] != null) {
+            queryParameters['start_timestamp'] = requestParameters['startTimestamp'];
+        }
+
+        if (requestParameters['endTimestamp'] != null) {
+            queryParameters['end_timestamp'] = requestParameters['endTimestamp'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/v1/chat/alerts/logs`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginatedResponseAlertLogFromJSON(jsonValue));
+    }
+
+    /**
+     * Get all alert logs.
+     * Get all alert logs
+     */
+    async getAllAlertLogs(requestParameters: GetAllAlertLogsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginatedResponseAlertLog> {
+        const response = await this.getAllAlertLogsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
