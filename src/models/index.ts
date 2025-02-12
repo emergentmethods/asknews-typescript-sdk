@@ -51,6 +51,8 @@ export * from './AskNewsSource';
 export * from './AsknewsApiErrorsAPIErrorModel';
 export * from './AsknewsApiSchemaV1CommonGraphRelationships';
 export * from './AsknewsApiSchemaV1StoriesGraphRelationships';
+export * from './BlueskySource';
+export * from './BlueskySourceParams';
 export * from './BodyBuildGraph';
 export * from './Choice';
 export * from './Classification';
