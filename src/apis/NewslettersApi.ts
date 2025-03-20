@@ -404,7 +404,7 @@ export class NewslettersApi extends runtime.BaseAPI {
             body: NewsletterContactRequestToJSON(requestParameters['newsletterContactRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['newsletterContactRequest'] != null && 'stream' in requestParameters['newsletterContactRequest'] && requestParameters['newsletterContactRequest']['stream'] === true) {
+        if ('newsletterContactRequest' in requestParameters && requestParameters['newsletterContactRequest'] != null && 'stream' in requestParameters['newsletterContactRequest'] && requestParameters['newsletterContactRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 
@@ -446,7 +446,7 @@ export class NewslettersApi extends runtime.BaseAPI {
             body: CreateNewsletterRequestToJSON(requestParameters['createNewsletterRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['createNewsletterRequest'] != null && 'stream' in requestParameters['createNewsletterRequest'] && requestParameters['createNewsletterRequest']['stream'] === true) {
+        if ('createNewsletterRequest' in requestParameters && requestParameters['createNewsletterRequest'] != null && 'stream' in requestParameters['createNewsletterRequest'] && requestParameters['createNewsletterRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 
@@ -495,7 +495,7 @@ export class NewslettersApi extends runtime.BaseAPI {
             body: NewsletterContactRequestToJSON(requestParameters['newsletterContactRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['newsletterContactRequest'] != null && 'stream' in requestParameters['newsletterContactRequest'] && requestParameters['newsletterContactRequest']['stream'] === true) {
+        if ('newsletterContactRequest' in requestParameters && requestParameters['newsletterContactRequest'] != null && 'stream' in requestParameters['newsletterContactRequest'] && requestParameters['newsletterContactRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 
@@ -544,7 +544,7 @@ export class NewslettersApi extends runtime.BaseAPI {
             body: UpdateNewsletterRequestToJSON(requestParameters['updateNewsletterRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['updateNewsletterRequest'] != null && 'stream' in requestParameters['updateNewsletterRequest'] && requestParameters['updateNewsletterRequest']['stream'] === true) {
+        if ('updateNewsletterRequest' in requestParameters && requestParameters['updateNewsletterRequest'] != null && 'stream' in requestParameters['updateNewsletterRequest'] && requestParameters['updateNewsletterRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 

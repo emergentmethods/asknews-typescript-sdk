@@ -111,7 +111,7 @@ export class AlertsApi extends runtime.BaseAPI {
             body: CreateAlertRequestToJSON(requestParameters['createAlertRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['createAlertRequest'] != null && 'stream' in requestParameters['createAlertRequest'] && requestParameters['createAlertRequest']['stream'] === true) {
+        if ('createAlertRequest' in requestParameters && requestParameters['createAlertRequest'] != null && 'stream' in requestParameters['createAlertRequest'] && requestParameters['createAlertRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 
@@ -389,7 +389,7 @@ export class AlertsApi extends runtime.BaseAPI {
             body: UpdateAlertRequestToJSON(requestParameters['updateAlertRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['updateAlertRequest'] != null && 'stream' in requestParameters['updateAlertRequest'] && requestParameters['updateAlertRequest']['stream'] === true) {
+        if ('updateAlertRequest' in requestParameters && requestParameters['updateAlertRequest'] != null && 'stream' in requestParameters['updateAlertRequest'] && requestParameters['updateAlertRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 

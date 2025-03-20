@@ -71,7 +71,7 @@ export class GraphApi extends runtime.BaseAPI {
             body: BodyBuildGraphToJSON(requestParameters['bodyBuildGraph']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['bodyBuildGraph'] != null && 'stream' in requestParameters['bodyBuildGraph'] && requestParameters['bodyBuildGraph']['stream'] === true) {
+        if ('bodyBuildGraph' in requestParameters && requestParameters['bodyBuildGraph'] != null && 'stream' in requestParameters['bodyBuildGraph'] && requestParameters['bodyBuildGraph']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 

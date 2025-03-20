@@ -115,7 +115,7 @@ export class ChatApi extends runtime.BaseAPI {
             body: CreateDeepNewsRequestToJSON(requestParameters['createDeepNewsRequest']),
         }, initOverrides);
 
-        if ('createChatCompletionRequest' in requestParameters && requestParameters['createDeepNewsRequest'] != null && 'stream' in requestParameters['createDeepNewsRequest'] && requestParameters['createDeepNewsRequest']['stream'] === true) {
+        if ('createDeepNewsRequest' in requestParameters && requestParameters['createDeepNewsRequest'] != null && 'stream' in requestParameters['createDeepNewsRequest'] && requestParameters['createDeepNewsRequest']['stream'] === true) {
             return new runtime.StreamApiResponse(response);
         }
 
