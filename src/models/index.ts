@@ -90,6 +90,7 @@ export * from './CreateDeepNewsResponseStreamChunk1';
 export * from './CreateDeepNewsResponseStreamChunkChoice';
 export * from './CreateDeepNewsResponseStreamChunkChoice1';
 export * from './CreateDeepNewsResponseStreamSource';
+export * from './CreateDeepNewsResponseStreamSourcesGraphSource';
 export * from './CreateDeepNewsResponseStreamSourcesNewsSource';
 export * from './CreateDeepNewsResponseStreamSourcesWebSource';
 export * from './CreateDeepNewsResponseUsage';
