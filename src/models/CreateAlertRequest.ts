@@ -115,7 +115,10 @@ export const CreateAlertRequestModelEnum = {
     Gpt4oMini: 'gpt-4o-mini',
     Gpt4o: 'gpt-4o',
     O3Mini: 'o3-mini',
-    MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct'
+    MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct',
+    Gpt4120250414: 'gpt-4.1-2025-04-14',
+    Gpt41Nano20250414: 'gpt-4.1-nano-2025-04-14',
+    Gpt41Mini20250414: 'gpt-4.1-mini-2025-04-14'
 } as const;
 export type CreateAlertRequestModelEnum = typeof CreateAlertRequestModelEnum[keyof typeof CreateAlertRequestModelEnum];
 

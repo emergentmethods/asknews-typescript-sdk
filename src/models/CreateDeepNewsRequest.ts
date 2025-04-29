@@ -171,6 +171,24 @@ export interface CreateDeepNewsRequest {
      * @memberof CreateDeepNewsRequest
      */
     returnSources?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateDeepNewsRequest
+     */
+    includeCoordinates?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateDeepNewsRequest
+     */
+    includeEntities?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateDeepNewsRequest
+     */
+    includeGraphs?: boolean;
 }
 
 
@@ -226,6 +244,9 @@ export function CreateDeepNewsRequestFromJSONTyped(json: any, ignoreDiscriminato
         'maxDepth': json['max_depth'] == null ? undefined : json['max_depth'],
         'sources': json['sources'] == null ? undefined : Sources1FromJSON(json['sources']),
         'returnSources': json['return_sources'] == null ? undefined : json['return_sources'],
+        'includeCoordinates': json['include_coordinates'] == null ? undefined : json['include_coordinates'],
+        'includeEntities': json['include_entities'] == null ? undefined : json['include_entities'],
+        'includeGraphs': json['include_graphs'] == null ? undefined : json['include_graphs'],
     };
 }
 
@@ -258,6 +279,9 @@ export function CreateDeepNewsRequestToJSON(value?: CreateDeepNewsRequest | null
         'max_depth': value['maxDepth'],
         'sources': Sources1ToJSON(value['sources']),
         'return_sources': value['returnSources'],
+        'include_coordinates': value['includeCoordinates'],
+        'include_entities': value['includeEntities'],
+        'include_graphs': value['includeGraphs'],
     };
 }
 

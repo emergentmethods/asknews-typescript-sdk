@@ -1,4 +1,4 @@
-## @emergentmethods/asknews-typescript-sdk@0.2.52
+## @emergentmethods/asknews-typescript-sdk@0.2.53
 
 Typescript SDK for the AskNews API.
 This SDK utilizes [Fetch API](https://fetch.spec.whatwg.org/). The generated Node module can be used in the following environments:
@@ -21,7 +21,7 @@ It can be used in both TypeScript and JavaScript. In TypeScript, the definition 
 ### Installation
 
 ```
-npm install @emergentmethods/asknews-typescript-sdk@0.2.52 --save
+npm install @emergentmethods/asknews-typescript-sdk@0.2.53 --save
 ```
 
 ## Usage

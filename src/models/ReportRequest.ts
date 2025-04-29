@@ -49,7 +49,9 @@ export const ReportRequestModelEnum = {
     O3Mini: 'o3-mini',
     Claude35SonnetLatest: 'claude-3-5-sonnet-latest',
     MetaLlamaMetaLlama31405BInstruct: 'meta-llama/Meta-Llama-3.1-405B-Instruct',
-    MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct'
+    MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct',
+    Gpt4120250414: 'gpt-4.1-2025-04-14',
+    Gpt41Mini20250414: 'gpt-4.1-mini-2025-04-14'
 } as const;
 export type ReportRequestModelEnum = typeof ReportRequestModelEnum[keyof typeof ReportRequestModelEnum];
 
