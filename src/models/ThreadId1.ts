@@ -16,27 +16,27 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Value
+ * @interface ThreadId1
  */
-export interface Value {
+export interface ThreadId1 {
 }
 
 /**
- * Check if a given object implements the Value interface.
+ * Check if a given object implements the ThreadId1 interface.
  */
-export function instanceOfValue(value: object): boolean {
+export function instanceOfThreadId1(value: object): boolean {
     return true;
 }
 
-export function ValueFromJSON(json: any): Value {
-    return ValueFromJSONTyped(json, false);
+export function ThreadId1FromJSON(json: any): ThreadId1 {
+    return ThreadId1FromJSONTyped(json, false);
 }
 
-export function ValueFromJSONTyped(json: any, ignoreDiscriminator: boolean): Value {
+export function ThreadId1FromJSONTyped(json: any, ignoreDiscriminator: boolean): ThreadId1 {
     return json;
 }
 
-export function ValueToJSON(value?: Value | null): any {
+export function ThreadId1ToJSON(value?: ThreadId1 | null): any {
     return value;
 }
 
