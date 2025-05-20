@@ -13,18 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateChatCompletionResponseChoice } from './CreateChatCompletionResponseChoice';
-import {
-    CreateChatCompletionResponseChoiceFromJSON,
-    CreateChatCompletionResponseChoiceFromJSONTyped,
-    CreateChatCompletionResponseChoiceToJSON,
-} from './CreateChatCompletionResponseChoice';
 import type { CreateChatCompletionResponseUsage } from './CreateChatCompletionResponseUsage';
 import {
     CreateChatCompletionResponseUsageFromJSON,
     CreateChatCompletionResponseUsageFromJSONTyped,
     CreateChatCompletionResponseUsageToJSON,
+    CreateChatCompletionResponseUsageToJSONTyped,
 } from './CreateChatCompletionResponseUsage';
+import type { CreateChatCompletionResponseChoice } from './CreateChatCompletionResponseChoice';
+import {
+    CreateChatCompletionResponseChoiceFromJSON,
+    CreateChatCompletionResponseChoiceFromJSONTyped,
+    CreateChatCompletionResponseChoiceToJSON,
+    CreateChatCompletionResponseChoiceToJSONTyped,
+} from './CreateChatCompletionResponseChoice';
 
 /**
  * 
@@ -73,11 +75,11 @@ export interface CreateChatCompletionResponse {
 /**
  * Check if a given object implements the CreateChatCompletionResponse interface.
  */
-export function instanceOfCreateChatCompletionResponse(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
+export function instanceOfCreateChatCompletionResponse(value: object): value is CreateChatCompletionResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
     return true;
 }
 
@@ -100,10 +102,15 @@ export function CreateChatCompletionResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function CreateChatCompletionResponseToJSON(value?: CreateChatCompletionResponse | null): any {
+export function CreateChatCompletionResponseToJSON(json: any): CreateChatCompletionResponse {
+    return CreateChatCompletionResponseToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionResponseToJSONTyped(value?: CreateChatCompletionResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

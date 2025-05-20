@@ -18,6 +18,7 @@ import {
     GoogleDocsParamsFromJSON,
     GoogleDocsParamsFromJSONTyped,
     GoogleDocsParamsToJSON,
+    GoogleDocsParamsToJSONTyped,
 } from './GoogleDocsParams';
 
 /**
@@ -31,7 +32,7 @@ export interface GoogleDocsAction {
      * @type {string}
      * @memberof GoogleDocsAction
      */
-    action?: string;
+    action?: GoogleDocsActionActionEnum;
     /**
      * 
      * @type {GoogleDocsParams}
@@ -40,11 +41,21 @@ export interface GoogleDocsAction {
     params: GoogleDocsParams;
 }
 
+
+/**
+ * @export
+ */
+export const GoogleDocsActionActionEnum = {
+    GoogleDocs: 'google_docs'
+} as const;
+export type GoogleDocsActionActionEnum = typeof GoogleDocsActionActionEnum[keyof typeof GoogleDocsActionActionEnum];
+
+
 /**
  * Check if a given object implements the GoogleDocsAction interface.
  */
-export function instanceOfGoogleDocsAction(value: object): boolean {
-    if (!('params' in value)) return false;
+export function instanceOfGoogleDocsAction(value: object): value is GoogleDocsAction {
+    if (!('params' in value) || value['params'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function GoogleDocsActionFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function GoogleDocsActionToJSON(value?: GoogleDocsAction | null): any {
+export function GoogleDocsActionToJSON(json: any): GoogleDocsAction {
+    return GoogleDocsActionToJSONTyped(json, false);
+}
+
+export function GoogleDocsActionToJSONTyped(value?: GoogleDocsAction | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'action': value['action'],

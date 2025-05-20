@@ -13,18 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateChatCompletionResponseStreamChoice } from './CreateChatCompletionResponseStreamChoice';
-import {
-    CreateChatCompletionResponseStreamChoiceFromJSON,
-    CreateChatCompletionResponseStreamChoiceFromJSONTyped,
-    CreateChatCompletionResponseStreamChoiceToJSON,
-} from './CreateChatCompletionResponseStreamChoice';
 import type { CreateChatCompletionResponseUsage } from './CreateChatCompletionResponseUsage';
 import {
     CreateChatCompletionResponseUsageFromJSON,
     CreateChatCompletionResponseUsageFromJSONTyped,
     CreateChatCompletionResponseUsageToJSON,
+    CreateChatCompletionResponseUsageToJSONTyped,
 } from './CreateChatCompletionResponseUsage';
+import type { CreateChatCompletionResponseStreamChoice } from './CreateChatCompletionResponseStreamChoice';
+import {
+    CreateChatCompletionResponseStreamChoiceFromJSON,
+    CreateChatCompletionResponseStreamChoiceFromJSONTyped,
+    CreateChatCompletionResponseStreamChoiceToJSON,
+    CreateChatCompletionResponseStreamChoiceToJSONTyped,
+} from './CreateChatCompletionResponseStreamChoice';
 
 /**
  * 
@@ -73,11 +75,11 @@ export interface CreateChatCompletionResponseStream {
 /**
  * Check if a given object implements the CreateChatCompletionResponseStream interface.
  */
-export function instanceOfCreateChatCompletionResponseStream(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
+export function instanceOfCreateChatCompletionResponseStream(value: object): value is CreateChatCompletionResponseStream {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
     return true;
 }
 
@@ -100,10 +102,15 @@ export function CreateChatCompletionResponseStreamFromJSONTyped(json: any, ignor
     };
 }
 
-export function CreateChatCompletionResponseStreamToJSON(value?: CreateChatCompletionResponseStream | null): any {
+export function CreateChatCompletionResponseStreamToJSON(json: any): CreateChatCompletionResponseStream {
+    return CreateChatCompletionResponseStreamToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionResponseStreamToJSONTyped(value?: CreateChatCompletionResponseStream | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

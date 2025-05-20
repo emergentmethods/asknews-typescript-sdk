@@ -13,36 +13,41 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateChatCompletionRequestMessage } from './CreateChatCompletionRequestMessage';
+import type { User } from './User';
 import {
-    CreateChatCompletionRequestMessageFromJSON,
-    CreateChatCompletionRequestMessageFromJSONTyped,
-    CreateChatCompletionRequestMessageToJSON,
-} from './CreateChatCompletionRequestMessage';
+    UserFromJSON,
+    UserFromJSONTyped,
+    UserToJSON,
+    UserToJSONTyped,
+} from './User';
 import type { FilterParams } from './FilterParams';
 import {
     FilterParamsFromJSON,
     FilterParamsFromJSONTyped,
     FilterParamsToJSON,
+    FilterParamsToJSONTyped,
 } from './FilterParams';
 import type { Stop } from './Stop';
 import {
     StopFromJSON,
     StopFromJSONTyped,
     StopToJSON,
+    StopToJSONTyped,
 } from './Stop';
 import type { ThreadId } from './ThreadId';
 import {
     ThreadIdFromJSON,
     ThreadIdFromJSONTyped,
     ThreadIdToJSON,
+    ThreadIdToJSONTyped,
 } from './ThreadId';
-import type { User } from './User';
+import type { CreateChatCompletionRequestMessage } from './CreateChatCompletionRequestMessage';
 import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-} from './User';
+    CreateChatCompletionRequestMessageFromJSON,
+    CreateChatCompletionRequestMessageFromJSONTyped,
+    CreateChatCompletionRequestMessageToJSON,
+    CreateChatCompletionRequestMessageToJSONTyped,
+} from './CreateChatCompletionRequestMessage';
 
 /**
  * 
@@ -50,6 +55,7 @@ import {
  * @interface CreateChatCompletionRequest
  */
 export interface CreateChatCompletionRequest {
+    [key: string]: any | any;
     /**
      * 
      * @type {string}
@@ -64,28 +70,28 @@ export interface CreateChatCompletionRequest {
     messages: Array<CreateChatCompletionRequestMessage>;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateChatCompletionRequest
      */
-    temperature?: any;
+    temperature?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateChatCompletionRequest
      */
-    topP?: any;
+    topP?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateChatCompletionRequest
      */
-    n?: any;
+    n?: number;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateChatCompletionRequest
      */
-    stream?: any;
+    stream?: boolean;
     /**
      * 
      * @type {Stop}
@@ -94,22 +100,22 @@ export interface CreateChatCompletionRequest {
     stop?: Stop;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateChatCompletionRequest
      */
-    maxTokens?: any;
+    maxTokens?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateChatCompletionRequest
      */
-    presencePenalty?: any;
+    presencePenalty?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateChatCompletionRequest
      */
-    frequencyPenalty?: any;
+    frequencyPenalty?: number;
     /**
      * 
      * @type {ThreadId}
@@ -124,34 +130,34 @@ export interface CreateChatCompletionRequest {
     user?: User;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof CreateChatCompletionRequest
      */
     inlineCitations?: CreateChatCompletionRequestInlineCitationsEnum;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateChatCompletionRequest
      */
-    appendReferences?: any;
+    appendReferences?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateChatCompletionRequest
      */
-    journalistMode?: any;
+    journalistMode?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateChatCompletionRequest
      */
-    asknewsWatermark?: any;
+    asknewsWatermark?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateChatCompletionRequest
      */
-    conversationalAwareness?: any;
+    conversationalAwareness?: boolean;
     /**
      * 
      * @type {FilterParams}
@@ -175,8 +181,8 @@ export type CreateChatCompletionRequestInlineCitationsEnum = typeof CreateChatCo
 /**
  * Check if a given object implements the CreateChatCompletionRequest interface.
  */
-export function instanceOfCreateChatCompletionRequest(value: object): boolean {
-    if (!('messages' in value)) return false;
+export function instanceOfCreateChatCompletionRequest(value: object): value is CreateChatCompletionRequest {
+    if (!('messages' in value) || value['messages'] === undefined) return false;
     return true;
 }
 
@@ -190,6 +196,7 @@ export function CreateChatCompletionRequestFromJSONTyped(json: any, ignoreDiscri
     }
     return {
         
+            ...json,
         'model': json['model'] == null ? undefined : json['model'],
         'messages': ((json['messages'] as Array<any>).map(CreateChatCompletionRequestMessageFromJSON)),
         'temperature': json['temperature'] == null ? undefined : json['temperature'],
@@ -211,12 +218,18 @@ export function CreateChatCompletionRequestFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function CreateChatCompletionRequestToJSON(value?: CreateChatCompletionRequest | null): any {
+export function CreateChatCompletionRequestToJSON(json: any): CreateChatCompletionRequest {
+    return CreateChatCompletionRequestToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionRequestToJSONTyped(value?: CreateChatCompletionRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
+            ...value,
         'model': value['model'],
         'messages': ((value['messages'] as Array<any>).map(CreateChatCompletionRequestMessageToJSON)),
         'temperature': value['temperature'],

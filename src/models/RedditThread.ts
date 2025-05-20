@@ -18,24 +18,28 @@ import {
     ClassificationFromJSON,
     ClassificationFromJSONTyped,
     ClassificationToJSON,
+    ClassificationToJSONTyped,
 } from './Classification';
-import type { RedditComment } from './RedditComment';
-import {
-    RedditCommentFromJSON,
-    RedditCommentFromJSONTyped,
-    RedditCommentToJSON,
-} from './RedditComment';
 import type { RedditEntities } from './RedditEntities';
 import {
     RedditEntitiesFromJSON,
     RedditEntitiesFromJSONTyped,
     RedditEntitiesToJSON,
+    RedditEntitiesToJSONTyped,
 } from './RedditEntities';
+import type { RedditComment } from './RedditComment';
+import {
+    RedditCommentFromJSON,
+    RedditCommentFromJSONTyped,
+    RedditCommentToJSON,
+    RedditCommentToJSONTyped,
+} from './RedditComment';
 import type { Sentiment } from './Sentiment';
 import {
     SentimentFromJSON,
     SentimentFromJSONTyped,
     SentimentToJSON,
+    SentimentToJSONTyped,
 } from './Sentiment';
 
 /**
@@ -175,26 +179,26 @@ export interface RedditThread {
 /**
  * Check if a given object implements the RedditThread interface.
  */
-export function instanceOfRedditThread(value: object): boolean {
-    if (!('author' in value)) return false;
-    if (!('authorCommentKarma' in value)) return false;
-    if (!('authorLinkKarma' in value)) return false;
-    if (!('body' in value)) return false;
-    if (!('classification' in value)) return false;
-    if (!('comments' in value)) return false;
-    if (!('commentsCount' in value)) return false;
-    if (!('date' in value)) return false;
-    if (!('entities' in value)) return false;
-    if (!('id' in value)) return false;
-    if (!('keywords' in value)) return false;
-    if (!('sentiment' in value)) return false;
-    if (!('subredditName' in value)) return false;
-    if (!('subredditUrl' in value)) return false;
-    if (!('summary' in value)) return false;
-    if (!('title' in value)) return false;
-    if (!('topic' in value)) return false;
-    if (!('upvotes' in value)) return false;
-    if (!('url' in value)) return false;
+export function instanceOfRedditThread(value: object): value is RedditThread {
+    if (!('author' in value) || value['author'] === undefined) return false;
+    if (!('authorCommentKarma' in value) || value['authorCommentKarma'] === undefined) return false;
+    if (!('authorLinkKarma' in value) || value['authorLinkKarma'] === undefined) return false;
+    if (!('body' in value) || value['body'] === undefined) return false;
+    if (!('classification' in value) || value['classification'] === undefined) return false;
+    if (!('comments' in value) || value['comments'] === undefined) return false;
+    if (!('commentsCount' in value) || value['commentsCount'] === undefined) return false;
+    if (!('date' in value) || value['date'] === undefined) return false;
+    if (!('entities' in value) || value['entities'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('keywords' in value) || value['keywords'] === undefined) return false;
+    if (!('sentiment' in value) || value['sentiment'] === undefined) return false;
+    if (!('subredditName' in value) || value['subredditName'] === undefined) return false;
+    if (!('subredditUrl' in value) || value['subredditUrl'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
+    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('topic' in value) || value['topic'] === undefined) return false;
+    if (!('upvotes' in value) || value['upvotes'] === undefined) return false;
+    if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
 
@@ -232,10 +236,15 @@ export function RedditThreadFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function RedditThreadToJSON(value?: RedditThread | null): any {
+export function RedditThreadToJSON(json: any): RedditThread {
+    return RedditThreadToJSONTyped(json, false);
+}
+
+export function RedditThreadToJSONTyped(value?: RedditThread | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'author': value['author'],

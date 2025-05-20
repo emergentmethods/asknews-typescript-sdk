@@ -13,42 +13,48 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateChatCompletionResponse } from './CreateChatCompletionResponse';
-import {
-    CreateChatCompletionResponseFromJSON,
-    CreateChatCompletionResponseFromJSONTyped,
-    CreateChatCompletionResponseToJSON,
-} from './CreateChatCompletionResponse';
-import type { CreateChatCompletionResponseChoice } from './CreateChatCompletionResponseChoice';
-import {
-    CreateChatCompletionResponseChoiceFromJSON,
-    CreateChatCompletionResponseChoiceFromJSONTyped,
-    CreateChatCompletionResponseChoiceToJSON,
-} from './CreateChatCompletionResponseChoice';
-import type { CreateChatCompletionResponseChoice1 } from './CreateChatCompletionResponseChoice1';
-import {
-    CreateChatCompletionResponseChoice1FromJSON,
-    CreateChatCompletionResponseChoice1FromJSONTyped,
-    CreateChatCompletionResponseChoice1ToJSON,
-} from './CreateChatCompletionResponseChoice1';
 import type { CreateChatCompletionResponseStream } from './CreateChatCompletionResponseStream';
 import {
     CreateChatCompletionResponseStreamFromJSON,
     CreateChatCompletionResponseStreamFromJSONTyped,
     CreateChatCompletionResponseStreamToJSON,
+    CreateChatCompletionResponseStreamToJSONTyped,
 } from './CreateChatCompletionResponseStream';
-import type { CreateChatCompletionResponseUsage } from './CreateChatCompletionResponseUsage';
-import {
-    CreateChatCompletionResponseUsageFromJSON,
-    CreateChatCompletionResponseUsageFromJSONTyped,
-    CreateChatCompletionResponseUsageToJSON,
-} from './CreateChatCompletionResponseUsage';
 import type { CreateChatCompletionResponseUsage1 } from './CreateChatCompletionResponseUsage1';
 import {
     CreateChatCompletionResponseUsage1FromJSON,
     CreateChatCompletionResponseUsage1FromJSONTyped,
     CreateChatCompletionResponseUsage1ToJSON,
+    CreateChatCompletionResponseUsage1ToJSONTyped,
 } from './CreateChatCompletionResponseUsage1';
+import type { CreateChatCompletionResponse } from './CreateChatCompletionResponse';
+import {
+    CreateChatCompletionResponseFromJSON,
+    CreateChatCompletionResponseFromJSONTyped,
+    CreateChatCompletionResponseToJSON,
+    CreateChatCompletionResponseToJSONTyped,
+} from './CreateChatCompletionResponse';
+import type { CreateChatCompletionResponseUsage } from './CreateChatCompletionResponseUsage';
+import {
+    CreateChatCompletionResponseUsageFromJSON,
+    CreateChatCompletionResponseUsageFromJSONTyped,
+    CreateChatCompletionResponseUsageToJSON,
+    CreateChatCompletionResponseUsageToJSONTyped,
+} from './CreateChatCompletionResponseUsage';
+import type { CreateChatCompletionResponseChoice1 } from './CreateChatCompletionResponseChoice1';
+import {
+    CreateChatCompletionResponseChoice1FromJSON,
+    CreateChatCompletionResponseChoice1FromJSONTyped,
+    CreateChatCompletionResponseChoice1ToJSON,
+    CreateChatCompletionResponseChoice1ToJSONTyped,
+} from './CreateChatCompletionResponseChoice1';
+import type { CreateChatCompletionResponseChoice } from './CreateChatCompletionResponseChoice';
+import {
+    CreateChatCompletionResponseChoiceFromJSON,
+    CreateChatCompletionResponseChoiceFromJSONTyped,
+    CreateChatCompletionResponseChoiceToJSON,
+    CreateChatCompletionResponseChoiceToJSONTyped,
+} from './CreateChatCompletionResponseChoice';
 
 /**
  * 
@@ -97,11 +103,11 @@ export interface CreateChatCompletionResponse1 {
 /**
  * Check if a given object implements the CreateChatCompletionResponse1 interface.
  */
-export function instanceOfCreateChatCompletionResponse1(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
+export function instanceOfCreateChatCompletionResponse1(value: object): value is CreateChatCompletionResponse1 {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
     return true;
 }
 
@@ -124,10 +130,15 @@ export function CreateChatCompletionResponse1FromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function CreateChatCompletionResponse1ToJSON(value?: CreateChatCompletionResponse1 | null): any {
+export function CreateChatCompletionResponse1ToJSON(json: any): CreateChatCompletionResponse1 {
+    return CreateChatCompletionResponse1ToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionResponse1ToJSONTyped(value?: CreateChatCompletionResponse1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

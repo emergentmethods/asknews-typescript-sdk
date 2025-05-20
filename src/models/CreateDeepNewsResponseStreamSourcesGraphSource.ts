@@ -24,7 +24,7 @@ export interface CreateDeepNewsResponseStreamSourcesGraphSource {
      * @type {string}
      * @memberof CreateDeepNewsResponseStreamSourcesGraphSource
      */
-    kind?: string;
+    kind?: CreateDeepNewsResponseStreamSourcesGraphSourceKindEnum;
     /**
      * 
      * @type {string}
@@ -33,11 +33,21 @@ export interface CreateDeepNewsResponseStreamSourcesGraphSource {
     data: string;
 }
 
+
+/**
+ * @export
+ */
+export const CreateDeepNewsResponseStreamSourcesGraphSourceKindEnum = {
+    Graph: 'graph'
+} as const;
+export type CreateDeepNewsResponseStreamSourcesGraphSourceKindEnum = typeof CreateDeepNewsResponseStreamSourcesGraphSourceKindEnum[keyof typeof CreateDeepNewsResponseStreamSourcesGraphSourceKindEnum];
+
+
 /**
  * Check if a given object implements the CreateDeepNewsResponseStreamSourcesGraphSource interface.
  */
-export function instanceOfCreateDeepNewsResponseStreamSourcesGraphSource(value: object): boolean {
-    if (!('data' in value)) return false;
+export function instanceOfCreateDeepNewsResponseStreamSourcesGraphSource(value: object): value is CreateDeepNewsResponseStreamSourcesGraphSource {
+    if (!('data' in value) || value['data'] === undefined) return false;
     return true;
 }
 
@@ -56,10 +66,15 @@ export function CreateDeepNewsResponseStreamSourcesGraphSourceFromJSONTyped(json
     };
 }
 
-export function CreateDeepNewsResponseStreamSourcesGraphSourceToJSON(value?: CreateDeepNewsResponseStreamSourcesGraphSource | null): any {
+export function CreateDeepNewsResponseStreamSourcesGraphSourceToJSON(json: any): CreateDeepNewsResponseStreamSourcesGraphSource {
+    return CreateDeepNewsResponseStreamSourcesGraphSourceToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseStreamSourcesGraphSourceToJSONTyped(value?: CreateDeepNewsResponseStreamSourcesGraphSource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'kind': value['kind'],

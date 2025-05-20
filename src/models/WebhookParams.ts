@@ -30,20 +30,20 @@ export interface WebhookParams {
      * @type {{ [key: string]: string; }}
      * @memberof WebhookParams
      */
-    headers?: { [key: string]: string; };
+    headers?: { [key: string]: string; } | null;
     /**
      * 
      * @type {{ [key: string]: any; }}
      * @memberof WebhookParams
      */
-    payload?: { [key: string]: any; };
+    payload?: { [key: string]: any; } | null;
 }
 
 /**
  * Check if a given object implements the WebhookParams interface.
  */
-export function instanceOfWebhookParams(value: object): boolean {
-    if (!('url' in value)) return false;
+export function instanceOfWebhookParams(value: object): value is WebhookParams {
+    if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +63,15 @@ export function WebhookParamsFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function WebhookParamsToJSON(value?: WebhookParams | null): any {
+export function WebhookParamsToJSON(json: any): WebhookParams {
+    return WebhookParamsToJSONTyped(json, false);
+}
+
+export function WebhookParamsToJSONTyped(value?: WebhookParams | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'url': value['url'],

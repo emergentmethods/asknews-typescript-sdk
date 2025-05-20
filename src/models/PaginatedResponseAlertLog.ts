@@ -18,6 +18,7 @@ import {
     AlertLogFromJSON,
     AlertLogFromJSONTyped,
     AlertLogToJSON,
+    AlertLogToJSONTyped,
 } from './AlertLog';
 
 /**
@@ -55,11 +56,11 @@ export interface PaginatedResponseAlertLog {
 /**
  * Check if a given object implements the PaginatedResponseAlertLog interface.
  */
-export function instanceOfPaginatedResponseAlertLog(value: object): boolean {
-    if (!('items' in value)) return false;
-    if (!('count' in value)) return false;
-    if (!('nextPage' in value)) return false;
-    if (!('previousPage' in value)) return false;
+export function instanceOfPaginatedResponseAlertLog(value: object): value is PaginatedResponseAlertLog {
+    if (!('items' in value) || value['items'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('nextPage' in value) || value['nextPage'] === undefined) return false;
+    if (!('previousPage' in value) || value['previousPage'] === undefined) return false;
     return true;
 }
 
@@ -80,10 +81,15 @@ export function PaginatedResponseAlertLogFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function PaginatedResponseAlertLogToJSON(value?: PaginatedResponseAlertLog | null): any {
+export function PaginatedResponseAlertLogToJSON(json: any): PaginatedResponseAlertLog {
+    return PaginatedResponseAlertLogToJSONTyped(json, false);
+}
+
+export function PaginatedResponseAlertLogToJSONTyped(value?: PaginatedResponseAlertLog | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'items': ((value['items'] as Array<any>).map(AlertLogToJSON)),

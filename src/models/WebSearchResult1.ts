@@ -45,10 +45,10 @@ export interface WebSearchResult1 {
     published: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<string | null>}
      * @memberof WebSearchResult1
      */
-    keyPoints: Array<string>;
+    keyPoints: Array<string | null>;
     /**
      * 
      * @type {string}
@@ -60,18 +60,18 @@ export interface WebSearchResult1 {
      * @type {string}
      * @memberof WebSearchResult1
      */
-    asStringKey?: string;
+    asStringKey?: string | null;
 }
 
 /**
  * Check if a given object implements the WebSearchResult1 interface.
  */
-export function instanceOfWebSearchResult1(value: object): boolean {
-    if (!('title' in value)) return false;
-    if (!('url' in value)) return false;
-    if (!('source' in value)) return false;
-    if (!('published' in value)) return false;
-    if (!('keyPoints' in value)) return false;
+export function instanceOfWebSearchResult1(value: object): value is WebSearchResult1 {
+    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('url' in value) || value['url'] === undefined) return false;
+    if (!('source' in value) || value['source'] === undefined) return false;
+    if (!('published' in value) || value['published'] === undefined) return false;
+    if (!('keyPoints' in value) || value['keyPoints'] === undefined) return false;
     return true;
 }
 
@@ -95,10 +95,15 @@ export function WebSearchResult1FromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function WebSearchResult1ToJSON(value?: WebSearchResult1 | null): any {
+export function WebSearchResult1ToJSON(json: any): WebSearchResult1 {
+    return WebSearchResult1ToJSONTyped(json, false);
+}
+
+export function WebSearchResult1ToJSONTyped(value?: WebSearchResult1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'title': value['title'],

@@ -13,36 +13,41 @@
  */
 
 import { mapValues } from '../runtime';
-import type { AsknewsApiSchemaV1CommonGraphRelationships } from './AsknewsApiSchemaV1CommonGraphRelationships';
-import {
-    AsknewsApiSchemaV1CommonGraphRelationshipsFromJSON,
-    AsknewsApiSchemaV1CommonGraphRelationshipsFromJSONTyped,
-    AsknewsApiSchemaV1CommonGraphRelationshipsToJSON,
-} from './AsknewsApiSchemaV1CommonGraphRelationships';
 import type { Classification } from './Classification';
 import {
     ClassificationFromJSON,
     ClassificationFromJSONTyped,
     ClassificationToJSON,
+    ClassificationToJSONTyped,
 } from './Classification';
-import type { Entities } from './Entities';
+import type { AsknewsApiSchemaV1CommonGraphRelationships } from './AsknewsApiSchemaV1CommonGraphRelationships';
 import {
-    EntitiesFromJSON,
-    EntitiesFromJSONTyped,
-    EntitiesToJSON,
-} from './Entities';
+    AsknewsApiSchemaV1CommonGraphRelationshipsFromJSON,
+    AsknewsApiSchemaV1CommonGraphRelationshipsFromJSONTyped,
+    AsknewsApiSchemaV1CommonGraphRelationshipsToJSON,
+    AsknewsApiSchemaV1CommonGraphRelationshipsToJSONTyped,
+} from './AsknewsApiSchemaV1CommonGraphRelationships';
 import type { GeoCoordinate } from './GeoCoordinate';
 import {
     GeoCoordinateFromJSON,
     GeoCoordinateFromJSONTyped,
     GeoCoordinateToJSON,
+    GeoCoordinateToJSONTyped,
 } from './GeoCoordinate';
 import type { ReportingVoice1 } from './ReportingVoice1';
 import {
     ReportingVoice1FromJSON,
     ReportingVoice1FromJSONTyped,
     ReportingVoice1ToJSON,
+    ReportingVoice1ToJSONTyped,
 } from './ReportingVoice1';
+import type { Entities } from './Entities';
+import {
+    EntitiesFromJSON,
+    EntitiesFromJSONTyped,
+    EntitiesToJSON,
+    EntitiesToJSONTyped,
+} from './Entities';
 
 /**
  * 
@@ -109,7 +114,7 @@ export interface SearchResponseDictItem {
      * @type {string}
      * @memberof SearchResponseDictItem
      */
-    imageUrl?: string;
+    imageUrl?: string | null;
     /**
      * 
      * @type {Array<string>}
@@ -139,7 +144,7 @@ export interface SearchResponseDictItem {
      * @type {Array<string>}
      * @memberof SearchResponseDictItem
      */
-    keyPoints?: Array<string>;
+    keyPoints?: Array<string> | null;
     /**
      * 
      * @type {string}
@@ -187,19 +192,19 @@ export interface SearchResponseDictItem {
      * @type {AsknewsApiSchemaV1CommonGraphRelationships}
      * @memberof SearchResponseDictItem
      */
-    entityRelationGraph?: AsknewsApiSchemaV1CommonGraphRelationships;
+    entityRelationGraph?: AsknewsApiSchemaV1CommonGraphRelationships | null;
     /**
      * 
      * @type {{ [key: string]: GeoCoordinate; }}
      * @memberof SearchResponseDictItem
      */
-    geoCoordinates?: { [key: string]: GeoCoordinate; };
+    geoCoordinates?: { [key: string]: GeoCoordinate; } | null;
     /**
      * 
      * @type {string}
      * @memberof SearchResponseDictItem
      */
-    continent?: SearchResponseDictItemContinentEnum;
+    continent?: SearchResponseDictItemContinentEnum | null;
     /**
      * 
      * @type {string}
@@ -238,25 +243,25 @@ export type SearchResponseDictItemContinentEnum = typeof SearchResponseDictItemC
 /**
  * Check if a given object implements the SearchResponseDictItem interface.
  */
-export function instanceOfSearchResponseDictItem(value: object): boolean {
-    if (!('articleUrl' in value)) return false;
-    if (!('articleId' in value)) return false;
-    if (!('classification' in value)) return false;
-    if (!('country' in value)) return false;
-    if (!('sourceId' in value)) return false;
-    if (!('pageRank' in value)) return false;
-    if (!('domainUrl' in value)) return false;
-    if (!('engTitle' in value)) return false;
-    if (!('entities' in value)) return false;
-    if (!('keywords' in value)) return false;
-    if (!('language' in value)) return false;
-    if (!('pubDate' in value)) return false;
-    if (!('summary' in value)) return false;
-    if (!('title' in value)) return false;
-    if (!('sentiment' in value)) return false;
-    if (!('centroidDistance' in value)) return false;
-    if (!('clusterProbability' in value)) return false;
-    if (!('asStringKey' in value)) return false;
+export function instanceOfSearchResponseDictItem(value: object): value is SearchResponseDictItem {
+    if (!('articleUrl' in value) || value['articleUrl'] === undefined) return false;
+    if (!('articleId' in value) || value['articleId'] === undefined) return false;
+    if (!('classification' in value) || value['classification'] === undefined) return false;
+    if (!('country' in value) || value['country'] === undefined) return false;
+    if (!('sourceId' in value) || value['sourceId'] === undefined) return false;
+    if (!('pageRank' in value) || value['pageRank'] === undefined) return false;
+    if (!('domainUrl' in value) || value['domainUrl'] === undefined) return false;
+    if (!('engTitle' in value) || value['engTitle'] === undefined) return false;
+    if (!('entities' in value) || value['entities'] === undefined) return false;
+    if (!('keywords' in value) || value['keywords'] === undefined) return false;
+    if (!('language' in value) || value['language'] === undefined) return false;
+    if (!('pubDate' in value) || value['pubDate'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
+    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('sentiment' in value) || value['sentiment'] === undefined) return false;
+    if (!('centroidDistance' in value) || value['centroidDistance'] === undefined) return false;
+    if (!('clusterProbability' in value) || value['clusterProbability'] === undefined) return false;
+    if (!('asStringKey' in value) || value['asStringKey'] === undefined) return false;
     return true;
 }
 
@@ -293,16 +298,21 @@ export function SearchResponseDictItemFromJSONTyped(json: any, ignoreDiscriminat
         'provocative': json['provocative'] == null ? undefined : json['provocative'],
         'reportingVoice': json['reporting_voice'] == null ? undefined : ReportingVoice1FromJSON(json['reporting_voice']),
         'entityRelationGraph': json['entity_relation_graph'] == null ? undefined : AsknewsApiSchemaV1CommonGraphRelationshipsFromJSON(json['entity_relation_graph']),
-        'geoCoordinates': json['geo_coordinates'] == null ? undefined : json['geo_coordinates'],
+        'geoCoordinates': json['geo_coordinates'] == null ? undefined : (mapValues(json['geo_coordinates'], GeoCoordinateFromJSON)),
         'continent': json['continent'] == null ? undefined : json['continent'],
         'asStringKey': json['as_string_key'],
     };
 }
 
-export function SearchResponseDictItemToJSON(value?: SearchResponseDictItem | null): any {
+export function SearchResponseDictItemToJSON(json: any): SearchResponseDictItem {
+    return SearchResponseDictItemToJSONTyped(json, false);
+}
+
+export function SearchResponseDictItemToJSONTyped(value?: SearchResponseDictItem | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'article_url': value['articleUrl'],
@@ -328,7 +338,7 @@ export function SearchResponseDictItemToJSON(value?: SearchResponseDictItem | nu
         'provocative': value['provocative'],
         'reporting_voice': ReportingVoice1ToJSON(value['reportingVoice']),
         'entity_relation_graph': AsknewsApiSchemaV1CommonGraphRelationshipsToJSON(value['entityRelationGraph']),
-        'geo_coordinates': value['geoCoordinates'],
+        'geo_coordinates': value['geoCoordinates'] == null ? undefined : (mapValues(value['geoCoordinates'], GeoCoordinateToJSON)),
         'continent': value['continent'],
         'as_string_key': value['asStringKey'],
     };

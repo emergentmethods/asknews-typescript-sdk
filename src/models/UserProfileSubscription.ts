@@ -36,21 +36,21 @@ export interface UserProfileSubscription {
      * @type {Date}
      * @memberof UserProfileSubscription
      */
-    periodStart?: Date;
+    periodStart?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof UserProfileSubscription
      */
-    periodEnd?: Date;
+    periodEnd?: Date | null;
 }
 
 /**
  * Check if a given object implements the UserProfileSubscription interface.
  */
-export function instanceOfUserProfileSubscription(value: object): boolean {
-    if (!('status' in value)) return false;
-    if (!('plan' in value)) return false;
+export function instanceOfUserProfileSubscription(value: object): value is UserProfileSubscription {
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('plan' in value) || value['plan'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +71,15 @@ export function UserProfileSubscriptionFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function UserProfileSubscriptionToJSON(value?: UserProfileSubscription | null): any {
+export function UserProfileSubscriptionToJSON(json: any): UserProfileSubscription {
+    return UserProfileSubscriptionToJSONTyped(json, false);
+}
+
+export function UserProfileSubscriptionToJSONTyped(value?: UserProfileSubscription | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'status': value['status'],

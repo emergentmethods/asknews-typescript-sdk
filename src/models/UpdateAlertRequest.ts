@@ -13,24 +13,27 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ReportRequest } from './ReportRequest';
-import {
-    ReportRequestFromJSON,
-    ReportRequestFromJSONTyped,
-    ReportRequestToJSON,
-} from './ReportRequest';
-import type { SourcesInner } from './SourcesInner';
-import {
-    SourcesInnerFromJSON,
-    SourcesInnerFromJSONTyped,
-    SourcesInnerToJSON,
-} from './SourcesInner';
 import type { TriggersInner } from './TriggersInner';
 import {
     TriggersInnerFromJSON,
     TriggersInnerFromJSONTyped,
     TriggersInnerToJSON,
+    TriggersInnerToJSONTyped,
 } from './TriggersInner';
+import type { SourcesInner } from './SourcesInner';
+import {
+    SourcesInnerFromJSON,
+    SourcesInnerFromJSONTyped,
+    SourcesInnerToJSON,
+    SourcesInnerToJSONTyped,
+} from './SourcesInner';
+import type { ReportRequest } from './ReportRequest';
+import {
+    ReportRequestFromJSON,
+    ReportRequestFromJSONTyped,
+    ReportRequestToJSON,
+    ReportRequestToJSONTyped,
+} from './ReportRequest';
 
 /**
  * 
@@ -43,25 +46,25 @@ export interface UpdateAlertRequest {
      * @type {string}
      * @memberof UpdateAlertRequest
      */
-    query?: string;
+    query?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAlertRequest
      */
-    cron?: string;
+    cron?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAlertRequest
      */
-    model?: UpdateAlertRequestModelEnum;
+    model?: UpdateAlertRequestModelEnum | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAlertRequest
      */
-    shareLink?: string;
+    shareLink?: string | null;
     /**
      * 
      * @type {Array<SourcesInner>}
@@ -73,7 +76,7 @@ export interface UpdateAlertRequest {
      * @type {ReportRequest}
      * @memberof UpdateAlertRequest
      */
-    report?: ReportRequest;
+    report?: ReportRequest | null;
     /**
      * 
      * @type {Array<TriggersInner>}
@@ -85,25 +88,25 @@ export interface UpdateAlertRequest {
      * @type {boolean}
      * @memberof UpdateAlertRequest
      */
-    alwaysTrigger?: boolean;
+    alwaysTrigger?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAlertRequest
      */
-    repeat?: boolean;
+    repeat?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAlertRequest
      */
-    active?: boolean;
+    active?: boolean | null;
     /**
      * 
      * @type {Date}
      * @memberof UpdateAlertRequest
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
 }
 
 
@@ -126,7 +129,7 @@ export type UpdateAlertRequestModelEnum = typeof UpdateAlertRequestModelEnum[key
 /**
  * Check if a given object implements the UpdateAlertRequest interface.
  */
-export function instanceOfUpdateAlertRequest(value: object): boolean {
+export function instanceOfUpdateAlertRequest(value: object): value is UpdateAlertRequest {
     return true;
 }
 
@@ -154,10 +157,15 @@ export function UpdateAlertRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function UpdateAlertRequestToJSON(value?: UpdateAlertRequest | null): any {
+export function UpdateAlertRequestToJSON(json: any): UpdateAlertRequest {
+    return UpdateAlertRequestToJSONTyped(json, false);
+}
+
+export function UpdateAlertRequestToJSONTyped(value?: UpdateAlertRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'query': value['query'],

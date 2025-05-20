@@ -18,6 +18,7 @@ import {
     NewsletterResponseFromJSON,
     NewsletterResponseFromJSONTyped,
     NewsletterResponseToJSON,
+    NewsletterResponseToJSONTyped,
 } from './NewsletterResponse';
 
 /**
@@ -55,11 +56,11 @@ export interface PaginatedResponseNewsletterResponse {
 /**
  * Check if a given object implements the PaginatedResponseNewsletterResponse interface.
  */
-export function instanceOfPaginatedResponseNewsletterResponse(value: object): boolean {
-    if (!('items' in value)) return false;
-    if (!('count' in value)) return false;
-    if (!('nextPage' in value)) return false;
-    if (!('previousPage' in value)) return false;
+export function instanceOfPaginatedResponseNewsletterResponse(value: object): value is PaginatedResponseNewsletterResponse {
+    if (!('items' in value) || value['items'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('nextPage' in value) || value['nextPage'] === undefined) return false;
+    if (!('previousPage' in value) || value['previousPage'] === undefined) return false;
     return true;
 }
 
@@ -80,10 +81,15 @@ export function PaginatedResponseNewsletterResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function PaginatedResponseNewsletterResponseToJSON(value?: PaginatedResponseNewsletterResponse | null): any {
+export function PaginatedResponseNewsletterResponseToJSON(json: any): PaginatedResponseNewsletterResponse {
+    return PaginatedResponseNewsletterResponseToJSONTyped(json, false);
+}
+
+export function PaginatedResponseNewsletterResponseToJSONTyped(value?: PaginatedResponseNewsletterResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'items': ((value['items'] as Array<any>).map(NewsletterResponseToJSON)),

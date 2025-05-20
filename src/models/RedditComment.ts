@@ -48,11 +48,11 @@ export interface RedditComment {
 /**
  * Check if a given object implements the RedditComment interface.
  */
-export function instanceOfRedditComment(value: object): boolean {
-    if (!('author' in value)) return false;
-    if (!('body' in value)) return false;
-    if (!('date' in value)) return false;
-    if (!('upvotes' in value)) return false;
+export function instanceOfRedditComment(value: object): value is RedditComment {
+    if (!('author' in value) || value['author'] === undefined) return false;
+    if (!('body' in value) || value['body'] === undefined) return false;
+    if (!('date' in value) || value['date'] === undefined) return false;
+    if (!('upvotes' in value) || value['upvotes'] === undefined) return false;
     return true;
 }
 
@@ -73,10 +73,15 @@ export function RedditCommentFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function RedditCommentToJSON(value?: RedditComment | null): any {
+export function RedditCommentToJSON(json: any): RedditComment {
+    return RedditCommentToJSONTyped(json, false);
+}
+
+export function RedditCommentToJSONTyped(value?: RedditComment | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'author': value['author'],

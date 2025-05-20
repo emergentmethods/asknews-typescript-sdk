@@ -13,12 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ClusterProbabilities } from './ClusterProbabilities';
+import type { ClusterProbabilitiesValue } from './ClusterProbabilitiesValue';
 import {
-    ClusterProbabilitiesFromJSON,
-    ClusterProbabilitiesFromJSONTyped,
-    ClusterProbabilitiesToJSON,
-} from './ClusterProbabilities';
+    ClusterProbabilitiesValueFromJSON,
+    ClusterProbabilitiesValueFromJSONTyped,
+    ClusterProbabilitiesValueToJSON,
+    ClusterProbabilitiesValueToJSONTyped,
+} from './ClusterProbabilitiesValue';
 
 /**
  * 
@@ -52,16 +53,16 @@ export interface IntraClusterStatistics {
     clusterLanguagesPct?: number;
     /**
      * 
-     * @type {object}
+     * @type {{ [key: string]: ClusterProbabilitiesValue; }}
      * @memberof IntraClusterStatistics
      */
-    clusterProbabilities?: object;
+    clusterProbabilities?: { [key: string]: ClusterProbabilitiesValue; };
 }
 
 /**
  * Check if a given object implements the IntraClusterStatistics interface.
  */
-export function instanceOfIntraClusterStatistics(value: object): boolean {
+export function instanceOfIntraClusterStatistics(value: object): value is IntraClusterStatistics {
     return true;
 }
 
@@ -79,21 +80,26 @@ export function IntraClusterStatisticsFromJSONTyped(json: any, ignoreDiscriminat
         'clusterCountriesPct': json['cluster_countries_pct'] == null ? undefined : json['cluster_countries_pct'],
         'clusterDomainsPct': json['cluster_domains_pct'] == null ? undefined : json['cluster_domains_pct'],
         'clusterLanguagesPct': json['cluster_languages_pct'] == null ? undefined : json['cluster_languages_pct'],
-        'clusterProbabilities': json['cluster_probabilities'] == null ? undefined : json['cluster_probabilities'],
+        'clusterProbabilities': json['cluster_probabilities'] == null ? undefined : (mapValues(json['cluster_probabilities'], ClusterProbabilitiesValueFromJSON)),
     };
 }
 
-export function IntraClusterStatisticsToJSON(value?: IntraClusterStatistics | null): any {
+export function IntraClusterStatisticsToJSON(json: any): IntraClusterStatistics {
+    return IntraClusterStatisticsToJSONTyped(json, false);
+}
+
+export function IntraClusterStatisticsToJSONTyped(value?: IntraClusterStatistics | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'cluster_articles_pct': value['clusterArticlesPct'],
         'cluster_countries_pct': value['clusterCountriesPct'],
         'cluster_domains_pct': value['clusterDomainsPct'],
         'cluster_languages_pct': value['clusterLanguagesPct'],
-        'cluster_probabilities': value['clusterProbabilities'],
+        'cluster_probabilities': value['clusterProbabilities'] == null ? undefined : (mapValues(value['clusterProbabilities'], ClusterProbabilitiesValueToJSON)),
     };
 }
 

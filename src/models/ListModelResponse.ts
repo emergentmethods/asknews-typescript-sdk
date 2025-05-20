@@ -18,6 +18,7 @@ import {
     ModelItemFromJSON,
     ModelItemFromJSONTyped,
     ModelItemToJSON,
+    ModelItemToJSONTyped,
 } from './ModelItem';
 
 /**
@@ -43,8 +44,8 @@ export interface ListModelResponse {
 /**
  * Check if a given object implements the ListModelResponse interface.
  */
-export function instanceOfListModelResponse(value: object): boolean {
-    if (!('data' in value)) return false;
+export function instanceOfListModelResponse(value: object): value is ListModelResponse {
+    if (!('data' in value) || value['data'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +64,15 @@ export function ListModelResponseFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function ListModelResponseToJSON(value?: ListModelResponse | null): any {
+export function ListModelResponseToJSON(json: any): ListModelResponse {
+    return ListModelResponseToJSONTyped(json, false);
+}
+
+export function ListModelResponseToJSONTyped(value?: ListModelResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'object': value['object'],

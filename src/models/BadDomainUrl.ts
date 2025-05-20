@@ -24,7 +24,7 @@ export interface BadDomainUrl {
 /**
  * Check if a given object implements the BadDomainUrl interface.
  */
-export function instanceOfBadDomainUrl(value: object): boolean {
+export function instanceOfBadDomainUrl(value: object): value is BadDomainUrl {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function BadDomainUrlFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return json;
 }
 
-export function BadDomainUrlToJSON(value?: BadDomainUrl | null): any {
+export function BadDomainUrlToJSON(json: any): BadDomainUrl {
+    return BadDomainUrlToJSONTyped(json, false);
+}
+
+export function BadDomainUrlToJSONTyped(value?: BadDomainUrl | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

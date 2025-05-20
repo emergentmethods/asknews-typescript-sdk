@@ -36,21 +36,21 @@ export interface CreateDeepNewsRequestMessage {
      * @type {string}
      * @memberof CreateDeepNewsRequestMessage
      */
-    name?: string;
+    name?: string | null;
     /**
      * 
      * @type {{ [key: string]: any; }}
      * @memberof CreateDeepNewsRequestMessage
      */
-    functionCall?: { [key: string]: any; };
+    functionCall?: { [key: string]: any; } | null;
 }
 
 /**
  * Check if a given object implements the CreateDeepNewsRequestMessage interface.
  */
-export function instanceOfCreateDeepNewsRequestMessage(value: object): boolean {
-    if (!('role' in value)) return false;
-    if (!('content' in value)) return false;
+export function instanceOfCreateDeepNewsRequestMessage(value: object): value is CreateDeepNewsRequestMessage {
+    if (!('role' in value) || value['role'] === undefined) return false;
+    if (!('content' in value) || value['content'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +71,15 @@ export function CreateDeepNewsRequestMessageFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function CreateDeepNewsRequestMessageToJSON(value?: CreateDeepNewsRequestMessage | null): any {
+export function CreateDeepNewsRequestMessageToJSON(json: any): CreateDeepNewsRequestMessage {
+    return CreateDeepNewsRequestMessageToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsRequestMessageToJSONTyped(value?: CreateDeepNewsRequestMessage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'role': value['role'],

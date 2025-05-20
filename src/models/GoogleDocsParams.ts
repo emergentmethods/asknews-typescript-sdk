@@ -30,14 +30,14 @@ export interface GoogleDocsParams {
      * @type {Array<string>}
      * @memberof GoogleDocsParams
      */
-    emails?: Array<string>;
+    emails?: Array<string> | null;
 }
 
 /**
  * Check if a given object implements the GoogleDocsParams interface.
  */
-export function instanceOfGoogleDocsParams(value: object): boolean {
-    if (!('clientJson' in value)) return false;
+export function instanceOfGoogleDocsParams(value: object): value is GoogleDocsParams {
+    if (!('clientJson' in value) || value['clientJson'] === undefined) return false;
     return true;
 }
 
@@ -56,10 +56,15 @@ export function GoogleDocsParamsFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function GoogleDocsParamsToJSON(value?: GoogleDocsParams | null): any {
+export function GoogleDocsParamsToJSON(json: any): GoogleDocsParams {
+    return GoogleDocsParamsToJSONTyped(json, false);
+}
+
+export function GoogleDocsParamsToJSONTyped(value?: GoogleDocsParams | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'client_json': value['clientJson'],

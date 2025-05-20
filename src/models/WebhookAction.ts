@@ -18,6 +18,7 @@ import {
     WebhookParamsFromJSON,
     WebhookParamsFromJSONTyped,
     WebhookParamsToJSON,
+    WebhookParamsToJSONTyped,
 } from './WebhookParams';
 
 /**
@@ -31,7 +32,7 @@ export interface WebhookAction {
      * @type {string}
      * @memberof WebhookAction
      */
-    action?: string;
+    action?: WebhookActionActionEnum;
     /**
      * 
      * @type {WebhookParams}
@@ -40,11 +41,21 @@ export interface WebhookAction {
     params: WebhookParams;
 }
 
+
+/**
+ * @export
+ */
+export const WebhookActionActionEnum = {
+    Webhook: 'webhook'
+} as const;
+export type WebhookActionActionEnum = typeof WebhookActionActionEnum[keyof typeof WebhookActionActionEnum];
+
+
 /**
  * Check if a given object implements the WebhookAction interface.
  */
-export function instanceOfWebhookAction(value: object): boolean {
-    if (!('params' in value)) return false;
+export function instanceOfWebhookAction(value: object): value is WebhookAction {
+    if (!('params' in value) || value['params'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function WebhookActionFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function WebhookActionToJSON(value?: WebhookAction | null): any {
+export function WebhookActionToJSON(json: any): WebhookAction {
+    return WebhookActionToJSONTyped(json, false);
+}
+
+export function WebhookActionToJSONTyped(value?: WebhookAction | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'action': value['action'],

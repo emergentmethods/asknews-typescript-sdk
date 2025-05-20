@@ -58,31 +58,35 @@ export function TriggersInnerFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     switch (json['action']) {
         case 'email':
-            return Object.assign({}, EmailActionFromJSONTyped(json, true), { action: 'email' });
+            return Object.assign({}, EmailActionFromJSONTyped(json, true), { action: 'email' } as const);
         case 'google_docs':
-            return Object.assign({}, GoogleDocsActionFromJSONTyped(json, true), { action: 'google_docs' });
+            return Object.assign({}, GoogleDocsActionFromJSONTyped(json, true), { action: 'google_docs' } as const);
         case 'resend_broadcast':
-            return Object.assign({}, ResendBroadcastActionFromJSONTyped(json, true), { action: 'resend_broadcast' });
+            return Object.assign({}, ResendBroadcastActionFromJSONTyped(json, true), { action: 'resend_broadcast' } as const);
         case 'webhook':
-            return Object.assign({}, WebhookActionFromJSONTyped(json, true), { action: 'webhook' });
+            return Object.assign({}, WebhookActionFromJSONTyped(json, true), { action: 'webhook' } as const);
         default:
             throw new Error(`No variant of TriggersInner exists with 'action=${json['action']}'`);
     }
 }
 
-export function TriggersInnerToJSON(value?: TriggersInner | null): any {
+export function TriggersInnerToJSON(json: any): any {
+    return TriggersInnerToJSONTyped(json, false);
+}
+
+export function TriggersInnerToJSONTyped(value?: TriggersInner | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
     switch (value['action']) {
         case 'email':
-            return EmailActionToJSON(value);
+            return Object.assign({}, EmailActionToJSON(value), { action: 'email' } as const);
         case 'google_docs':
-            return GoogleDocsActionToJSON(value);
+            return Object.assign({}, GoogleDocsActionToJSON(value), { action: 'google_docs' } as const);
         case 'resend_broadcast':
-            return ResendBroadcastActionToJSON(value);
+            return Object.assign({}, ResendBroadcastActionToJSON(value), { action: 'resend_broadcast' } as const);
         case 'webhook':
-            return WebhookActionToJSON(value);
+            return Object.assign({}, WebhookActionToJSON(value), { action: 'webhook' } as const);
         default:
             throw new Error(`No variant of TriggersInner exists with 'action=${value['action']}'`);
     }

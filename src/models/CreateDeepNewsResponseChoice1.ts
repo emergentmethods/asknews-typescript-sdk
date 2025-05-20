@@ -18,6 +18,7 @@ import {
     CreateDeepNewsRequestMessage1FromJSON,
     CreateDeepNewsRequestMessage1FromJSONTyped,
     CreateDeepNewsRequestMessage1ToJSON,
+    CreateDeepNewsRequestMessage1ToJSONTyped,
 } from './CreateDeepNewsRequestMessage1';
 
 /**
@@ -43,15 +44,15 @@ export interface CreateDeepNewsResponseChoice1 {
      * @type {string}
      * @memberof CreateDeepNewsResponseChoice1
      */
-    finishReason?: string;
+    finishReason?: string | null;
 }
 
 /**
  * Check if a given object implements the CreateDeepNewsResponseChoice1 interface.
  */
-export function instanceOfCreateDeepNewsResponseChoice1(value: object): boolean {
-    if (!('index' in value)) return false;
-    if (!('message' in value)) return false;
+export function instanceOfCreateDeepNewsResponseChoice1(value: object): value is CreateDeepNewsResponseChoice1 {
+    if (!('index' in value) || value['index'] === undefined) return false;
+    if (!('message' in value) || value['message'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +72,15 @@ export function CreateDeepNewsResponseChoice1FromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function CreateDeepNewsResponseChoice1ToJSON(value?: CreateDeepNewsResponseChoice1 | null): any {
+export function CreateDeepNewsResponseChoice1ToJSON(json: any): CreateDeepNewsResponseChoice1 {
+    return CreateDeepNewsResponseChoice1ToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseChoice1ToJSONTyped(value?: CreateDeepNewsResponseChoice1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'index': value['index'],

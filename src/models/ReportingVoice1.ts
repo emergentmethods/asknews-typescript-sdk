@@ -24,7 +24,7 @@ export interface ReportingVoice1 {
 /**
  * Check if a given object implements the ReportingVoice1 interface.
  */
-export function instanceOfReportingVoice1(value: object): boolean {
+export function instanceOfReportingVoice1(value: object): value is ReportingVoice1 {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ReportingVoice1FromJSONTyped(json: any, ignoreDiscriminator: boo
     return json;
 }
 
-export function ReportingVoice1ToJSON(value?: ReportingVoice1 | null): any {
+export function ReportingVoice1ToJSON(json: any): ReportingVoice1 {
+    return ReportingVoice1ToJSONTyped(json, false);
+}
+
+export function ReportingVoice1ToJSONTyped(value?: ReportingVoice1 | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

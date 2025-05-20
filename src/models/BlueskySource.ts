@@ -18,6 +18,7 @@ import {
     BlueskySourceParamsFromJSON,
     BlueskySourceParamsFromJSONTyped,
     BlueskySourceParamsToJSON,
+    BlueskySourceParamsToJSONTyped,
 } from './BlueskySourceParams';
 
 /**
@@ -31,20 +32,30 @@ export interface BlueskySource {
      * @type {string}
      * @memberof BlueskySource
      */
-    identifier: string;
+    identifier: BlueskySourceIdentifierEnum;
     /**
      * 
      * @type {BlueskySourceParams}
      * @memberof BlueskySource
      */
-    params?: BlueskySourceParams;
+    params?: BlueskySourceParams | null;
 }
+
+
+/**
+ * @export
+ */
+export const BlueskySourceIdentifierEnum = {
+    Bluesky: 'bluesky'
+} as const;
+export type BlueskySourceIdentifierEnum = typeof BlueskySourceIdentifierEnum[keyof typeof BlueskySourceIdentifierEnum];
+
 
 /**
  * Check if a given object implements the BlueskySource interface.
  */
-export function instanceOfBlueskySource(value: object): boolean {
-    if (!('identifier' in value)) return false;
+export function instanceOfBlueskySource(value: object): value is BlueskySource {
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function BlueskySourceFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function BlueskySourceToJSON(value?: BlueskySource | null): any {
+export function BlueskySourceToJSON(json: any): BlueskySource {
+    return BlueskySourceToJSONTyped(json, false);
+}
+
+export function BlueskySourceToJSONTyped(value?: BlueskySource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'identifier': value['identifier'],

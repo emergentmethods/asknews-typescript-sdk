@@ -18,18 +18,21 @@ import {
     CreateDeepNewsResponseStreamSourcesGraphSourceFromJSON,
     CreateDeepNewsResponseStreamSourcesGraphSourceFromJSONTyped,
     CreateDeepNewsResponseStreamSourcesGraphSourceToJSON,
+    CreateDeepNewsResponseStreamSourcesGraphSourceToJSONTyped,
 } from './CreateDeepNewsResponseStreamSourcesGraphSource';
 import type { CreateDeepNewsResponseStreamSourcesNewsSource } from './CreateDeepNewsResponseStreamSourcesNewsSource';
 import {
     CreateDeepNewsResponseStreamSourcesNewsSourceFromJSON,
     CreateDeepNewsResponseStreamSourcesNewsSourceFromJSONTyped,
     CreateDeepNewsResponseStreamSourcesNewsSourceToJSON,
+    CreateDeepNewsResponseStreamSourcesNewsSourceToJSONTyped,
 } from './CreateDeepNewsResponseStreamSourcesNewsSource';
 import type { CreateDeepNewsResponseStreamSourcesWebSource } from './CreateDeepNewsResponseStreamSourcesWebSource';
 import {
     CreateDeepNewsResponseStreamSourcesWebSourceFromJSON,
     CreateDeepNewsResponseStreamSourcesWebSourceFromJSONTyped,
     CreateDeepNewsResponseStreamSourcesWebSourceToJSON,
+    CreateDeepNewsResponseStreamSourcesWebSourceToJSONTyped,
 } from './CreateDeepNewsResponseStreamSourcesWebSource';
 
 /**
@@ -43,7 +46,7 @@ export interface Source {
      * @type {string}
      * @memberof Source
      */
-    kind?: string;
+    kind?: SourceKindEnum;
     /**
      * 
      * @type {string}
@@ -52,11 +55,21 @@ export interface Source {
     data: string;
 }
 
+
+/**
+ * @export
+ */
+export const SourceKindEnum = {
+    Graph: 'graph'
+} as const;
+export type SourceKindEnum = typeof SourceKindEnum[keyof typeof SourceKindEnum];
+
+
 /**
  * Check if a given object implements the Source interface.
  */
-export function instanceOfSource(value: object): boolean {
-    if (!('data' in value)) return false;
+export function instanceOfSource(value: object): value is Source {
+    if (!('data' in value) || value['data'] === undefined) return false;
     return true;
 }
 
@@ -75,10 +88,15 @@ export function SourceFromJSONTyped(json: any, ignoreDiscriminator: boolean): So
     };
 }
 
-export function SourceToJSON(value?: Source | null): any {
+export function SourceToJSON(json: any): Source {
+    return SourceToJSONTyped(json, false);
+}
+
+export function SourceToJSONTyped(value?: Source | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'kind': value['kind'],

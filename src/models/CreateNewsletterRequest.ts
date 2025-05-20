@@ -48,7 +48,7 @@ export interface CreateNewsletterRequest {
      * @type {string}
      * @memberof CreateNewsletterRequest
      */
-    subject?: string;
+    subject?: string | null;
     /**
      * The sender of the newsletter.
      * @type {string}
@@ -60,25 +60,25 @@ export interface CreateNewsletterRequest {
      * @type {string}
      * @memberof CreateNewsletterRequest
      */
-    logoUrl?: string;
+    logoUrl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CreateNewsletterRequest
      */
-    replyTo?: string;
+    replyTo?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CreateNewsletterRequest
      */
-    audienceId?: string;
+    audienceId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CreateNewsletterRequest
      */
-    resendApiKey?: string;
+    resendApiKey?: string | null;
     /**
      * Whether the newsletter is public or not. If not provided, the newsletter will be public. If you make the newsletter public only title and query will be shown.
      * @type {boolean}
@@ -96,7 +96,7 @@ export interface CreateNewsletterRequest {
      * @type {Date}
      * @memberof CreateNewsletterRequest
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
 }
 
 
@@ -116,12 +116,12 @@ export type CreateNewsletterRequestModelEnum = typeof CreateNewsletterRequestMod
 /**
  * Check if a given object implements the CreateNewsletterRequest interface.
  */
-export function instanceOfCreateNewsletterRequest(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('query' in value)) return false;
-    if (!('cron' in value)) return false;
-    if (!('model' in value)) return false;
-    if (!('sender' in value)) return false;
+export function instanceOfCreateNewsletterRequest(value: object): value is CreateNewsletterRequest {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('query' in value) || value['query'] === undefined) return false;
+    if (!('cron' in value) || value['cron'] === undefined) return false;
+    if (!('model' in value) || value['model'] === undefined) return false;
+    if (!('sender' in value) || value['sender'] === undefined) return false;
     return true;
 }
 
@@ -151,10 +151,15 @@ export function CreateNewsletterRequestFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function CreateNewsletterRequestToJSON(value?: CreateNewsletterRequest | null): any {
+export function CreateNewsletterRequestToJSON(json: any): CreateNewsletterRequest {
+    return CreateNewsletterRequestToJSONTyped(json, false);
+}
+
+export function CreateNewsletterRequestToJSONTyped(value?: CreateNewsletterRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

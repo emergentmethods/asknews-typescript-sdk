@@ -66,14 +66,14 @@ export interface SourceReportItem {
 /**
  * Check if a given object implements the SourceReportItem interface.
  */
-export function instanceOfSourceReportItem(value: object): boolean {
-    if (!('bsonDate' in value)) return false;
-    if (!('nBucket' in value)) return false;
-    if (!('nSelected' in value)) return false;
-    if (!('bucketCounts' in value)) return false;
-    if (!('selectedCounts' in value)) return false;
-    if (!('bucketPct' in value)) return false;
-    if (!('selectedPct' in value)) return false;
+export function instanceOfSourceReportItem(value: object): value is SourceReportItem {
+    if (!('bsonDate' in value) || value['bsonDate'] === undefined) return false;
+    if (!('nBucket' in value) || value['nBucket'] === undefined) return false;
+    if (!('nSelected' in value) || value['nSelected'] === undefined) return false;
+    if (!('bucketCounts' in value) || value['bucketCounts'] === undefined) return false;
+    if (!('selectedCounts' in value) || value['selectedCounts'] === undefined) return false;
+    if (!('bucketPct' in value) || value['bucketPct'] === undefined) return false;
+    if (!('selectedPct' in value) || value['selectedPct'] === undefined) return false;
     return true;
 }
 
@@ -97,10 +97,15 @@ export function SourceReportItemFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function SourceReportItemToJSON(value?: SourceReportItem | null): any {
+export function SourceReportItemToJSON(json: any): SourceReportItem {
+    return SourceReportItemToJSONTyped(json, false);
+}
+
+export function SourceReportItemToJSONTyped(value?: SourceReportItem | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'bson_date': ((value['bsonDate']).toISOString()),

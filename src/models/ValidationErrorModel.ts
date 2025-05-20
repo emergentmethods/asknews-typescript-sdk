@@ -18,6 +18,7 @@ import {
     ValidationErrorItemFromJSON,
     ValidationErrorItemFromJSONTyped,
     ValidationErrorItemToJSON,
+    ValidationErrorItemToJSONTyped,
 } from './ValidationErrorItem';
 
 /**
@@ -43,8 +44,8 @@ export interface ValidationErrorModel {
 /**
  * Check if a given object implements the ValidationErrorModel interface.
  */
-export function instanceOfValidationErrorModel(value: object): boolean {
-    if (!('detail' in value)) return false;
+export function instanceOfValidationErrorModel(value: object): value is ValidationErrorModel {
+    if (!('detail' in value) || value['detail'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +64,15 @@ export function ValidationErrorModelFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function ValidationErrorModelToJSON(value?: ValidationErrorModel | null): any {
+export function ValidationErrorModelToJSON(json: any): ValidationErrorModel {
+    return ValidationErrorModelToJSONTyped(json, false);
+}
+
+export function ValidationErrorModelToJSONTyped(value?: ValidationErrorModel | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'code': value['code'],

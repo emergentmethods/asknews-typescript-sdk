@@ -18,12 +18,14 @@ import {
     Offset3FromJSON,
     Offset3FromJSONTyped,
     Offset3ToJSON,
+    Offset3ToJSONTyped,
 } from './Offset3';
 import type { SearchResponseDictItem } from './SearchResponseDictItem';
 import {
     SearchResponseDictItemFromJSON,
     SearchResponseDictItemFromJSONTyped,
     SearchResponseDictItemToJSON,
+    SearchResponseDictItemToJSONTyped,
 } from './SearchResponseDictItem';
 
 /**
@@ -37,25 +39,25 @@ export interface SearchResponse {
      * @type {Array<SearchResponseDictItem>}
      * @memberof SearchResponse
      */
-    asDicts?: Array<SearchResponseDictItem>;
+    asDicts?: Array<SearchResponseDictItem> | null;
     /**
      * 
      * @type {string}
      * @memberof SearchResponse
      */
-    asString?: string;
+    asString?: string | null;
     /**
      * 
      * @type {Offset3}
      * @memberof SearchResponse
      */
-    offset?: Offset3;
+    offset?: Offset3 | null;
 }
 
 /**
  * Check if a given object implements the SearchResponse interface.
  */
-export function instanceOfSearchResponse(value: object): boolean {
+export function instanceOfSearchResponse(value: object): value is SearchResponse {
     return true;
 }
 
@@ -75,10 +77,15 @@ export function SearchResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function SearchResponseToJSON(value?: SearchResponse | null): any {
+export function SearchResponseToJSON(json: any): SearchResponse {
+    return SearchResponseToJSONTyped(json, false);
+}
+
+export function SearchResponseToJSONTyped(value?: SearchResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'as_dicts': value['asDicts'] == null ? undefined : ((value['asDicts'] as Array<any>).map(SearchResponseDictItemToJSON)),

@@ -18,6 +18,7 @@ import {
     TelegramSourceParamsFromJSON,
     TelegramSourceParamsFromJSONTyped,
     TelegramSourceParamsToJSON,
+    TelegramSourceParamsToJSONTyped,
 } from './TelegramSourceParams';
 
 /**
@@ -31,7 +32,7 @@ export interface TelegramSource {
      * @type {string}
      * @memberof TelegramSource
      */
-    identifier: string;
+    identifier: TelegramSourceIdentifierEnum;
     /**
      * 
      * @type {TelegramSourceParams}
@@ -40,12 +41,22 @@ export interface TelegramSource {
     params: TelegramSourceParams;
 }
 
+
+/**
+ * @export
+ */
+export const TelegramSourceIdentifierEnum = {
+    Telegram: 'telegram'
+} as const;
+export type TelegramSourceIdentifierEnum = typeof TelegramSourceIdentifierEnum[keyof typeof TelegramSourceIdentifierEnum];
+
+
 /**
  * Check if a given object implements the TelegramSource interface.
  */
-export function instanceOfTelegramSource(value: object): boolean {
-    if (!('identifier' in value)) return false;
-    if (!('params' in value)) return false;
+export function instanceOfTelegramSource(value: object): value is TelegramSource {
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
+    if (!('params' in value) || value['params'] === undefined) return false;
     return true;
 }
 
@@ -64,10 +75,15 @@ export function TelegramSourceFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function TelegramSourceToJSON(value?: TelegramSource | null): any {
+export function TelegramSourceToJSON(json: any): TelegramSource {
+    return TelegramSourceToJSONTyped(json, false);
+}
+
+export function TelegramSourceToJSONTyped(value?: TelegramSource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'identifier': value['identifier'],

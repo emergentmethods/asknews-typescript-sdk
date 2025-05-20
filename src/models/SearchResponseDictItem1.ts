@@ -13,36 +13,41 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Classification } from './Classification';
+import type { GeoCoordinate1 } from './GeoCoordinate1';
 import {
-    ClassificationFromJSON,
-    ClassificationFromJSONTyped,
-    ClassificationToJSON,
-} from './Classification';
+    GeoCoordinate1FromJSON,
+    GeoCoordinate1FromJSONTyped,
+    GeoCoordinate1ToJSON,
+    GeoCoordinate1ToJSONTyped,
+} from './GeoCoordinate1';
 import type { Entities1 } from './Entities1';
 import {
     Entities1FromJSON,
     Entities1FromJSONTyped,
     Entities1ToJSON,
+    Entities1ToJSONTyped,
 } from './Entities1';
+import type { Classification } from './Classification';
+import {
+    ClassificationFromJSON,
+    ClassificationFromJSONTyped,
+    ClassificationToJSON,
+    ClassificationToJSONTyped,
+} from './Classification';
 import type { GraphRelationships } from './GraphRelationships';
 import {
     GraphRelationshipsFromJSON,
     GraphRelationshipsFromJSONTyped,
     GraphRelationshipsToJSON,
+    GraphRelationshipsToJSONTyped,
 } from './GraphRelationships';
 import type { ReportingVoice1 } from './ReportingVoice1';
 import {
     ReportingVoice1FromJSON,
     ReportingVoice1FromJSONTyped,
     ReportingVoice1ToJSON,
+    ReportingVoice1ToJSONTyped,
 } from './ReportingVoice1';
-import type { SearchResponseDictItem1GeoCoordinatesValue } from './SearchResponseDictItem1GeoCoordinatesValue';
-import {
-    SearchResponseDictItem1GeoCoordinatesValueFromJSON,
-    SearchResponseDictItem1GeoCoordinatesValueFromJSONTyped,
-    SearchResponseDictItem1GeoCoordinatesValueToJSON,
-} from './SearchResponseDictItem1GeoCoordinatesValue';
 
 /**
  * 
@@ -109,7 +114,7 @@ export interface SearchResponseDictItem1 {
      * @type {string}
      * @memberof SearchResponseDictItem1
      */
-    imageUrl?: string;
+    imageUrl?: string | null;
     /**
      * 
      * @type {Array<string>}
@@ -139,7 +144,7 @@ export interface SearchResponseDictItem1 {
      * @type {Array<string>}
      * @memberof SearchResponseDictItem1
      */
-    keyPoints?: Array<string>;
+    keyPoints?: Array<string> | null;
     /**
      * 
      * @type {string}
@@ -187,19 +192,19 @@ export interface SearchResponseDictItem1 {
      * @type {GraphRelationships}
      * @memberof SearchResponseDictItem1
      */
-    entityRelationGraph?: GraphRelationships;
+    entityRelationGraph?: GraphRelationships | null;
     /**
      * 
-     * @type {object}
+     * @type {{ [key: string]: GeoCoordinate1; }}
      * @memberof SearchResponseDictItem1
      */
-    geoCoordinates?: object;
+    geoCoordinates?: { [key: string]: GeoCoordinate1; } | null;
     /**
      * 
      * @type {string}
      * @memberof SearchResponseDictItem1
      */
-    continent?: SearchResponseDictItem1ContinentEnum;
+    continent?: SearchResponseDictItem1ContinentEnum | null;
     /**
      * 
      * @type {string}
@@ -238,25 +243,25 @@ export type SearchResponseDictItem1ContinentEnum = typeof SearchResponseDictItem
 /**
  * Check if a given object implements the SearchResponseDictItem1 interface.
  */
-export function instanceOfSearchResponseDictItem1(value: object): boolean {
-    if (!('articleUrl' in value)) return false;
-    if (!('articleId' in value)) return false;
-    if (!('classification' in value)) return false;
-    if (!('country' in value)) return false;
-    if (!('sourceId' in value)) return false;
-    if (!('pageRank' in value)) return false;
-    if (!('domainUrl' in value)) return false;
-    if (!('engTitle' in value)) return false;
-    if (!('entities' in value)) return false;
-    if (!('keywords' in value)) return false;
-    if (!('language' in value)) return false;
-    if (!('pubDate' in value)) return false;
-    if (!('summary' in value)) return false;
-    if (!('title' in value)) return false;
-    if (!('sentiment' in value)) return false;
-    if (!('centroidDistance' in value)) return false;
-    if (!('clusterProbability' in value)) return false;
-    if (!('asStringKey' in value)) return false;
+export function instanceOfSearchResponseDictItem1(value: object): value is SearchResponseDictItem1 {
+    if (!('articleUrl' in value) || value['articleUrl'] === undefined) return false;
+    if (!('articleId' in value) || value['articleId'] === undefined) return false;
+    if (!('classification' in value) || value['classification'] === undefined) return false;
+    if (!('country' in value) || value['country'] === undefined) return false;
+    if (!('sourceId' in value) || value['sourceId'] === undefined) return false;
+    if (!('pageRank' in value) || value['pageRank'] === undefined) return false;
+    if (!('domainUrl' in value) || value['domainUrl'] === undefined) return false;
+    if (!('engTitle' in value) || value['engTitle'] === undefined) return false;
+    if (!('entities' in value) || value['entities'] === undefined) return false;
+    if (!('keywords' in value) || value['keywords'] === undefined) return false;
+    if (!('language' in value) || value['language'] === undefined) return false;
+    if (!('pubDate' in value) || value['pubDate'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
+    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('sentiment' in value) || value['sentiment'] === undefined) return false;
+    if (!('centroidDistance' in value) || value['centroidDistance'] === undefined) return false;
+    if (!('clusterProbability' in value) || value['clusterProbability'] === undefined) return false;
+    if (!('asStringKey' in value) || value['asStringKey'] === undefined) return false;
     return true;
 }
 
@@ -293,16 +298,21 @@ export function SearchResponseDictItem1FromJSONTyped(json: any, ignoreDiscrimina
         'provocative': json['provocative'] == null ? undefined : json['provocative'],
         'reportingVoice': json['reporting_voice'] == null ? undefined : ReportingVoice1FromJSON(json['reporting_voice']),
         'entityRelationGraph': json['entity_relation_graph'] == null ? undefined : GraphRelationshipsFromJSON(json['entity_relation_graph']),
-        'geoCoordinates': json['geo_coordinates'] == null ? undefined : json['geo_coordinates'],
+        'geoCoordinates': json['geo_coordinates'] == null ? undefined : (mapValues(json['geo_coordinates'], GeoCoordinate1FromJSON)),
         'continent': json['continent'] == null ? undefined : json['continent'],
         'asStringKey': json['as_string_key'],
     };
 }
 
-export function SearchResponseDictItem1ToJSON(value?: SearchResponseDictItem1 | null): any {
+export function SearchResponseDictItem1ToJSON(json: any): SearchResponseDictItem1 {
+    return SearchResponseDictItem1ToJSONTyped(json, false);
+}
+
+export function SearchResponseDictItem1ToJSONTyped(value?: SearchResponseDictItem1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'article_url': value['articleUrl'],
@@ -328,7 +338,7 @@ export function SearchResponseDictItem1ToJSON(value?: SearchResponseDictItem1 | 
         'provocative': value['provocative'],
         'reporting_voice': ReportingVoice1ToJSON(value['reportingVoice']),
         'entity_relation_graph': GraphRelationshipsToJSON(value['entityRelationGraph']),
-        'geo_coordinates': value['geoCoordinates'],
+        'geo_coordinates': value['geoCoordinates'] == null ? undefined : (mapValues(value['geoCoordinates'], GeoCoordinate1ToJSON)),
         'continent': value['continent'],
         'as_string_key': value['asStringKey'],
     };

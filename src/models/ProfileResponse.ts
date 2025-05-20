@@ -18,6 +18,7 @@ import {
     ProfileFromJSON,
     ProfileFromJSONTyped,
     ProfileToJSON,
+    ProfileToJSONTyped,
 } from './Profile';
 
 /**
@@ -37,8 +38,8 @@ export interface ProfileResponse {
 /**
  * Check if a given object implements the ProfileResponse interface.
  */
-export function instanceOfProfileResponse(value: object): boolean {
-    if (!('profile' in value)) return false;
+export function instanceOfProfileResponse(value: object): value is ProfileResponse {
+    if (!('profile' in value) || value['profile'] === undefined) return false;
     return true;
 }
 
@@ -56,10 +57,15 @@ export function ProfileResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ProfileResponseToJSON(value?: ProfileResponse | null): any {
+export function ProfileResponseToJSON(json: any): ProfileResponse {
+    return ProfileResponseToJSONTyped(json, false);
+}
+
+export function ProfileResponseToJSONTyped(value?: ProfileResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'profile': ProfileToJSON(value['profile']),

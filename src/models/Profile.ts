@@ -44,23 +44,27 @@ export function ProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     }
     switch (json['identity_type']) {
         case 'service_account':
-            return Object.assign({}, ServiceAccountProfileFromJSONTyped(json, true), { identityType: 'service_account' });
+            return Object.assign({}, ServiceAccountProfileFromJSONTyped(json, true), { identityType: 'service_account' } as const);
         case 'user':
-            return Object.assign({}, UserProfileFromJSONTyped(json, true), { identityType: 'user' });
+            return Object.assign({}, UserProfileFromJSONTyped(json, true), { identityType: 'user' } as const);
         default:
             throw new Error(`No variant of Profile exists with 'identityType=${json['identityType']}'`);
     }
 }
 
-export function ProfileToJSON(value?: Profile | null): any {
+export function ProfileToJSON(json: any): any {
+    return ProfileToJSONTyped(json, false);
+}
+
+export function ProfileToJSONTyped(value?: Profile | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
     switch (value['identityType']) {
         case 'service_account':
-            return ServiceAccountProfileToJSON(value);
+            return Object.assign({}, ServiceAccountProfileToJSON(value), { identityType: 'service_account' } as const);
         case 'user':
-            return UserProfileToJSON(value);
+            return Object.assign({}, UserProfileToJSON(value), { identityType: 'user' } as const);
         default:
             throw new Error(`No variant of Profile exists with 'identityType=${value['identityType']}'`);
     }

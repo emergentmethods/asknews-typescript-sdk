@@ -30,8 +30,8 @@ export interface NewsletterContactCreateResponse {
 /**
  * Check if a given object implements the NewsletterContactCreateResponse interface.
  */
-export function instanceOfNewsletterContactCreateResponse(value: object): boolean {
-    if (!('id' in value)) return false;
+export function instanceOfNewsletterContactCreateResponse(value: object): value is NewsletterContactCreateResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
     return true;
 }
 
@@ -49,10 +49,15 @@ export function NewsletterContactCreateResponseFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function NewsletterContactCreateResponseToJSON(value?: NewsletterContactCreateResponse | null): any {
+export function NewsletterContactCreateResponseToJSON(json: any): NewsletterContactCreateResponse {
+    return NewsletterContactCreateResponseToJSONTyped(json, false);
+}
+
+export function NewsletterContactCreateResponseToJSONTyped(value?: NewsletterContactCreateResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

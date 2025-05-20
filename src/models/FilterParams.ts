@@ -24,7 +24,7 @@ export interface FilterParams {
 /**
  * Check if a given object implements the FilterParams interface.
  */
-export function instanceOfFilterParams(value: object): boolean {
+export function instanceOfFilterParams(value: object): value is FilterParams {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function FilterParamsFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return json;
 }
 
-export function FilterParamsToJSON(value?: FilterParams | null): any {
+export function FilterParamsToJSON(json: any): FilterParams {
+    return FilterParamsToJSONTyped(json, false);
+}
+
+export function FilterParamsToJSONTyped(value?: FilterParams | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

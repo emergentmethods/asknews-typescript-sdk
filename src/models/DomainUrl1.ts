@@ -24,7 +24,7 @@ export interface DomainUrl1 {
 /**
  * Check if a given object implements the DomainUrl1 interface.
  */
-export function instanceOfDomainUrl1(value: object): boolean {
+export function instanceOfDomainUrl1(value: object): value is DomainUrl1 {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function DomainUrl1FromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return json;
 }
 
-export function DomainUrl1ToJSON(value?: DomainUrl1 | null): any {
+export function DomainUrl1ToJSON(json: any): DomainUrl1 {
+    return DomainUrl1ToJSONTyped(json, false);
+}
+
+export function DomainUrl1ToJSONTyped(value?: DomainUrl1 | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

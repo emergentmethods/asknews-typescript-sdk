@@ -18,6 +18,7 @@ import {
     FilterParamsFromJSON,
     FilterParamsFromJSONTyped,
     FilterParamsToJSON,
+    FilterParamsToJSONTyped,
 } from './FilterParams';
 
 /**
@@ -31,20 +32,30 @@ export interface AskNewsSource {
      * @type {string}
      * @memberof AskNewsSource
      */
-    identifier: string;
+    identifier: AskNewsSourceIdentifierEnum;
     /**
      * 
      * @type {FilterParams}
      * @memberof AskNewsSource
      */
-    params?: FilterParams;
+    params?: FilterParams | null;
 }
+
+
+/**
+ * @export
+ */
+export const AskNewsSourceIdentifierEnum = {
+    Asknews: 'asknews'
+} as const;
+export type AskNewsSourceIdentifierEnum = typeof AskNewsSourceIdentifierEnum[keyof typeof AskNewsSourceIdentifierEnum];
+
 
 /**
  * Check if a given object implements the AskNewsSource interface.
  */
-export function instanceOfAskNewsSource(value: object): boolean {
-    if (!('identifier' in value)) return false;
+export function instanceOfAskNewsSource(value: object): value is AskNewsSource {
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function AskNewsSourceFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function AskNewsSourceToJSON(value?: AskNewsSource | null): any {
+export function AskNewsSourceToJSON(json: any): AskNewsSource {
+    return AskNewsSourceToJSONTyped(json, false);
+}
+
+export function AskNewsSourceToJSONTyped(value?: AskNewsSource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'identifier': value['identifier'],

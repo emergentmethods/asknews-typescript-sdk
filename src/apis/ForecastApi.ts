@@ -29,7 +29,7 @@ export interface GetForecastRequest {
     query: string;
     lookback?: number;
     articlesToUse?: number;
-    method?: string;
+    method?: GetForecastMethodEnum;
     model?: GetForecastModelEnum;
     cutoffDate?: string;
     useReddit?: boolean;
@@ -121,6 +121,13 @@ export class ForecastApi extends runtime.BaseAPI {
 
 }
 
+/**
+ * @export
+ */
+export const GetForecastMethodEnum = {
+    Kw: 'kw'
+} as const;
+export type GetForecastMethodEnum = typeof GetForecastMethodEnum[keyof typeof GetForecastMethodEnum];
 /**
  * @export
  */

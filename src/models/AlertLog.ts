@@ -60,13 +60,13 @@ export interface AlertLog {
      * @type {string}
      * @memberof AlertLog
      */
-    report?: string;
+    report?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AlertLog
      */
-    reportUrl?: string;
+    reportUrl?: string | null;
     /**
      * 
      * @type {Array<string>}
@@ -78,20 +78,20 @@ export interface AlertLog {
      * @type {{ [key: string]: any; }}
      * @memberof AlertLog
      */
-    webhook?: { [key: string]: any; };
+    webhook?: { [key: string]: any; } | null;
 }
 
 /**
  * Check if a given object implements the AlertLog interface.
  */
-export function instanceOfAlertLog(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('createdAt' in value)) return false;
-    if (!('alertId' in value)) return false;
-    if (!('userId' in value)) return false;
-    if (!('alert' in value)) return false;
-    if (!('reasoning' in value)) return false;
-    if (!('articleIds' in value)) return false;
+export function instanceOfAlertLog(value: object): value is AlertLog {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('alertId' in value) || value['alertId'] === undefined) return false;
+    if (!('userId' in value) || value['userId'] === undefined) return false;
+    if (!('alert' in value) || value['alert'] === undefined) return false;
+    if (!('reasoning' in value) || value['reasoning'] === undefined) return false;
+    if (!('articleIds' in value) || value['articleIds'] === undefined) return false;
     return true;
 }
 
@@ -118,10 +118,15 @@ export function AlertLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function AlertLogToJSON(value?: AlertLog | null): any {
+export function AlertLogToJSON(json: any): AlertLog {
+    return AlertLogToJSONTyped(json, false);
+}
+
+export function AlertLogToJSONTyped(value?: AlertLog | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

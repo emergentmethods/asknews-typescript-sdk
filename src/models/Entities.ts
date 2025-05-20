@@ -168,7 +168,7 @@ export interface Entities {
 /**
  * Check if a given object implements the Entities interface.
  */
-export function instanceOfEntities(value: object): boolean {
+export function instanceOfEntities(value: object): value is Entities {
     return true;
 }
 
@@ -209,10 +209,15 @@ export function EntitiesFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function EntitiesToJSON(value?: Entities | null): any {
+export function EntitiesToJSON(json: any): Entities {
+    return EntitiesToJSONTyped(json, false);
+}
+
+export function EntitiesToJSONTyped(value?: Entities | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'Person': value['person'],

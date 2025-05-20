@@ -36,9 +36,9 @@ export interface DisplayImageUrl {
 /**
  * Check if a given object implements the DisplayImageUrl interface.
  */
-export function instanceOfDisplayImageUrl(value: object): boolean {
-    if (!('sourceId' in value)) return false;
-    if (!('imageUrl' in value)) return false;
+export function instanceOfDisplayImageUrl(value: object): value is DisplayImageUrl {
+    if (!('sourceId' in value) || value['sourceId'] === undefined) return false;
+    if (!('imageUrl' in value) || value['imageUrl'] === undefined) return false;
     return true;
 }
 
@@ -57,10 +57,15 @@ export function DisplayImageUrlFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function DisplayImageUrlToJSON(value?: DisplayImageUrl | null): any {
+export function DisplayImageUrlToJSON(json: any): DisplayImageUrl {
+    return DisplayImageUrlToJSONTyped(json, false);
+}
+
+export function DisplayImageUrlToJSONTyped(value?: DisplayImageUrl | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'source_id': value['sourceId'],

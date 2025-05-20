@@ -13,48 +13,55 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Article } from './Article';
-import {
-    ArticleFromJSON,
-    ArticleFromJSONTyped,
-    ArticleToJSON,
-} from './Article';
-import type { AsknewsApiSchemaV1StoriesGraphRelationships } from './AsknewsApiSchemaV1StoriesGraphRelationships';
-import {
-    AsknewsApiSchemaV1StoriesGraphRelationshipsFromJSON,
-    AsknewsApiSchemaV1StoriesGraphRelationshipsFromJSONTyped,
-    AsknewsApiSchemaV1StoriesGraphRelationshipsToJSON,
-} from './AsknewsApiSchemaV1StoriesGraphRelationships';
-import type { Entities } from './Entities';
-import {
-    EntitiesFromJSON,
-    EntitiesFromJSONTyped,
-    EntitiesToJSON,
-} from './Entities';
 import type { IntraClusterStatistics } from './IntraClusterStatistics';
 import {
     IntraClusterStatisticsFromJSON,
     IntraClusterStatisticsFromJSONTyped,
     IntraClusterStatisticsToJSON,
+    IntraClusterStatisticsToJSONTyped,
 } from './IntraClusterStatistics';
+import type { Article } from './Article';
+import {
+    ArticleFromJSON,
+    ArticleFromJSONTyped,
+    ArticleToJSON,
+    ArticleToJSONTyped,
+} from './Article';
 import type { RedditPerspective } from './RedditPerspective';
 import {
     RedditPerspectiveFromJSON,
     RedditPerspectiveFromJSONTyped,
     RedditPerspectiveToJSON,
+    RedditPerspectiveToJSONTyped,
 } from './RedditPerspective';
-import type { RedditThread } from './RedditThread';
-import {
-    RedditThreadFromJSON,
-    RedditThreadFromJSONTyped,
-    RedditThreadToJSON,
-} from './RedditThread';
 import type { StoryUpdateDisplayImageUrlsInner } from './StoryUpdateDisplayImageUrlsInner';
 import {
     StoryUpdateDisplayImageUrlsInnerFromJSON,
     StoryUpdateDisplayImageUrlsInnerFromJSONTyped,
     StoryUpdateDisplayImageUrlsInnerToJSON,
+    StoryUpdateDisplayImageUrlsInnerToJSONTyped,
 } from './StoryUpdateDisplayImageUrlsInner';
+import type { AsknewsApiSchemaV1StoriesGraphRelationships } from './AsknewsApiSchemaV1StoriesGraphRelationships';
+import {
+    AsknewsApiSchemaV1StoriesGraphRelationshipsFromJSON,
+    AsknewsApiSchemaV1StoriesGraphRelationshipsFromJSONTyped,
+    AsknewsApiSchemaV1StoriesGraphRelationshipsToJSON,
+    AsknewsApiSchemaV1StoriesGraphRelationshipsToJSONTyped,
+} from './AsknewsApiSchemaV1StoriesGraphRelationships';
+import type { RedditThread } from './RedditThread';
+import {
+    RedditThreadFromJSON,
+    RedditThreadFromJSONTyped,
+    RedditThreadToJSON,
+    RedditThreadToJSONTyped,
+} from './RedditThread';
+import type { Entities } from './Entities';
+import {
+    EntitiesFromJSON,
+    EntitiesFromJSONTyped,
+    EntitiesToJSON,
+    EntitiesToJSONTyped,
+} from './Entities';
 
 /**
  * 
@@ -314,42 +321,42 @@ export type StoryUpdateProvocativeEnum = typeof StoryUpdateProvocativeEnum[keyof
 /**
  * Check if a given object implements the StoryUpdate interface.
  */
-export function instanceOfStoryUpdate(value: object): boolean {
-    if (!('uuid' in value)) return false;
-    if (!('clusterArticles' in value)) return false;
-    if (!('promptArticles' in value)) return false;
-    if (!('nArticles' in value)) return false;
-    if (!('entities' in value)) return false;
-    if (!('headline' in value)) return false;
-    if (!('story' in value)) return false;
-    if (!('storyUpdateTs' in value)) return false;
-    if (!('sourcesUrls' in value)) return false;
-    if (!('languagesPct' in value)) return false;
-    if (!('countriesPct' in value)) return false;
-    if (!('keyTakeaways' in value)) return false;
-    if (!('contradictions' in value)) return false;
-    if (!('continent' in value)) return false;
-    if (!('people' in value)) return false;
-    if (!('locations' in value)) return false;
-    if (!('newInformation' in value)) return false;
-    if (!('imageUrl' in value)) return false;
-    if (!('urlSafeTitle' in value)) return false;
-    if (!('storyUuid' in value)) return false;
-    if (!('categories' in value)) return false;
-    if (!('imagePrompt' in value)) return false;
-    if (!('redditPerspective' in value)) return false;
-    if (!('redditThreads' in value)) return false;
-    if (!('languages' in value)) return false;
-    if (!('keywords' in value)) return false;
-    if (!('intraClusterStatistics' in value)) return false;
-    if (!('silhouetteScore' in value)) return false;
-    if (!('articleIds' in value)) return false;
-    if (!('countries' in value)) return false;
-    if (!('markdownCitations' in value)) return false;
-    if (!('relationships' in value)) return false;
-    if (!('mermaid' in value)) return false;
-    if (!('ccImageUrl' in value)) return false;
-    if (!('displayImageUrls' in value)) return false;
+export function instanceOfStoryUpdate(value: object): value is StoryUpdate {
+    if (!('uuid' in value) || value['uuid'] === undefined) return false;
+    if (!('clusterArticles' in value) || value['clusterArticles'] === undefined) return false;
+    if (!('promptArticles' in value) || value['promptArticles'] === undefined) return false;
+    if (!('nArticles' in value) || value['nArticles'] === undefined) return false;
+    if (!('entities' in value) || value['entities'] === undefined) return false;
+    if (!('headline' in value) || value['headline'] === undefined) return false;
+    if (!('story' in value) || value['story'] === undefined) return false;
+    if (!('storyUpdateTs' in value) || value['storyUpdateTs'] === undefined) return false;
+    if (!('sourcesUrls' in value) || value['sourcesUrls'] === undefined) return false;
+    if (!('languagesPct' in value) || value['languagesPct'] === undefined) return false;
+    if (!('countriesPct' in value) || value['countriesPct'] === undefined) return false;
+    if (!('keyTakeaways' in value) || value['keyTakeaways'] === undefined) return false;
+    if (!('contradictions' in value) || value['contradictions'] === undefined) return false;
+    if (!('continent' in value) || value['continent'] === undefined) return false;
+    if (!('people' in value) || value['people'] === undefined) return false;
+    if (!('locations' in value) || value['locations'] === undefined) return false;
+    if (!('newInformation' in value) || value['newInformation'] === undefined) return false;
+    if (!('imageUrl' in value) || value['imageUrl'] === undefined) return false;
+    if (!('urlSafeTitle' in value) || value['urlSafeTitle'] === undefined) return false;
+    if (!('storyUuid' in value) || value['storyUuid'] === undefined) return false;
+    if (!('categories' in value) || value['categories'] === undefined) return false;
+    if (!('imagePrompt' in value) || value['imagePrompt'] === undefined) return false;
+    if (!('redditPerspective' in value) || value['redditPerspective'] === undefined) return false;
+    if (!('redditThreads' in value) || value['redditThreads'] === undefined) return false;
+    if (!('languages' in value) || value['languages'] === undefined) return false;
+    if (!('keywords' in value) || value['keywords'] === undefined) return false;
+    if (!('intraClusterStatistics' in value) || value['intraClusterStatistics'] === undefined) return false;
+    if (!('silhouetteScore' in value) || value['silhouetteScore'] === undefined) return false;
+    if (!('articleIds' in value) || value['articleIds'] === undefined) return false;
+    if (!('countries' in value) || value['countries'] === undefined) return false;
+    if (!('markdownCitations' in value) || value['markdownCitations'] === undefined) return false;
+    if (!('relationships' in value) || value['relationships'] === undefined) return false;
+    if (!('mermaid' in value) || value['mermaid'] === undefined) return false;
+    if (!('ccImageUrl' in value) || value['ccImageUrl'] === undefined) return false;
+    if (!('displayImageUrls' in value) || value['displayImageUrls'] === undefined) return false;
     return true;
 }
 
@@ -405,10 +412,15 @@ export function StoryUpdateFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function StoryUpdateToJSON(value?: StoryUpdate | null): any {
+export function StoryUpdateToJSON(json: any): StoryUpdate {
+    return StoryUpdateToJSONTyped(json, false);
+}
+
+export function StoryUpdateToJSONTyped(value?: StoryUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'uuid': value['uuid'],

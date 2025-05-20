@@ -18,6 +18,7 @@ import {
     CreateChatCompletionRequestMessage1FromJSON,
     CreateChatCompletionRequestMessage1FromJSONTyped,
     CreateChatCompletionRequestMessage1ToJSON,
+    CreateChatCompletionRequestMessage1ToJSONTyped,
 } from './CreateChatCompletionRequestMessage1';
 
 /**
@@ -43,15 +44,15 @@ export interface CreateChatCompletionResponseStreamChoice1 {
      * @type {string}
      * @memberof CreateChatCompletionResponseStreamChoice1
      */
-    finishReason?: string;
+    finishReason?: string | null;
 }
 
 /**
  * Check if a given object implements the CreateChatCompletionResponseStreamChoice1 interface.
  */
-export function instanceOfCreateChatCompletionResponseStreamChoice1(value: object): boolean {
-    if (!('index' in value)) return false;
-    if (!('delta' in value)) return false;
+export function instanceOfCreateChatCompletionResponseStreamChoice1(value: object): value is CreateChatCompletionResponseStreamChoice1 {
+    if (!('index' in value) || value['index'] === undefined) return false;
+    if (!('delta' in value) || value['delta'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +72,15 @@ export function CreateChatCompletionResponseStreamChoice1FromJSONTyped(json: any
     };
 }
 
-export function CreateChatCompletionResponseStreamChoice1ToJSON(value?: CreateChatCompletionResponseStreamChoice1 | null): any {
+export function CreateChatCompletionResponseStreamChoice1ToJSON(json: any): CreateChatCompletionResponseStreamChoice1 {
+    return CreateChatCompletionResponseStreamChoice1ToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionResponseStreamChoice1ToJSONTyped(value?: CreateChatCompletionResponseStreamChoice1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'index': value['index'],

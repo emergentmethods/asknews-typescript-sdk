@@ -24,7 +24,7 @@ export interface Stop {
 /**
  * Check if a given object implements the Stop interface.
  */
-export function instanceOfStop(value: object): boolean {
+export function instanceOfStop(value: object): value is Stop {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function StopFromJSONTyped(json: any, ignoreDiscriminator: boolean): Stop
     return json;
 }
 
-export function StopToJSON(value?: Stop | null): any {
+export function StopToJSON(json: any): Stop {
+    return StopToJSONTyped(json, false);
+}
+
+export function StopToJSONTyped(value?: Stop | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

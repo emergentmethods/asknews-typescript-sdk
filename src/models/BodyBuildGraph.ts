@@ -48,31 +48,31 @@ export interface BodyBuildGraph {
      * @type {{ [key: string]: any; }}
      * @memberof BodyBuildGraph
      */
-    filterParams?: { [key: string]: any; };
+    filterParams?: { [key: string]: any; } | null;
+    /**
+     * 
+     * @type {Array<{ [key: string]: any; } | null>}
+     * @memberof BodyBuildGraph
+     */
+    constrainedDisambiguations?: Array<{ [key: string]: any; } | null> | null;
     /**
      * 
      * @type {Array<{ [key: string]: any; }>}
      * @memberof BodyBuildGraph
      */
-    constrainedDisambiguations?: Array<{ [key: string]: any; }>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: any; }>}
-     * @memberof BodyBuildGraph
-     */
-    docsUpload?: Array<{ [key: string]: any; }>;
+    docsUpload?: Array<{ [key: string]: any; }> | null;
     /**
      * 
      * @type {string}
      * @memberof BodyBuildGraph
      */
-    visualizeWith?: string;
+    visualizeWith?: string | null;
 }
 
 /**
  * Check if a given object implements the BodyBuildGraph interface.
  */
-export function instanceOfBodyBuildGraph(value: object): boolean {
+export function instanceOfBodyBuildGraph(value: object): value is BodyBuildGraph {
     return true;
 }
 
@@ -97,10 +97,15 @@ export function BodyBuildGraphFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function BodyBuildGraphToJSON(value?: BodyBuildGraph | null): any {
+export function BodyBuildGraphToJSON(json: any): BodyBuildGraph {
+    return BodyBuildGraphToJSONTyped(json, false);
+}
+
+export function BodyBuildGraphToJSONTyped(value?: BodyBuildGraph | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'query': value['query'],

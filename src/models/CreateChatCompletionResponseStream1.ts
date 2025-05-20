@@ -13,18 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateChatCompletionResponseStreamChoice1 } from './CreateChatCompletionResponseStreamChoice1';
-import {
-    CreateChatCompletionResponseStreamChoice1FromJSON,
-    CreateChatCompletionResponseStreamChoice1FromJSONTyped,
-    CreateChatCompletionResponseStreamChoice1ToJSON,
-} from './CreateChatCompletionResponseStreamChoice1';
 import type { CreateChatCompletionResponseUsage1 } from './CreateChatCompletionResponseUsage1';
 import {
     CreateChatCompletionResponseUsage1FromJSON,
     CreateChatCompletionResponseUsage1FromJSONTyped,
     CreateChatCompletionResponseUsage1ToJSON,
+    CreateChatCompletionResponseUsage1ToJSONTyped,
 } from './CreateChatCompletionResponseUsage1';
+import type { CreateChatCompletionResponseStreamChoice1 } from './CreateChatCompletionResponseStreamChoice1';
+import {
+    CreateChatCompletionResponseStreamChoice1FromJSON,
+    CreateChatCompletionResponseStreamChoice1FromJSONTyped,
+    CreateChatCompletionResponseStreamChoice1ToJSON,
+    CreateChatCompletionResponseStreamChoice1ToJSONTyped,
+} from './CreateChatCompletionResponseStreamChoice1';
 
 /**
  * 
@@ -73,11 +75,11 @@ export interface CreateChatCompletionResponseStream1 {
 /**
  * Check if a given object implements the CreateChatCompletionResponseStream1 interface.
  */
-export function instanceOfCreateChatCompletionResponseStream1(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
+export function instanceOfCreateChatCompletionResponseStream1(value: object): value is CreateChatCompletionResponseStream1 {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
     return true;
 }
 
@@ -100,10 +102,15 @@ export function CreateChatCompletionResponseStream1FromJSONTyped(json: any, igno
     };
 }
 
-export function CreateChatCompletionResponseStream1ToJSON(value?: CreateChatCompletionResponseStream1 | null): any {
+export function CreateChatCompletionResponseStream1ToJSON(json: any): CreateChatCompletionResponseStream1 {
+    return CreateChatCompletionResponseStream1ToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionResponseStream1ToJSONTyped(value?: CreateChatCompletionResponseStream1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

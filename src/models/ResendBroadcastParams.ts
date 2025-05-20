@@ -18,6 +18,7 @@ import {
     ReplyToFromJSON,
     ReplyToFromJSONTyped,
     ReplyToToJSON,
+    ReplyToToJSONTyped,
 } from './ReplyTo';
 
 /**
@@ -37,13 +38,13 @@ export interface ResendBroadcastParams {
      * @type {ReplyTo}
      * @memberof ResendBroadcastParams
      */
-    replyTo?: ReplyTo;
+    replyTo?: ReplyTo | null;
     /**
      * 
      * @type {string}
      * @memberof ResendBroadcastParams
      */
-    subject?: string;
+    subject?: string | null;
     /**
      * The audience id that the broadcast will be sent to
      * @type {string}
@@ -61,10 +62,10 @@ export interface ResendBroadcastParams {
 /**
  * Check if a given object implements the ResendBroadcastParams interface.
  */
-export function instanceOfResendBroadcastParams(value: object): boolean {
-    if (!('sender' in value)) return false;
-    if (!('audienceId' in value)) return false;
-    if (!('resendApiKey' in value)) return false;
+export function instanceOfResendBroadcastParams(value: object): value is ResendBroadcastParams {
+    if (!('sender' in value) || value['sender'] === undefined) return false;
+    if (!('audienceId' in value) || value['audienceId'] === undefined) return false;
+    if (!('resendApiKey' in value) || value['resendApiKey'] === undefined) return false;
     return true;
 }
 
@@ -86,10 +87,15 @@ export function ResendBroadcastParamsFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ResendBroadcastParamsToJSON(value?: ResendBroadcastParams | null): any {
+export function ResendBroadcastParamsToJSON(json: any): ResendBroadcastParams {
+    return ResendBroadcastParamsToJSONTyped(json, false);
+}
+
+export function ResendBroadcastParamsToJSONTyped(value?: ResendBroadcastParams | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'sender': value['sender'],

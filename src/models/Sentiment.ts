@@ -24,7 +24,7 @@ export interface Sentiment {
 /**
  * Check if a given object implements the Sentiment interface.
  */
-export function instanceOfSentiment(value: object): boolean {
+export function instanceOfSentiment(value: object): value is Sentiment {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function SentimentFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return json;
 }
 
-export function SentimentToJSON(value?: Sentiment | null): any {
+export function SentimentToJSON(json: any): Sentiment {
+    return SentimentToJSONTyped(json, false);
+}
+
+export function SentimentToJSONTyped(value?: Sentiment | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

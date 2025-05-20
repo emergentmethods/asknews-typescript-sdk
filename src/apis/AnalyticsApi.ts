@@ -134,11 +134,11 @@ export type GetAssetSentimentAssetEnum = typeof GetAssetSentimentAssetEnum[keyof
  * @export
  */
 export const GetAssetSentimentMetricEnum = {
-    Positive: 'news_positive',
-    Negative: 'news_negative',
-    Total: 'news_total',
-    PositiveWeighted: 'news_positive_weighted',
-    NegativeWeighted: 'news_negative_weighted',
-    TotalWeighted: 'news_total_weighted'
+    NewsPositive: 'news_positive',
+    NewsNegative: 'news_negative',
+    NewsTotal: 'news_total',
+    NewsPositiveWeighted: 'news_positive_weighted',
+    NewsNegativeWeighted: 'news_negative_weighted',
+    NewsTotalWeighted: 'news_total_weighted'
 } as const;
 export type GetAssetSentimentMetricEnum = typeof GetAssetSentimentMetricEnum[keyof typeof GetAssetSentimentMetricEnum];

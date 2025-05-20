@@ -18,6 +18,7 @@ import {
     FinanceResponseTimeSeriesFromJSON,
     FinanceResponseTimeSeriesFromJSONTyped,
     FinanceResponseTimeSeriesToJSON,
+    FinanceResponseTimeSeriesToJSONTyped,
 } from './FinanceResponseTimeSeries';
 
 /**
@@ -37,8 +38,8 @@ export interface FinanceResponse {
 /**
  * Check if a given object implements the FinanceResponse interface.
  */
-export function instanceOfFinanceResponse(value: object): boolean {
-    if (!('data' in value)) return false;
+export function instanceOfFinanceResponse(value: object): value is FinanceResponse {
+    if (!('data' in value) || value['data'] === undefined) return false;
     return true;
 }
 
@@ -56,10 +57,15 @@ export function FinanceResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function FinanceResponseToJSON(value?: FinanceResponse | null): any {
+export function FinanceResponseToJSON(json: any): FinanceResponse {
+    return FinanceResponseToJSONTyped(json, false);
+}
+
+export function FinanceResponseToJSONTyped(value?: FinanceResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'data': FinanceResponseTimeSeriesToJSON(value['data']),

@@ -13,42 +13,48 @@
  */
 
 import { mapValues } from '../runtime';
+import type { User } from './User';
+import {
+    UserFromJSON,
+    UserFromJSONTyped,
+    UserToJSON,
+    UserToJSONTyped,
+} from './User';
 import type { CreateDeepNewsRequestMessage } from './CreateDeepNewsRequestMessage';
 import {
     CreateDeepNewsRequestMessageFromJSON,
     CreateDeepNewsRequestMessageFromJSONTyped,
     CreateDeepNewsRequestMessageToJSON,
+    CreateDeepNewsRequestMessageToJSONTyped,
 } from './CreateDeepNewsRequestMessage';
+import type { Stop } from './Stop';
+import {
+    StopFromJSON,
+    StopFromJSONTyped,
+    StopToJSON,
+    StopToJSONTyped,
+} from './Stop';
 import type { FilterParams1 } from './FilterParams1';
 import {
     FilterParams1FromJSON,
     FilterParams1FromJSONTyped,
     FilterParams1ToJSON,
+    FilterParams1ToJSONTyped,
 } from './FilterParams1';
 import type { Sources1 } from './Sources1';
 import {
     Sources1FromJSON,
     Sources1FromJSONTyped,
     Sources1ToJSON,
+    Sources1ToJSONTyped,
 } from './Sources1';
-import type { Stop } from './Stop';
-import {
-    StopFromJSON,
-    StopFromJSONTyped,
-    StopToJSON,
-} from './Stop';
 import type { ThreadId1 } from './ThreadId1';
 import {
     ThreadId1FromJSON,
     ThreadId1FromJSONTyped,
     ThreadId1ToJSON,
+    ThreadId1ToJSONTyped,
 } from './ThreadId1';
-import type { User } from './User';
-import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-} from './User';
 
 /**
  * 
@@ -56,6 +62,7 @@ import {
  * @interface CreateDeepNewsRequest
  */
 export interface CreateDeepNewsRequest {
+    [key: string]: any | any;
     /**
      * 
      * @type {string}
@@ -70,28 +77,28 @@ export interface CreateDeepNewsRequest {
     messages: Array<CreateDeepNewsRequestMessage>;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    temperature?: any;
+    temperature?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    topP?: any;
+    topP?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    n?: any;
+    n?: number;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    stream?: any;
+    stream?: boolean;
     /**
      * 
      * @type {Stop}
@@ -100,22 +107,22 @@ export interface CreateDeepNewsRequest {
     stop?: Stop;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    maxTokens?: any;
+    maxTokens?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    presencePenalty?: any;
+    presencePenalty?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    frequencyPenalty?: any;
+    frequencyPenalty?: number;
     /**
      * 
      * @type {User}
@@ -130,34 +137,34 @@ export interface CreateDeepNewsRequest {
     threadId?: ThreadId1;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof CreateDeepNewsRequest
      */
     inlineCitations?: CreateDeepNewsRequestInlineCitationsEnum;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    appendReferences?: any;
+    appendReferences?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    journalistMode?: any;
+    journalistMode?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    asknewsWatermark?: any;
+    asknewsWatermark?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    conversationalAwareness?: any;
+    conversationalAwareness?: boolean;
     /**
      * 
      * @type {FilterParams1}
@@ -166,16 +173,16 @@ export interface CreateDeepNewsRequest {
     filterParams?: FilterParams1;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    searchDepth?: any;
+    searchDepth?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreateDeepNewsRequest
      */
-    maxDepth?: any;
+    maxDepth?: number;
     /**
      * 
      * @type {Sources1}
@@ -184,28 +191,28 @@ export interface CreateDeepNewsRequest {
     sources?: Sources1;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    returnSources?: any;
+    returnSources?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    includeCoordinates?: any;
+    includeCoordinates?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    includeEntities?: any;
+    includeEntities?: boolean;
     /**
      * 
-     * @type {any}
+     * @type {boolean}
      * @memberof CreateDeepNewsRequest
      */
-    includeGraphs?: any;
+    includeGraphs?: boolean;
 }
 
 
@@ -223,8 +230,8 @@ export type CreateDeepNewsRequestInlineCitationsEnum = typeof CreateDeepNewsRequ
 /**
  * Check if a given object implements the CreateDeepNewsRequest interface.
  */
-export function instanceOfCreateDeepNewsRequest(value: object): boolean {
-    if (!('messages' in value)) return false;
+export function instanceOfCreateDeepNewsRequest(value: object): value is CreateDeepNewsRequest {
+    if (!('messages' in value) || value['messages'] === undefined) return false;
     return true;
 }
 
@@ -238,6 +245,7 @@ export function CreateDeepNewsRequestFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
+            ...json,
         'model': json['model'] == null ? undefined : json['model'],
         'messages': ((json['messages'] as Array<any>).map(CreateDeepNewsRequestMessageFromJSON)),
         'temperature': json['temperature'] == null ? undefined : json['temperature'],
@@ -266,12 +274,18 @@ export function CreateDeepNewsRequestFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function CreateDeepNewsRequestToJSON(value?: CreateDeepNewsRequest | null): any {
+export function CreateDeepNewsRequestToJSON(json: any): CreateDeepNewsRequest {
+    return CreateDeepNewsRequestToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsRequestToJSONTyped(value?: CreateDeepNewsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
+            ...value,
         'model': value['model'],
         'messages': ((value['messages'] as Array<any>).map(CreateDeepNewsRequestMessageToJSON)),
         'temperature': value['temperature'],

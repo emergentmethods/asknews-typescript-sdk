@@ -66,7 +66,7 @@ export interface RedditEntities {
 /**
  * Check if a given object implements the RedditEntities interface.
  */
-export function instanceOfRedditEntities(value: object): boolean {
+export function instanceOfRedditEntities(value: object): value is RedditEntities {
     return true;
 }
 
@@ -90,10 +90,15 @@ export function RedditEntitiesFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function RedditEntitiesToJSON(value?: RedditEntities | null): any {
+export function RedditEntitiesToJSON(json: any): RedditEntities {
+    return RedditEntitiesToJSONTyped(json, false);
+}
+
+export function RedditEntitiesToJSONTyped(value?: RedditEntities | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'DATE': value['dATE'],

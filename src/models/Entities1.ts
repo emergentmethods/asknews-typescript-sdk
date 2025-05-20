@@ -21,10 +21,10 @@ import { mapValues } from '../runtime';
 export interface Entities1 {
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<string | null>}
      * @memberof Entities1
      */
-    person?: Array<string>;
+    person?: Array<string | null>;
     /**
      * 
      * @type {Array<string>}
@@ -45,16 +45,16 @@ export interface Entities1 {
     nationality?: Array<string>;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<string | null>}
      * @memberof Entities1
      */
-    date?: Array<string>;
+    date?: Array<string | null>;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<string | null>}
      * @memberof Entities1
      */
-    event?: Array<string>;
+    event?: Array<string | null>;
     /**
      * 
      * @type {Array<string>}
@@ -168,7 +168,7 @@ export interface Entities1 {
 /**
  * Check if a given object implements the Entities1 interface.
  */
-export function instanceOfEntities1(value: object): boolean {
+export function instanceOfEntities1(value: object): value is Entities1 {
     return true;
 }
 
@@ -209,10 +209,15 @@ export function Entities1FromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function Entities1ToJSON(value?: Entities1 | null): any {
+export function Entities1ToJSON(json: any): Entities1 {
+    return Entities1ToJSONTyped(json, false);
+}
+
+export function Entities1ToJSONTyped(value?: Entities1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'Person': value['person'],

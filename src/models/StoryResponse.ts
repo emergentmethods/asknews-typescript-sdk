@@ -13,17 +13,19 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ClusterProbabilities } from './ClusterProbabilities';
+import type { ClusterProbabilitiesValue } from './ClusterProbabilitiesValue';
 import {
-    ClusterProbabilitiesFromJSON,
-    ClusterProbabilitiesFromJSONTyped,
-    ClusterProbabilitiesToJSON,
-} from './ClusterProbabilities';
+    ClusterProbabilitiesValueFromJSON,
+    ClusterProbabilitiesValueFromJSONTyped,
+    ClusterProbabilitiesValueToJSON,
+    ClusterProbabilitiesValueToJSONTyped,
+} from './ClusterProbabilitiesValue';
 import type { StoryUpdate } from './StoryUpdate';
 import {
     StoryUpdateFromJSON,
     StoryUpdateFromJSONTyped,
     StoryUpdateToJSON,
+    StoryUpdateToJSONTyped,
 } from './StoryUpdate';
 
 /**
@@ -124,10 +126,10 @@ export interface StoryResponse {
     people: Array<string>;
     /**
      * 
-     * @type {Array<ClusterProbabilities>}
+     * @type {Array<ClusterProbabilitiesValue>}
      * @memberof StoryResponse
      */
-    redditSentiment: Array<ClusterProbabilities>;
+    redditSentiment: Array<ClusterProbabilitiesValue>;
     /**
      * 
      * @type {Array<number>}
@@ -199,34 +201,34 @@ export interface StoryResponse {
 /**
  * Check if a given object implements the StoryResponse interface.
  */
-export function instanceOfStoryResponse(value: object): boolean {
-    if (!('uuid' in value)) return false;
-    if (!('categories' in value)) return false;
-    if (!('countries' in value)) return false;
-    if (!('countriesPct' in value)) return false;
-    if (!('currentUpdateUuid' in value)) return false;
-    if (!('requestedUpdateUuid' in value)) return false;
-    if (!('generateImage' in value)) return false;
-    if (!('keywords' in value)) return false;
-    if (!('languages' in value)) return false;
-    if (!('languagesPct' in value)) return false;
-    if (!('locations' in value)) return false;
-    if (!('metaType' in value)) return false;
-    if (!('nArticles' in value)) return false;
-    if (!('nUpdates' in value)) return false;
-    if (!('people' in value)) return false;
-    if (!('redditSentiment' in value)) return false;
-    if (!('redditSentimentTimestamps' in value)) return false;
-    if (!('rollingSentiment' in value)) return false;
-    if (!('sentiment' in value)) return false;
-    if (!('sentimentTimestamps' in value)) return false;
-    if (!('sources' in value)) return false;
-    if (!('sourcesUrls' in value)) return false;
-    if (!('topic' in value)) return false;
-    if (!('topics' in value)) return false;
-    if (!('updates' in value)) return false;
-    if (!('updatedTs' in value)) return false;
-    if (!('updateUuids' in value)) return false;
+export function instanceOfStoryResponse(value: object): value is StoryResponse {
+    if (!('uuid' in value) || value['uuid'] === undefined) return false;
+    if (!('categories' in value) || value['categories'] === undefined) return false;
+    if (!('countries' in value) || value['countries'] === undefined) return false;
+    if (!('countriesPct' in value) || value['countriesPct'] === undefined) return false;
+    if (!('currentUpdateUuid' in value) || value['currentUpdateUuid'] === undefined) return false;
+    if (!('requestedUpdateUuid' in value) || value['requestedUpdateUuid'] === undefined) return false;
+    if (!('generateImage' in value) || value['generateImage'] === undefined) return false;
+    if (!('keywords' in value) || value['keywords'] === undefined) return false;
+    if (!('languages' in value) || value['languages'] === undefined) return false;
+    if (!('languagesPct' in value) || value['languagesPct'] === undefined) return false;
+    if (!('locations' in value) || value['locations'] === undefined) return false;
+    if (!('metaType' in value) || value['metaType'] === undefined) return false;
+    if (!('nArticles' in value) || value['nArticles'] === undefined) return false;
+    if (!('nUpdates' in value) || value['nUpdates'] === undefined) return false;
+    if (!('people' in value) || value['people'] === undefined) return false;
+    if (!('redditSentiment' in value) || value['redditSentiment'] === undefined) return false;
+    if (!('redditSentimentTimestamps' in value) || value['redditSentimentTimestamps'] === undefined) return false;
+    if (!('rollingSentiment' in value) || value['rollingSentiment'] === undefined) return false;
+    if (!('sentiment' in value) || value['sentiment'] === undefined) return false;
+    if (!('sentimentTimestamps' in value) || value['sentimentTimestamps'] === undefined) return false;
+    if (!('sources' in value) || value['sources'] === undefined) return false;
+    if (!('sourcesUrls' in value) || value['sourcesUrls'] === undefined) return false;
+    if (!('topic' in value) || value['topic'] === undefined) return false;
+    if (!('topics' in value) || value['topics'] === undefined) return false;
+    if (!('updates' in value) || value['updates'] === undefined) return false;
+    if (!('updatedTs' in value) || value['updatedTs'] === undefined) return false;
+    if (!('updateUuids' in value) || value['updateUuids'] === undefined) return false;
     return true;
 }
 
@@ -255,7 +257,7 @@ export function StoryResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         'nArticles': json['n_articles'],
         'nUpdates': json['n_updates'],
         'people': json['people'],
-        'redditSentiment': ((json['reddit_sentiment'] as Array<any>).map(ClusterProbabilitiesFromJSON)),
+        'redditSentiment': ((json['reddit_sentiment'] as Array<any>).map(ClusterProbabilitiesValueFromJSON)),
         'redditSentimentTimestamps': json['reddit_sentiment_timestamps'],
         'rollingSentiment': json['rolling_sentiment'],
         'sentiment': json['sentiment'],
@@ -270,10 +272,15 @@ export function StoryResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function StoryResponseToJSON(value?: StoryResponse | null): any {
+export function StoryResponseToJSON(json: any): StoryResponse {
+    return StoryResponseToJSONTyped(json, false);
+}
+
+export function StoryResponseToJSONTyped(value?: StoryResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'uuid': value['uuid'],
@@ -291,7 +298,7 @@ export function StoryResponseToJSON(value?: StoryResponse | null): any {
         'n_articles': value['nArticles'],
         'n_updates': value['nUpdates'],
         'people': value['people'],
-        'reddit_sentiment': ((value['redditSentiment'] as Array<any>).map(ClusterProbabilitiesToJSON)),
+        'reddit_sentiment': ((value['redditSentiment'] as Array<any>).map(ClusterProbabilitiesValueToJSON)),
         'reddit_sentiment_timestamps': value['redditSentimentTimestamps'],
         'rolling_sentiment': value['rollingSentiment'],
         'sentiment': value['sentiment'],

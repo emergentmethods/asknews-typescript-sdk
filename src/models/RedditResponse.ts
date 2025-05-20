@@ -18,6 +18,7 @@ import {
     RedditThreadFromJSON,
     RedditThreadFromJSONTyped,
     RedditThreadToJSON,
+    RedditThreadToJSONTyped,
 } from './RedditThread';
 
 /**
@@ -31,19 +32,19 @@ export interface RedditResponse {
      * @type {Array<RedditThread>}
      * @memberof RedditResponse
      */
-    asDicts?: Array<RedditThread>;
+    asDicts?: Array<RedditThread> | null;
     /**
      * 
      * @type {string}
      * @memberof RedditResponse
      */
-    asString?: string;
+    asString?: string | null;
 }
 
 /**
  * Check if a given object implements the RedditResponse interface.
  */
-export function instanceOfRedditResponse(value: object): boolean {
+export function instanceOfRedditResponse(value: object): value is RedditResponse {
     return true;
 }
 
@@ -62,10 +63,15 @@ export function RedditResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function RedditResponseToJSON(value?: RedditResponse | null): any {
+export function RedditResponseToJSON(json: any): RedditResponse {
+    return RedditResponseToJSONTyped(json, false);
+}
+
+export function RedditResponseToJSONTyped(value?: RedditResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'as_dicts': value['asDicts'] == null ? undefined : ((value['asDicts'] as Array<any>).map(RedditThreadToJSON)),

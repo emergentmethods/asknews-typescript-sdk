@@ -24,7 +24,7 @@ export interface ServiceAccountProfile {
      * @type {string}
      * @memberof ServiceAccountProfile
      */
-    identityType?: string;
+    identityType?: ServiceAccountProfileIdentityTypeEnum;
     /**
      * 
      * @type {string}
@@ -33,11 +33,21 @@ export interface ServiceAccountProfile {
     impersonatesPlan: string;
 }
 
+
+/**
+ * @export
+ */
+export const ServiceAccountProfileIdentityTypeEnum = {
+    ServiceAccount: 'service_account'
+} as const;
+export type ServiceAccountProfileIdentityTypeEnum = typeof ServiceAccountProfileIdentityTypeEnum[keyof typeof ServiceAccountProfileIdentityTypeEnum];
+
+
 /**
  * Check if a given object implements the ServiceAccountProfile interface.
  */
-export function instanceOfServiceAccountProfile(value: object): boolean {
-    if (!('impersonatesPlan' in value)) return false;
+export function instanceOfServiceAccountProfile(value: object): value is ServiceAccountProfile {
+    if (!('impersonatesPlan' in value) || value['impersonatesPlan'] === undefined) return false;
     return true;
 }
 
@@ -56,10 +66,15 @@ export function ServiceAccountProfileFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ServiceAccountProfileToJSON(value?: ServiceAccountProfile | null): any {
+export function ServiceAccountProfileToJSON(json: any): ServiceAccountProfile {
+    return ServiceAccountProfileToJSONTyped(json, false);
+}
+
+export function ServiceAccountProfileToJSONTyped(value?: ServiceAccountProfile | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'identity_type': value['identityType'],

@@ -36,9 +36,9 @@ export interface PingModel {
 /**
  * Check if a given object implements the PingModel interface.
  */
-export function instanceOfPingModel(value: object): boolean {
-    if (!('app' in value)) return false;
-    if (!('version' in value)) return false;
+export function instanceOfPingModel(value: object): value is PingModel {
+    if (!('app' in value) || value['app'] === undefined) return false;
+    if (!('version' in value) || value['version'] === undefined) return false;
     return true;
 }
 
@@ -57,10 +57,15 @@ export function PingModelFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function PingModelToJSON(value?: PingModel | null): any {
+export function PingModelToJSON(json: any): PingModel {
+    return PingModelToJSONTyped(json, false);
+}
+
+export function PingModelToJSONTyped(value?: PingModel | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'app': value['app'],

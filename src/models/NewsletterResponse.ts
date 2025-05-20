@@ -30,13 +30,13 @@ export interface NewsletterResponse {
      * @type {Date}
      * @memberof NewsletterResponse
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof NewsletterResponse
      */
-    updatedAt?: Date;
+    updatedAt?: Date | null;
     /**
      * 
      * @type {string}
@@ -48,7 +48,7 @@ export interface NewsletterResponse {
      * @type {string}
      * @memberof NewsletterResponse
      */
-    alertId?: string;
+    alertId?: string | null;
     /**
      * 
      * @type {string}
@@ -126,25 +126,25 @@ export interface NewsletterResponse {
      * @type {Date}
      * @memberof NewsletterResponse
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
 }
 
 /**
  * Check if a given object implements the NewsletterResponse interface.
  */
-export function instanceOfNewsletterResponse(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('userId' in value)) return false;
-    if (!('name' in value)) return false;
-    if (!('query' in value)) return false;
-    if (!('cron' in value)) return false;
-    if (!('model' in value)) return false;
-    if (!('subject' in value)) return false;
-    if (!('sender' in value)) return false;
-    if (!('logoUrl' in value)) return false;
-    if (!('replyTo' in value)) return false;
-    if (!('audienceId' in value)) return false;
-    if (!('resendApiKey' in value)) return false;
+export function instanceOfNewsletterResponse(value: object): value is NewsletterResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('userId' in value) || value['userId'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('query' in value) || value['query'] === undefined) return false;
+    if (!('cron' in value) || value['cron'] === undefined) return false;
+    if (!('model' in value) || value['model'] === undefined) return false;
+    if (!('subject' in value) || value['subject'] === undefined) return false;
+    if (!('sender' in value) || value['sender'] === undefined) return false;
+    if (!('logoUrl' in value) || value['logoUrl'] === undefined) return false;
+    if (!('replyTo' in value) || value['replyTo'] === undefined) return false;
+    if (!('audienceId' in value) || value['audienceId'] === undefined) return false;
+    if (!('resendApiKey' in value) || value['resendApiKey'] === undefined) return false;
     return true;
 }
 
@@ -179,10 +179,15 @@ export function NewsletterResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function NewsletterResponseToJSON(value?: NewsletterResponse | null): any {
+export function NewsletterResponseToJSON(json: any): NewsletterResponse {
+    return NewsletterResponseToJSONTyped(json, false);
+}
+
+export function NewsletterResponseToJSONTyped(value?: NewsletterResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

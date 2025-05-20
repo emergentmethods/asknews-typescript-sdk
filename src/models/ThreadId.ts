@@ -24,7 +24,7 @@ export interface ThreadId {
 /**
  * Check if a given object implements the ThreadId interface.
  */
-export function instanceOfThreadId(value: object): boolean {
+export function instanceOfThreadId(value: object): value is ThreadId {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ThreadIdFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     return json;
 }
 
-export function ThreadIdToJSON(value?: ThreadId | null): any {
+export function ThreadIdToJSON(json: any): ThreadId {
+    return ThreadIdToJSONTyped(json, false);
+}
+
+export function ThreadIdToJSONTyped(value?: ThreadId | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

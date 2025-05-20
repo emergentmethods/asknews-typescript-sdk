@@ -18,6 +18,7 @@ import {
     EmailParamsFromJSON,
     EmailParamsFromJSONTyped,
     EmailParamsToJSON,
+    EmailParamsToJSONTyped,
 } from './EmailParams';
 
 /**
@@ -31,7 +32,7 @@ export interface EmailAction {
      * @type {string}
      * @memberof EmailAction
      */
-    action?: string;
+    action?: EmailActionActionEnum;
     /**
      * 
      * @type {EmailParams}
@@ -40,11 +41,21 @@ export interface EmailAction {
     params: EmailParams;
 }
 
+
+/**
+ * @export
+ */
+export const EmailActionActionEnum = {
+    Email: 'email'
+} as const;
+export type EmailActionActionEnum = typeof EmailActionActionEnum[keyof typeof EmailActionActionEnum];
+
+
 /**
  * Check if a given object implements the EmailAction interface.
  */
-export function instanceOfEmailAction(value: object): boolean {
-    if (!('params' in value)) return false;
+export function instanceOfEmailAction(value: object): value is EmailAction {
+    if (!('params' in value) || value['params'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function EmailActionFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function EmailActionToJSON(value?: EmailAction | null): any {
+export function EmailActionToJSON(json: any): EmailAction {
+    return EmailActionToJSONTyped(json, false);
+}
+
+export function EmailActionToJSONTyped(value?: EmailAction | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'action': value['action'],

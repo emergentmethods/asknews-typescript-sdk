@@ -48,8 +48,8 @@ export interface ModelItem {
 /**
  * Check if a given object implements the ModelItem interface.
  */
-export function instanceOfModelItem(value: object): boolean {
-    if (!('id' in value)) return false;
+export function instanceOfModelItem(value: object): value is ModelItem {
+    if (!('id' in value) || value['id'] === undefined) return false;
     return true;
 }
 
@@ -70,10 +70,15 @@ export function ModelItemFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function ModelItemToJSON(value?: ModelItem | null): any {
+export function ModelItemToJSON(json: any): ModelItem {
+    return ModelItemToJSONTyped(json, false);
+}
+
+export function ModelItemToJSONTyped(value?: ModelItem | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

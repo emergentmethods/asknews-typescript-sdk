@@ -18,6 +18,7 @@ import {
     ResendBroadcastParamsFromJSON,
     ResendBroadcastParamsFromJSONTyped,
     ResendBroadcastParamsToJSON,
+    ResendBroadcastParamsToJSONTyped,
 } from './ResendBroadcastParams';
 
 /**
@@ -31,7 +32,7 @@ export interface ResendBroadcastAction {
      * @type {string}
      * @memberof ResendBroadcastAction
      */
-    action?: string;
+    action?: ResendBroadcastActionActionEnum;
     /**
      * 
      * @type {ResendBroadcastParams}
@@ -40,11 +41,21 @@ export interface ResendBroadcastAction {
     params: ResendBroadcastParams;
 }
 
+
+/**
+ * @export
+ */
+export const ResendBroadcastActionActionEnum = {
+    ResendBroadcast: 'resend_broadcast'
+} as const;
+export type ResendBroadcastActionActionEnum = typeof ResendBroadcastActionActionEnum[keyof typeof ResendBroadcastActionActionEnum];
+
+
 /**
  * Check if a given object implements the ResendBroadcastAction interface.
  */
-export function instanceOfResendBroadcastAction(value: object): boolean {
-    if (!('params' in value)) return false;
+export function instanceOfResendBroadcastAction(value: object): value is ResendBroadcastAction {
+    if (!('params' in value) || value['params'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function ResendBroadcastActionFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ResendBroadcastActionToJSON(value?: ResendBroadcastAction | null): any {
+export function ResendBroadcastActionToJSON(json: any): ResendBroadcastAction {
+    return ResendBroadcastActionToJSONTyped(json, false);
+}
+
+export function ResendBroadcastActionToJSONTyped(value?: ResendBroadcastAction | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'action': value['action'],

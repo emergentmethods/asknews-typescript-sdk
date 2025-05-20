@@ -24,7 +24,7 @@ export interface Value {
 /**
  * Check if a given object implements the Value interface.
  */
-export function instanceOfValue(value: object): boolean {
+export function instanceOfValue(value: object): value is Value {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ValueFromJSONTyped(json: any, ignoreDiscriminator: boolean): Val
     return json;
 }
 
-export function ValueToJSON(value?: Value | null): any {
+export function ValueToJSON(json: any): Value {
+    return ValueToJSONTyped(json, false);
+}
+
+export function ValueToJSONTyped(value?: Value | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

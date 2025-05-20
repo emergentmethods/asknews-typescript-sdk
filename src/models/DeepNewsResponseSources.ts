@@ -13,18 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { SearchResponseDictItem } from './SearchResponseDictItem';
-import {
-    SearchResponseDictItemFromJSON,
-    SearchResponseDictItemFromJSONTyped,
-    SearchResponseDictItemToJSON,
-} from './SearchResponseDictItem';
 import type { WebSearchResult } from './WebSearchResult';
 import {
     WebSearchResultFromJSON,
     WebSearchResultFromJSONTyped,
     WebSearchResultToJSON,
+    WebSearchResultToJSONTyped,
 } from './WebSearchResult';
+import type { SearchResponseDictItem } from './SearchResponseDictItem';
+import {
+    SearchResponseDictItemFromJSON,
+    SearchResponseDictItemFromJSONTyped,
+    SearchResponseDictItemToJSON,
+    SearchResponseDictItemToJSONTyped,
+} from './SearchResponseDictItem';
 
 /**
  * 
@@ -37,19 +39,19 @@ export interface DeepNewsResponseSources {
      * @type {Array<SearchResponseDictItem>}
      * @memberof DeepNewsResponseSources
      */
-    news?: Array<SearchResponseDictItem>;
+    news?: Array<SearchResponseDictItem> | null;
     /**
      * 
      * @type {Array<WebSearchResult>}
      * @memberof DeepNewsResponseSources
      */
-    web?: Array<WebSearchResult>;
+    web?: Array<WebSearchResult> | null;
 }
 
 /**
  * Check if a given object implements the DeepNewsResponseSources interface.
  */
-export function instanceOfDeepNewsResponseSources(value: object): boolean {
+export function instanceOfDeepNewsResponseSources(value: object): value is DeepNewsResponseSources {
     return true;
 }
 
@@ -68,10 +70,15 @@ export function DeepNewsResponseSourcesFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function DeepNewsResponseSourcesToJSON(value?: DeepNewsResponseSources | null): any {
+export function DeepNewsResponseSourcesToJSON(json: any): DeepNewsResponseSources {
+    return DeepNewsResponseSourcesToJSONTyped(json, false);
+}
+
+export function DeepNewsResponseSourcesToJSONTyped(value?: DeepNewsResponseSources | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'news': value['news'] == null ? undefined : ((value['news'] as Array<any>).map(SearchResponseDictItemToJSON)),

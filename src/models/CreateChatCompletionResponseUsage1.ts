@@ -42,10 +42,10 @@ export interface CreateChatCompletionResponseUsage1 {
 /**
  * Check if a given object implements the CreateChatCompletionResponseUsage1 interface.
  */
-export function instanceOfCreateChatCompletionResponseUsage1(value: object): boolean {
-    if (!('promptTokens' in value)) return false;
-    if (!('completionTokens' in value)) return false;
-    if (!('totalTokens' in value)) return false;
+export function instanceOfCreateChatCompletionResponseUsage1(value: object): value is CreateChatCompletionResponseUsage1 {
+    if (!('promptTokens' in value) || value['promptTokens'] === undefined) return false;
+    if (!('completionTokens' in value) || value['completionTokens'] === undefined) return false;
+    if (!('totalTokens' in value) || value['totalTokens'] === undefined) return false;
     return true;
 }
 
@@ -65,10 +65,15 @@ export function CreateChatCompletionResponseUsage1FromJSONTyped(json: any, ignor
     };
 }
 
-export function CreateChatCompletionResponseUsage1ToJSON(value?: CreateChatCompletionResponseUsage1 | null): any {
+export function CreateChatCompletionResponseUsage1ToJSON(json: any): CreateChatCompletionResponseUsage1 {
+    return CreateChatCompletionResponseUsage1ToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionResponseUsage1ToJSONTyped(value?: CreateChatCompletionResponseUsage1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'prompt_tokens': value['promptTokens'],

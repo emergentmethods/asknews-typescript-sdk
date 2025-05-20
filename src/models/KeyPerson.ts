@@ -36,9 +36,9 @@ export interface KeyPerson {
 /**
  * Check if a given object implements the KeyPerson interface.
  */
-export function instanceOfKeyPerson(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('role' in value)) return false;
+export function instanceOfKeyPerson(value: object): value is KeyPerson {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('role' in value) || value['role'] === undefined) return false;
     return true;
 }
 
@@ -57,10 +57,15 @@ export function KeyPersonFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function KeyPersonToJSON(value?: KeyPerson | null): any {
+export function KeyPersonToJSON(json: any): KeyPerson {
+    return KeyPersonToJSONTyped(json, false);
+}
+
+export function KeyPersonToJSONTyped(value?: KeyPerson | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

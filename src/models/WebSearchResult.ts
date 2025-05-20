@@ -60,18 +60,18 @@ export interface WebSearchResult {
      * @type {string}
      * @memberof WebSearchResult
      */
-    asStringKey?: string;
+    asStringKey?: string | null;
 }
 
 /**
  * Check if a given object implements the WebSearchResult interface.
  */
-export function instanceOfWebSearchResult(value: object): boolean {
-    if (!('title' in value)) return false;
-    if (!('url' in value)) return false;
-    if (!('source' in value)) return false;
-    if (!('published' in value)) return false;
-    if (!('keyPoints' in value)) return false;
+export function instanceOfWebSearchResult(value: object): value is WebSearchResult {
+    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('url' in value) || value['url'] === undefined) return false;
+    if (!('source' in value) || value['source'] === undefined) return false;
+    if (!('published' in value) || value['published'] === undefined) return false;
+    if (!('keyPoints' in value) || value['keyPoints'] === undefined) return false;
     return true;
 }
 
@@ -95,10 +95,15 @@ export function WebSearchResultFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function WebSearchResultToJSON(value?: WebSearchResult | null): any {
+export function WebSearchResultToJSON(json: any): WebSearchResult {
+    return WebSearchResultToJSONTyped(json, false);
+}
+
+export function WebSearchResultToJSONTyped(value?: WebSearchResult | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'title': value['title'],

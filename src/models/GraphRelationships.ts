@@ -36,7 +36,7 @@ export interface GraphRelationships {
 /**
  * Check if a given object implements the GraphRelationships interface.
  */
-export function instanceOfGraphRelationships(value: object): boolean {
+export function instanceOfGraphRelationships(value: object): value is GraphRelationships {
     return true;
 }
 
@@ -55,10 +55,15 @@ export function GraphRelationshipsFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function GraphRelationshipsToJSON(value?: GraphRelationships | null): any {
+export function GraphRelationshipsToJSON(json: any): GraphRelationships {
+    return GraphRelationshipsToJSONTyped(json, false);
+}
+
+export function GraphRelationshipsToJSONTyped(value?: GraphRelationships | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'nodes': value['nodes'],

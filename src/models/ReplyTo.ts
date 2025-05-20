@@ -24,7 +24,7 @@ export interface ReplyTo {
 /**
  * Check if a given object implements the ReplyTo interface.
  */
-export function instanceOfReplyTo(value: object): boolean {
+export function instanceOfReplyTo(value: object): value is ReplyTo {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ReplyToFromJSONTyped(json: any, ignoreDiscriminator: boolean): R
     return json;
 }
 
-export function ReplyToToJSON(value?: ReplyTo | null): any {
+export function ReplyToToJSON(json: any): ReplyTo {
+    return ReplyToToJSONTyped(json, false);
+}
+
+export function ReplyToToJSONTyped(value?: ReplyTo | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

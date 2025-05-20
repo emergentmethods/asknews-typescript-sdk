@@ -36,21 +36,21 @@ export interface CreateChatCompletionRequestMessage {
      * @type {string}
      * @memberof CreateChatCompletionRequestMessage
      */
-    name?: string;
+    name?: string | null;
     /**
      * 
      * @type {{ [key: string]: any; }}
      * @memberof CreateChatCompletionRequestMessage
      */
-    functionCall?: { [key: string]: any; };
+    functionCall?: { [key: string]: any; } | null;
 }
 
 /**
  * Check if a given object implements the CreateChatCompletionRequestMessage interface.
  */
-export function instanceOfCreateChatCompletionRequestMessage(value: object): boolean {
-    if (!('role' in value)) return false;
-    if (!('content' in value)) return false;
+export function instanceOfCreateChatCompletionRequestMessage(value: object): value is CreateChatCompletionRequestMessage {
+    if (!('role' in value) || value['role'] === undefined) return false;
+    if (!('content' in value) || value['content'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +71,15 @@ export function CreateChatCompletionRequestMessageFromJSONTyped(json: any, ignor
     };
 }
 
-export function CreateChatCompletionRequestMessageToJSON(value?: CreateChatCompletionRequestMessage | null): any {
+export function CreateChatCompletionRequestMessageToJSON(json: any): CreateChatCompletionRequestMessage {
+    return CreateChatCompletionRequestMessageToJSONTyped(json, false);
+}
+
+export function CreateChatCompletionRequestMessageToJSONTyped(value?: CreateChatCompletionRequestMessage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'role': value['role'],

@@ -18,6 +18,7 @@ import {
     ValueFromJSON,
     ValueFromJSONTyped,
     ValueToJSON,
+    ValueToJSONTyped,
 } from './Value';
 
 /**
@@ -43,9 +44,9 @@ export interface FinanceResponseTimeSeriesData {
 /**
  * Check if a given object implements the FinanceResponseTimeSeriesData interface.
  */
-export function instanceOfFinanceResponseTimeSeriesData(value: object): boolean {
-    if (!('datetime' in value)) return false;
-    if (!('value' in value)) return false;
+export function instanceOfFinanceResponseTimeSeriesData(value: object): value is FinanceResponseTimeSeriesData {
+    if (!('datetime' in value) || value['datetime'] === undefined) return false;
+    if (!('value' in value) || value['value'] === undefined) return false;
     return true;
 }
 
@@ -64,10 +65,15 @@ export function FinanceResponseTimeSeriesDataFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function FinanceResponseTimeSeriesDataToJSON(value?: FinanceResponseTimeSeriesData | null): any {
+export function FinanceResponseTimeSeriesDataToJSON(json: any): FinanceResponseTimeSeriesData {
+    return FinanceResponseTimeSeriesDataToJSONTyped(json, false);
+}
+
+export function FinanceResponseTimeSeriesDataToJSONTyped(value?: FinanceResponseTimeSeriesData | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'datetime': ((value['datetime']).toISOString()),

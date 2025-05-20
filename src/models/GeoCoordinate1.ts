@@ -16,44 +16,44 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface GeoCoordinate
+ * @interface GeoCoordinate1
  */
-export interface GeoCoordinate {
+export interface GeoCoordinate1 {
     /**
      * 
      * @type {number}
-     * @memberof GeoCoordinate
+     * @memberof GeoCoordinate1
      */
     latitude: number;
     /**
      * 
      * @type {number}
-     * @memberof GeoCoordinate
+     * @memberof GeoCoordinate1
      */
     longitude: number;
     /**
      * 
      * @type {{ [key: string]: any; }}
-     * @memberof GeoCoordinate
+     * @memberof GeoCoordinate1
      */
     metadata: { [key: string]: any; };
 }
 
 /**
- * Check if a given object implements the GeoCoordinate interface.
+ * Check if a given object implements the GeoCoordinate1 interface.
  */
-export function instanceOfGeoCoordinate(value: object): value is GeoCoordinate {
+export function instanceOfGeoCoordinate1(value: object): value is GeoCoordinate1 {
     if (!('latitude' in value) || value['latitude'] === undefined) return false;
     if (!('longitude' in value) || value['longitude'] === undefined) return false;
     if (!('metadata' in value) || value['metadata'] === undefined) return false;
     return true;
 }
 
-export function GeoCoordinateFromJSON(json: any): GeoCoordinate {
-    return GeoCoordinateFromJSONTyped(json, false);
+export function GeoCoordinate1FromJSON(json: any): GeoCoordinate1 {
+    return GeoCoordinate1FromJSONTyped(json, false);
 }
 
-export function GeoCoordinateFromJSONTyped(json: any, ignoreDiscriminator: boolean): GeoCoordinate {
+export function GeoCoordinate1FromJSONTyped(json: any, ignoreDiscriminator: boolean): GeoCoordinate1 {
     if (json == null) {
         return json;
     }
@@ -65,11 +65,11 @@ export function GeoCoordinateFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function GeoCoordinateToJSON(json: any): GeoCoordinate {
-    return GeoCoordinateToJSONTyped(json, false);
+export function GeoCoordinate1ToJSON(json: any): GeoCoordinate1 {
+    return GeoCoordinate1ToJSONTyped(json, false);
 }
 
-export function GeoCoordinateToJSONTyped(value?: GeoCoordinate | null, ignoreDiscriminator: boolean = false): any {
+export function GeoCoordinate1ToJSONTyped(value?: GeoCoordinate1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -24,7 +24,7 @@ export interface Offset1 {
 /**
  * Check if a given object implements the Offset1 interface.
  */
-export function instanceOfOffset1(value: object): boolean {
+export function instanceOfOffset1(value: object): value is Offset1 {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function Offset1FromJSONTyped(json: any, ignoreDiscriminator: boolean): O
     return json;
 }
 
-export function Offset1ToJSON(value?: Offset1 | null): any {
+export function Offset1ToJSON(json: any): Offset1 {
+    return Offset1ToJSONTyped(json, false);
+}
+
+export function Offset1ToJSONTyped(value?: Offset1 | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

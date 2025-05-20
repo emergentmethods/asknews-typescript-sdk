@@ -18,12 +18,14 @@ import {
     FilterParamsFromJSON,
     FilterParamsFromJSONTyped,
     FilterParamsToJSON,
+    FilterParamsToJSONTyped,
 } from './FilterParams';
 import type { FilterParamsMetadata } from './FilterParamsMetadata';
 import {
     FilterParamsMetadataFromJSON,
     FilterParamsMetadataFromJSONTyped,
     FilterParamsMetadataToJSON,
+    FilterParamsMetadataToJSONTyped,
 } from './FilterParamsMetadata';
 
 /**
@@ -49,9 +51,9 @@ export interface FilterParamsResponse {
 /**
  * Check if a given object implements the FilterParamsResponse interface.
  */
-export function instanceOfFilterParamsResponse(value: object): boolean {
-    if (!('filterParams' in value)) return false;
-    if (!('metadata' in value)) return false;
+export function instanceOfFilterParamsResponse(value: object): value is FilterParamsResponse {
+    if (!('filterParams' in value) || value['filterParams'] === undefined) return false;
+    if (!('metadata' in value) || value['metadata'] === undefined) return false;
     return true;
 }
 
@@ -70,10 +72,15 @@ export function FilterParamsResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function FilterParamsResponseToJSON(value?: FilterParamsResponse | null): any {
+export function FilterParamsResponseToJSON(json: any): FilterParamsResponse {
+    return FilterParamsResponseToJSONTyped(json, false);
+}
+
+export function FilterParamsResponseToJSONTyped(value?: FilterParamsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'filter_params': FilterParamsToJSON(value['filterParams']),

@@ -18,12 +18,14 @@ import {
     CreateDeepNewsResponseStreamChunkChoiceFromJSON,
     CreateDeepNewsResponseStreamChunkChoiceFromJSONTyped,
     CreateDeepNewsResponseStreamChunkChoiceToJSON,
+    CreateDeepNewsResponseStreamChunkChoiceToJSONTyped,
 } from './CreateDeepNewsResponseStreamChunkChoice';
 import type { CreateDeepNewsResponseUsage } from './CreateDeepNewsResponseUsage';
 import {
     CreateDeepNewsResponseUsageFromJSON,
     CreateDeepNewsResponseUsageFromJSONTyped,
     CreateDeepNewsResponseUsageToJSON,
+    CreateDeepNewsResponseUsageToJSONTyped,
 } from './CreateDeepNewsResponseUsage';
 
 /**
@@ -73,11 +75,11 @@ export interface CreateDeepNewsResponseStreamChunk {
 /**
  * Check if a given object implements the CreateDeepNewsResponseStreamChunk interface.
  */
-export function instanceOfCreateDeepNewsResponseStreamChunk(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
+export function instanceOfCreateDeepNewsResponseStreamChunk(value: object): value is CreateDeepNewsResponseStreamChunk {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
     return true;
 }
 
@@ -100,10 +102,15 @@ export function CreateDeepNewsResponseStreamChunkFromJSONTyped(json: any, ignore
     };
 }
 
-export function CreateDeepNewsResponseStreamChunkToJSON(value?: CreateDeepNewsResponseStreamChunk | null): any {
+export function CreateDeepNewsResponseStreamChunkToJSON(json: any): CreateDeepNewsResponseStreamChunk {
+    return CreateDeepNewsResponseStreamChunkToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseStreamChunkToJSONTyped(value?: CreateDeepNewsResponseStreamChunk | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

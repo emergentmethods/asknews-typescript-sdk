@@ -13,18 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Offset4 } from './Offset4';
-import {
-    Offset4FromJSON,
-    Offset4FromJSONTyped,
-    Offset4ToJSON,
-} from './Offset4';
 import type { StoryResponse } from './StoryResponse';
 import {
     StoryResponseFromJSON,
     StoryResponseFromJSONTyped,
     StoryResponseToJSON,
+    StoryResponseToJSONTyped,
 } from './StoryResponse';
+import type { Offset4 } from './Offset4';
+import {
+    Offset4FromJSON,
+    Offset4FromJSONTyped,
+    Offset4ToJSON,
+    Offset4ToJSONTyped,
+} from './Offset4';
 
 /**
  * 
@@ -49,9 +51,9 @@ export interface StoriesResponse {
 /**
  * Check if a given object implements the StoriesResponse interface.
  */
-export function instanceOfStoriesResponse(value: object): boolean {
-    if (!('stories' in value)) return false;
-    if (!('offset' in value)) return false;
+export function instanceOfStoriesResponse(value: object): value is StoriesResponse {
+    if (!('stories' in value) || value['stories'] === undefined) return false;
+    if (!('offset' in value) || value['offset'] === undefined) return false;
     return true;
 }
 
@@ -70,10 +72,15 @@ export function StoriesResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function StoriesResponseToJSON(value?: StoriesResponse | null): any {
+export function StoriesResponseToJSON(json: any): StoriesResponse {
+    return StoriesResponseToJSONTyped(json, false);
+}
+
+export function StoriesResponseToJSONTyped(value?: StoriesResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'stories': ((value['stories'] as Array<any>).map(StoryResponseToJSON)),

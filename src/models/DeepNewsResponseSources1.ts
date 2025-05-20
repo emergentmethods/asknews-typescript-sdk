@@ -18,12 +18,14 @@ import {
     SearchResponseDictItem1FromJSON,
     SearchResponseDictItem1FromJSONTyped,
     SearchResponseDictItem1ToJSON,
+    SearchResponseDictItem1ToJSONTyped,
 } from './SearchResponseDictItem1';
 import type { WebSearchResult1 } from './WebSearchResult1';
 import {
     WebSearchResult1FromJSON,
     WebSearchResult1FromJSONTyped,
     WebSearchResult1ToJSON,
+    WebSearchResult1ToJSONTyped,
 } from './WebSearchResult1';
 
 /**
@@ -37,19 +39,19 @@ export interface DeepNewsResponseSources1 {
      * @type {Array<SearchResponseDictItem1>}
      * @memberof DeepNewsResponseSources1
      */
-    news?: Array<SearchResponseDictItem1>;
+    news?: Array<SearchResponseDictItem1> | null;
     /**
      * 
      * @type {Array<WebSearchResult1>}
      * @memberof DeepNewsResponseSources1
      */
-    web?: Array<WebSearchResult1>;
+    web?: Array<WebSearchResult1> | null;
 }
 
 /**
  * Check if a given object implements the DeepNewsResponseSources1 interface.
  */
-export function instanceOfDeepNewsResponseSources1(value: object): boolean {
+export function instanceOfDeepNewsResponseSources1(value: object): value is DeepNewsResponseSources1 {
     return true;
 }
 
@@ -68,10 +70,15 @@ export function DeepNewsResponseSources1FromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function DeepNewsResponseSources1ToJSON(value?: DeepNewsResponseSources1 | null): any {
+export function DeepNewsResponseSources1ToJSON(json: any): DeepNewsResponseSources1 {
+    return DeepNewsResponseSources1ToJSONTyped(json, false);
+}
+
+export function DeepNewsResponseSources1ToJSONTyped(value?: DeepNewsResponseSources1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'news': value['news'] == null ? undefined : ((value['news'] as Array<any>).map(SearchResponseDictItem1ToJSON)),

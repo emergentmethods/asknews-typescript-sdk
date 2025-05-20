@@ -42,10 +42,10 @@ export interface NewsletterPublicResponse {
 /**
  * Check if a given object implements the NewsletterPublicResponse interface.
  */
-export function instanceOfNewsletterPublicResponse(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('name' in value)) return false;
-    if (!('query' in value)) return false;
+export function instanceOfNewsletterPublicResponse(value: object): value is NewsletterPublicResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('query' in value) || value['query'] === undefined) return false;
     return true;
 }
 
@@ -65,10 +65,15 @@ export function NewsletterPublicResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function NewsletterPublicResponseToJSON(value?: NewsletterPublicResponse | null): any {
+export function NewsletterPublicResponseToJSON(json: any): NewsletterPublicResponse {
+    return NewsletterPublicResponseToJSONTyped(json, false);
+}
+
+export function NewsletterPublicResponseToJSONTyped(value?: NewsletterPublicResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

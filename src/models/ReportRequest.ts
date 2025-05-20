@@ -24,19 +24,19 @@ export interface ReportRequest {
      * @type {Array<Array<string>>}
      * @memberof ReportRequest
      */
-    prompt?: Array<Array<string>>;
+    prompt?: Array<Array<string>> | null;
     /**
      * 
      * @type {string}
      * @memberof ReportRequest
      */
-    model?: ReportRequestModelEnum;
+    model?: ReportRequestModelEnum | null;
     /**
      * 
      * @type {string}
      * @memberof ReportRequest
      */
-    logoUrl?: string;
+    logoUrl?: string | null;
 }
 
 
@@ -59,7 +59,7 @@ export type ReportRequestModelEnum = typeof ReportRequestModelEnum[keyof typeof 
 /**
  * Check if a given object implements the ReportRequest interface.
  */
-export function instanceOfReportRequest(value: object): boolean {
+export function instanceOfReportRequest(value: object): value is ReportRequest {
     return true;
 }
 
@@ -79,10 +79,15 @@ export function ReportRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function ReportRequestToJSON(value?: ReportRequest | null): any {
+export function ReportRequestToJSON(json: any): ReportRequest {
+    return ReportRequestToJSONTyped(json, false);
+}
+
+export function ReportRequestToJSONTyped(value?: ReportRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'prompt': value['prompt'],

@@ -18,6 +18,7 @@ import {
     WebSearchResultFromJSON,
     WebSearchResultFromJSONTyped,
     WebSearchResultToJSON,
+    WebSearchResultToJSONTyped,
 } from './WebSearchResult';
 
 /**
@@ -43,9 +44,9 @@ export interface WebSearchResponse {
 /**
  * Check if a given object implements the WebSearchResponse interface.
  */
-export function instanceOfWebSearchResponse(value: object): boolean {
-    if (!('asString' in value)) return false;
-    if (!('asDicts' in value)) return false;
+export function instanceOfWebSearchResponse(value: object): value is WebSearchResponse {
+    if (!('asString' in value) || value['asString'] === undefined) return false;
+    if (!('asDicts' in value) || value['asDicts'] === undefined) return false;
     return true;
 }
 
@@ -64,10 +65,15 @@ export function WebSearchResponseFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function WebSearchResponseToJSON(value?: WebSearchResponse | null): any {
+export function WebSearchResponseToJSON(json: any): WebSearchResponse {
+    return WebSearchResponseToJSONTyped(json, false);
+}
+
+export function WebSearchResponseToJSONTyped(value?: WebSearchResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'as_string': value['asString'],

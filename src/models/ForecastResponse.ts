@@ -13,30 +13,34 @@
  */
 
 import { mapValues } from '../runtime';
+import type { WebSearchResult } from './WebSearchResult';
+import {
+    WebSearchResultFromJSON,
+    WebSearchResultFromJSONTyped,
+    WebSearchResultToJSON,
+    WebSearchResultToJSONTyped,
+} from './WebSearchResult';
 import type { Choice } from './Choice';
 import {
     ChoiceFromJSON,
     ChoiceFromJSONTyped,
     ChoiceToJSON,
+    ChoiceToJSONTyped,
 } from './Choice';
 import type { KeyPerson } from './KeyPerson';
 import {
     KeyPersonFromJSON,
     KeyPersonFromJSONTyped,
     KeyPersonToJSON,
+    KeyPersonToJSONTyped,
 } from './KeyPerson';
 import type { SearchResponseDictItem } from './SearchResponseDictItem';
 import {
     SearchResponseDictItemFromJSON,
     SearchResponseDictItemFromJSONTyped,
     SearchResponseDictItemToJSON,
+    SearchResponseDictItemToJSONTyped,
 } from './SearchResponseDictItem';
-import type { WebSearchResult } from './WebSearchResult';
-import {
-    WebSearchResultFromJSON,
-    WebSearchResultFromJSONTyped,
-    WebSearchResultToJSON,
-} from './WebSearchResult';
 
 /**
  * 
@@ -175,27 +179,27 @@ export interface ForecastResponse {
 /**
  * Check if a given object implements the ForecastResponse interface.
  */
-export function instanceOfForecastResponse(value: object): boolean {
-    if (!('forecast' in value)) return false;
-    if (!('resolutionCriteria' in value)) return false;
-    if (!('date' in value)) return false;
-    if (!('reasoning' in value)) return false;
-    if (!('sources' in value)) return false;
-    if (!('timeline' in value)) return false;
-    if (!('oppositeRequest' in value)) return false;
-    if (!('confidence' in value)) return false;
-    if (!('choice' in value)) return false;
-    if (!('llmConfidence' in value)) return false;
-    if (!('modelUsed' in value)) return false;
-    if (!('likelihood' in value)) return false;
-    if (!('probability' in value)) return false;
-    if (!('webSearchResults' in value)) return false;
-    if (!('summary' in value)) return false;
-    if (!('keyPeople' in value)) return false;
-    if (!('keyFacets' in value)) return false;
-    if (!('reconciledInformation' in value)) return false;
-    if (!('candidateModels' in value)) return false;
-    if (!('uniqueInformation' in value)) return false;
+export function instanceOfForecastResponse(value: object): value is ForecastResponse {
+    if (!('forecast' in value) || value['forecast'] === undefined) return false;
+    if (!('resolutionCriteria' in value) || value['resolutionCriteria'] === undefined) return false;
+    if (!('date' in value) || value['date'] === undefined) return false;
+    if (!('reasoning' in value) || value['reasoning'] === undefined) return false;
+    if (!('sources' in value) || value['sources'] === undefined) return false;
+    if (!('timeline' in value) || value['timeline'] === undefined) return false;
+    if (!('oppositeRequest' in value) || value['oppositeRequest'] === undefined) return false;
+    if (!('confidence' in value) || value['confidence'] === undefined) return false;
+    if (!('choice' in value) || value['choice'] === undefined) return false;
+    if (!('llmConfidence' in value) || value['llmConfidence'] === undefined) return false;
+    if (!('modelUsed' in value) || value['modelUsed'] === undefined) return false;
+    if (!('likelihood' in value) || value['likelihood'] === undefined) return false;
+    if (!('probability' in value) || value['probability'] === undefined) return false;
+    if (!('webSearchResults' in value) || value['webSearchResults'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
+    if (!('keyPeople' in value) || value['keyPeople'] === undefined) return false;
+    if (!('keyFacets' in value) || value['keyFacets'] === undefined) return false;
+    if (!('reconciledInformation' in value) || value['reconciledInformation'] === undefined) return false;
+    if (!('candidateModels' in value) || value['candidateModels'] === undefined) return false;
+    if (!('uniqueInformation' in value) || value['uniqueInformation'] === undefined) return false;
     return true;
 }
 
@@ -233,10 +237,15 @@ export function ForecastResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function ForecastResponseToJSON(value?: ForecastResponse | null): any {
+export function ForecastResponseToJSON(json: any): ForecastResponse {
+    return ForecastResponseToJSONTyped(json, false);
+}
+
+export function ForecastResponseToJSONTyped(value?: ForecastResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'forecast': value['forecast'],

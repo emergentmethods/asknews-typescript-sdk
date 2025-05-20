@@ -24,79 +24,79 @@ export interface UpdateNewsletterRequest {
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    name?: string;
+    name?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    query?: string;
+    query?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    cron?: string;
+    cron?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    model?: UpdateNewsletterRequestModelEnum;
+    model?: UpdateNewsletterRequestModelEnum | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    subject?: string;
+    subject?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    sender?: string;
+    sender?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    logoUrl?: string;
+    logoUrl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    replyTo?: string;
+    replyTo?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    audienceId?: string;
+    audienceId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateNewsletterRequest
      */
-    resendApiKey?: string;
+    resendApiKey?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateNewsletterRequest
      */
-    _public?: boolean;
+    _public?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateNewsletterRequest
      */
-    active?: boolean;
+    active?: boolean | null;
     /**
      * 
      * @type {Date}
      * @memberof UpdateNewsletterRequest
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
 }
 
 
@@ -116,7 +116,7 @@ export type UpdateNewsletterRequestModelEnum = typeof UpdateNewsletterRequestMod
 /**
  * Check if a given object implements the UpdateNewsletterRequest interface.
  */
-export function instanceOfUpdateNewsletterRequest(value: object): boolean {
+export function instanceOfUpdateNewsletterRequest(value: object): value is UpdateNewsletterRequest {
     return true;
 }
 
@@ -146,10 +146,15 @@ export function UpdateNewsletterRequestFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function UpdateNewsletterRequestToJSON(value?: UpdateNewsletterRequest | null): any {
+export function UpdateNewsletterRequestToJSON(json: any): UpdateNewsletterRequest {
+    return UpdateNewsletterRequestToJSONTyped(json, false);
+}
+
+export function UpdateNewsletterRequestToJSONTyped(value?: UpdateNewsletterRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

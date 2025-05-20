@@ -18,6 +18,7 @@ import {
     SearchResponseDictItemFromJSON,
     SearchResponseDictItemFromJSONTyped,
     SearchResponseDictItemToJSON,
+    SearchResponseDictItemToJSONTyped,
 } from './SearchResponseDictItem';
 
 /**
@@ -34,48 +35,48 @@ export interface GraphResponse {
     fullGraph: { [key: string]: any; };
     /**
      * 
-     * @type {Array<{ [key: string]: any; }>}
+     * @type {Array<{ [key: string]: any; } | null>}
      * @memberof GraphResponse
      */
-    disambiguations: Array<{ [key: string]: any; }>;
+    disambiguations: Array<{ [key: string]: any; } | null>;
     /**
      * 
      * @type {Array<SearchResponseDictItem>}
      * @memberof GraphResponse
      */
-    articles?: Array<SearchResponseDictItem>;
+    articles?: Array<SearchResponseDictItem> | null;
     /**
      * 
      * @type {string}
      * @memberof GraphResponse
      */
-    query?: string;
+    query?: string | null;
     /**
      * 
      * @type {Array<{ [key: string]: any; }>}
      * @memberof GraphResponse
      */
-    docsEnhanced?: Array<{ [key: string]: any; }>;
+    docsEnhanced?: Array<{ [key: string]: any; }> | null;
     /**
      * 
      * @type {string}
      * @memberof GraphResponse
      */
-    triplesUrl?: string;
+    triplesUrl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof GraphResponse
      */
-    visualizeUrl?: string;
+    visualizeUrl?: string | null;
 }
 
 /**
  * Check if a given object implements the GraphResponse interface.
  */
-export function instanceOfGraphResponse(value: object): boolean {
-    if (!('fullGraph' in value)) return false;
-    if (!('disambiguations' in value)) return false;
+export function instanceOfGraphResponse(value: object): value is GraphResponse {
+    if (!('fullGraph' in value) || value['fullGraph'] === undefined) return false;
+    if (!('disambiguations' in value) || value['disambiguations'] === undefined) return false;
     return true;
 }
 
@@ -99,10 +100,15 @@ export function GraphResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function GraphResponseToJSON(value?: GraphResponse | null): any {
+export function GraphResponseToJSON(json: any): GraphResponse {
+    return GraphResponseToJSONTyped(json, false);
+}
+
+export function GraphResponseToJSONTyped(value?: GraphResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'full_graph': value['fullGraph'],

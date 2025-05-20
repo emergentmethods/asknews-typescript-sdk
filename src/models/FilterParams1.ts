@@ -24,7 +24,7 @@ export interface FilterParams1 {
 /**
  * Check if a given object implements the FilterParams1 interface.
  */
-export function instanceOfFilterParams1(value: object): boolean {
+export function instanceOfFilterParams1(value: object): value is FilterParams1 {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function FilterParams1FromJSONTyped(json: any, ignoreDiscriminator: boole
     return json;
 }
 
-export function FilterParams1ToJSON(value?: FilterParams1 | null): any {
+export function FilterParams1ToJSON(json: any): FilterParams1 {
+    return FilterParams1ToJSONTyped(json, false);
+}
+
+export function FilterParams1ToJSONTyped(value?: FilterParams1 | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

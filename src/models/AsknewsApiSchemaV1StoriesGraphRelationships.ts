@@ -36,9 +36,9 @@ export interface AsknewsApiSchemaV1StoriesGraphRelationships {
 /**
  * Check if a given object implements the AsknewsApiSchemaV1StoriesGraphRelationships interface.
  */
-export function instanceOfAsknewsApiSchemaV1StoriesGraphRelationships(value: object): boolean {
-    if (!('nodes' in value)) return false;
-    if (!('edges' in value)) return false;
+export function instanceOfAsknewsApiSchemaV1StoriesGraphRelationships(value: object): value is AsknewsApiSchemaV1StoriesGraphRelationships {
+    if (!('nodes' in value) || value['nodes'] === undefined) return false;
+    if (!('edges' in value) || value['edges'] === undefined) return false;
     return true;
 }
 
@@ -57,10 +57,15 @@ export function AsknewsApiSchemaV1StoriesGraphRelationshipsFromJSONTyped(json: a
     };
 }
 
-export function AsknewsApiSchemaV1StoriesGraphRelationshipsToJSON(value?: AsknewsApiSchemaV1StoriesGraphRelationships | null): any {
+export function AsknewsApiSchemaV1StoriesGraphRelationshipsToJSON(json: any): AsknewsApiSchemaV1StoriesGraphRelationships {
+    return AsknewsApiSchemaV1StoriesGraphRelationshipsToJSONTyped(json, false);
+}
+
+export function AsknewsApiSchemaV1StoriesGraphRelationshipsToJSONTyped(value?: AsknewsApiSchemaV1StoriesGraphRelationships | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'nodes': value['nodes'],

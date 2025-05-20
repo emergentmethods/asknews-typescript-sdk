@@ -13,18 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateDeepNewsResponseStreamChunkChoice1 } from './CreateDeepNewsResponseStreamChunkChoice1';
-import {
-    CreateDeepNewsResponseStreamChunkChoice1FromJSON,
-    CreateDeepNewsResponseStreamChunkChoice1FromJSONTyped,
-    CreateDeepNewsResponseStreamChunkChoice1ToJSON,
-} from './CreateDeepNewsResponseStreamChunkChoice1';
 import type { CreateDeepNewsResponseUsage1 } from './CreateDeepNewsResponseUsage1';
 import {
     CreateDeepNewsResponseUsage1FromJSON,
     CreateDeepNewsResponseUsage1FromJSONTyped,
     CreateDeepNewsResponseUsage1ToJSON,
+    CreateDeepNewsResponseUsage1ToJSONTyped,
 } from './CreateDeepNewsResponseUsage1';
+import type { CreateDeepNewsResponseStreamChunkChoice1 } from './CreateDeepNewsResponseStreamChunkChoice1';
+import {
+    CreateDeepNewsResponseStreamChunkChoice1FromJSON,
+    CreateDeepNewsResponseStreamChunkChoice1FromJSONTyped,
+    CreateDeepNewsResponseStreamChunkChoice1ToJSON,
+    CreateDeepNewsResponseStreamChunkChoice1ToJSONTyped,
+} from './CreateDeepNewsResponseStreamChunkChoice1';
 
 /**
  * 
@@ -73,11 +75,11 @@ export interface CreateDeepNewsResponseStreamChunk1 {
 /**
  * Check if a given object implements the CreateDeepNewsResponseStreamChunk1 interface.
  */
-export function instanceOfCreateDeepNewsResponseStreamChunk1(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
+export function instanceOfCreateDeepNewsResponseStreamChunk1(value: object): value is CreateDeepNewsResponseStreamChunk1 {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
     return true;
 }
 
@@ -100,10 +102,15 @@ export function CreateDeepNewsResponseStreamChunk1FromJSONTyped(json: any, ignor
     };
 }
 
-export function CreateDeepNewsResponseStreamChunk1ToJSON(value?: CreateDeepNewsResponseStreamChunk1 | null): any {
+export function CreateDeepNewsResponseStreamChunk1ToJSON(json: any): CreateDeepNewsResponseStreamChunk1 {
+    return CreateDeepNewsResponseStreamChunk1ToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseStreamChunk1ToJSONTyped(value?: CreateDeepNewsResponseStreamChunk1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

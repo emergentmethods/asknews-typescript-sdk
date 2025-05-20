@@ -30,7 +30,7 @@ export interface FilterParamsMetadata {
 /**
  * Check if a given object implements the FilterParamsMetadata interface.
  */
-export function instanceOfFilterParamsMetadata(value: object): boolean {
+export function instanceOfFilterParamsMetadata(value: object): value is FilterParamsMetadata {
     return true;
 }
 
@@ -48,10 +48,15 @@ export function FilterParamsMetadataFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function FilterParamsMetadataToJSON(value?: FilterParamsMetadata | null): any {
+export function FilterParamsMetadataToJSON(json: any): FilterParamsMetadata {
+    return FilterParamsMetadataToJSONTyped(json, false);
+}
+
+export function FilterParamsMetadataToJSONTyped(value?: FilterParamsMetadata | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'title': value['title'],

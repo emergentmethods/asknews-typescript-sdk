@@ -24,13 +24,13 @@ export interface BlueskySourceParams {
      * @type {string}
      * @memberof BlueskySourceParams
      */
-    query?: string;
+    query?: string | null;
 }
 
 /**
  * Check if a given object implements the BlueskySourceParams interface.
  */
-export function instanceOfBlueskySourceParams(value: object): boolean {
+export function instanceOfBlueskySourceParams(value: object): value is BlueskySourceParams {
     return true;
 }
 
@@ -48,10 +48,15 @@ export function BlueskySourceParamsFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function BlueskySourceParamsToJSON(value?: BlueskySourceParams | null): any {
+export function BlueskySourceParamsToJSON(json: any): BlueskySourceParams {
+    return BlueskySourceParamsToJSONTyped(json, false);
+}
+
+export function BlueskySourceParamsToJSONTyped(value?: BlueskySourceParams | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'query': value['query'],

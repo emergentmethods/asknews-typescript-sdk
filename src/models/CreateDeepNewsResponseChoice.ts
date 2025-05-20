@@ -18,6 +18,7 @@ import {
     CreateDeepNewsRequestMessageFromJSON,
     CreateDeepNewsRequestMessageFromJSONTyped,
     CreateDeepNewsRequestMessageToJSON,
+    CreateDeepNewsRequestMessageToJSONTyped,
 } from './CreateDeepNewsRequestMessage';
 
 /**
@@ -43,15 +44,15 @@ export interface CreateDeepNewsResponseChoice {
      * @type {string}
      * @memberof CreateDeepNewsResponseChoice
      */
-    finishReason?: string;
+    finishReason?: string | null;
 }
 
 /**
  * Check if a given object implements the CreateDeepNewsResponseChoice interface.
  */
-export function instanceOfCreateDeepNewsResponseChoice(value: object): boolean {
-    if (!('index' in value)) return false;
-    if (!('message' in value)) return false;
+export function instanceOfCreateDeepNewsResponseChoice(value: object): value is CreateDeepNewsResponseChoice {
+    if (!('index' in value) || value['index'] === undefined) return false;
+    if (!('message' in value) || value['message'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +72,15 @@ export function CreateDeepNewsResponseChoiceFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function CreateDeepNewsResponseChoiceToJSON(value?: CreateDeepNewsResponseChoice | null): any {
+export function CreateDeepNewsResponseChoiceToJSON(json: any): CreateDeepNewsResponseChoice {
+    return CreateDeepNewsResponseChoiceToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseChoiceToJSONTyped(value?: CreateDeepNewsResponseChoice | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'index': value['index'],

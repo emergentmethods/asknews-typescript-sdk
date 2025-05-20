@@ -176,7 +176,7 @@ export class ChatApi extends runtime.BaseAPI {
      * Get the headline example questions related to the given queries.
      * Get example headline questions
      */
-    async getHeadlineQuestionsRaw(requestParameters: GetHeadlineQuestionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<string> | null; }> > {
+    async getHeadlineQuestionsRaw(requestParameters: GetHeadlineQuestionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<string>; }> > {
         const queryParameters: any = {};
 
         if (requestParameters['queries'] != null) {
@@ -200,7 +200,7 @@ export class ChatApi extends runtime.BaseAPI {
      * Get the headline example questions related to the given queries.
      * Get example headline questions
      */
-    async getHeadlineQuestions(requestParameters: GetHeadlineQuestionsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<string> | null; }> {
+    async getHeadlineQuestions(requestParameters: GetHeadlineQuestionsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<string>; }> {
         const response = await this.getHeadlineQuestionsRaw(requestParameters, initOverrides);
         return await response.value();
     }

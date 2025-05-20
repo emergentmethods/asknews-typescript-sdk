@@ -18,6 +18,7 @@ import {
     WebSearchResultFromJSON,
     WebSearchResultFromJSONTyped,
     WebSearchResultToJSON,
+    WebSearchResultToJSONTyped,
 } from './WebSearchResult';
 
 /**
@@ -31,7 +32,7 @@ export interface CreateDeepNewsResponseStreamSourcesWebSource {
      * @type {string}
      * @memberof CreateDeepNewsResponseStreamSourcesWebSource
      */
-    kind?: string;
+    kind?: CreateDeepNewsResponseStreamSourcesWebSourceKindEnum;
     /**
      * 
      * @type {WebSearchResult}
@@ -40,11 +41,21 @@ export interface CreateDeepNewsResponseStreamSourcesWebSource {
     data: WebSearchResult;
 }
 
+
+/**
+ * @export
+ */
+export const CreateDeepNewsResponseStreamSourcesWebSourceKindEnum = {
+    Web: 'web'
+} as const;
+export type CreateDeepNewsResponseStreamSourcesWebSourceKindEnum = typeof CreateDeepNewsResponseStreamSourcesWebSourceKindEnum[keyof typeof CreateDeepNewsResponseStreamSourcesWebSourceKindEnum];
+
+
 /**
  * Check if a given object implements the CreateDeepNewsResponseStreamSourcesWebSource interface.
  */
-export function instanceOfCreateDeepNewsResponseStreamSourcesWebSource(value: object): boolean {
-    if (!('data' in value)) return false;
+export function instanceOfCreateDeepNewsResponseStreamSourcesWebSource(value: object): value is CreateDeepNewsResponseStreamSourcesWebSource {
+    if (!('data' in value) || value['data'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function CreateDeepNewsResponseStreamSourcesWebSourceFromJSONTyped(json: 
     };
 }
 
-export function CreateDeepNewsResponseStreamSourcesWebSourceToJSON(value?: CreateDeepNewsResponseStreamSourcesWebSource | null): any {
+export function CreateDeepNewsResponseStreamSourcesWebSourceToJSON(json: any): CreateDeepNewsResponseStreamSourcesWebSource {
+    return CreateDeepNewsResponseStreamSourcesWebSourceToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseStreamSourcesWebSourceToJSONTyped(value?: CreateDeepNewsResponseStreamSourcesWebSource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'kind': value['kind'],

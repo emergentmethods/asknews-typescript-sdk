@@ -36,13 +36,13 @@ export interface NewsletterContactResponse {
      * @type {string}
      * @memberof NewsletterContactResponse
      */
-    firstName?: string;
+    firstName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NewsletterContactResponse
      */
-    lastName?: string;
+    lastName?: string | null;
     /**
      * 
      * @type {string}
@@ -60,11 +60,11 @@ export interface NewsletterContactResponse {
 /**
  * Check if a given object implements the NewsletterContactResponse interface.
  */
-export function instanceOfNewsletterContactResponse(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('email' in value)) return false;
-    if (!('createdAt' in value)) return false;
-    if (!('unsubscribed' in value)) return false;
+export function instanceOfNewsletterContactResponse(value: object): value is NewsletterContactResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('unsubscribed' in value) || value['unsubscribed'] === undefined) return false;
     return true;
 }
 
@@ -87,10 +87,15 @@ export function NewsletterContactResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function NewsletterContactResponseToJSON(value?: NewsletterContactResponse | null): any {
+export function NewsletterContactResponseToJSON(json: any): NewsletterContactResponse {
+    return NewsletterContactResponseToJSONTyped(json, false);
+}
+
+export function NewsletterContactResponseToJSONTyped(value?: NewsletterContactResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

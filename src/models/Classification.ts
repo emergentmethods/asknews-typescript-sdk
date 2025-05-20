@@ -24,7 +24,7 @@ export interface Classification {
 /**
  * Check if a given object implements the Classification interface.
  */
-export function instanceOfClassification(value: object): boolean {
+export function instanceOfClassification(value: object): value is Classification {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ClassificationFromJSONTyped(json: any, ignoreDiscriminator: bool
     return json;
 }
 
-export function ClassificationToJSON(value?: Classification | null): any {
+export function ClassificationToJSON(json: any): Classification {
+    return ClassificationToJSONTyped(json, false);
+}
+
+export function ClassificationToJSONTyped(value?: Classification | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

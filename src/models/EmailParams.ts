@@ -30,14 +30,14 @@ export interface EmailParams {
      * @type {string}
      * @memberof EmailParams
      */
-    subject?: string;
+    subject?: string | null;
 }
 
 /**
  * Check if a given object implements the EmailParams interface.
  */
-export function instanceOfEmailParams(value: object): boolean {
-    if (!('to' in value)) return false;
+export function instanceOfEmailParams(value: object): value is EmailParams {
+    if (!('to' in value) || value['to'] === undefined) return false;
     return true;
 }
 
@@ -56,10 +56,15 @@ export function EmailParamsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function EmailParamsToJSON(value?: EmailParams | null): any {
+export function EmailParamsToJSON(json: any): EmailParams {
+    return EmailParamsToJSONTyped(json, false);
+}
+
+export function EmailParamsToJSONTyped(value?: EmailParams | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'to': value['to'],

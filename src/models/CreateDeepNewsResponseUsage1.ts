@@ -42,10 +42,10 @@ export interface CreateDeepNewsResponseUsage1 {
 /**
  * Check if a given object implements the CreateDeepNewsResponseUsage1 interface.
  */
-export function instanceOfCreateDeepNewsResponseUsage1(value: object): boolean {
-    if (!('promptTokens' in value)) return false;
-    if (!('completionTokens' in value)) return false;
-    if (!('totalTokens' in value)) return false;
+export function instanceOfCreateDeepNewsResponseUsage1(value: object): value is CreateDeepNewsResponseUsage1 {
+    if (!('promptTokens' in value) || value['promptTokens'] === undefined) return false;
+    if (!('completionTokens' in value) || value['completionTokens'] === undefined) return false;
+    if (!('totalTokens' in value) || value['totalTokens'] === undefined) return false;
     return true;
 }
 
@@ -65,10 +65,15 @@ export function CreateDeepNewsResponseUsage1FromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function CreateDeepNewsResponseUsage1ToJSON(value?: CreateDeepNewsResponseUsage1 | null): any {
+export function CreateDeepNewsResponseUsage1ToJSON(json: any): CreateDeepNewsResponseUsage1 {
+    return CreateDeepNewsResponseUsage1ToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseUsage1ToJSONTyped(value?: CreateDeepNewsResponseUsage1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'prompt_tokens': value['promptTokens'],

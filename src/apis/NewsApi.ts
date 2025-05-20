@@ -368,7 +368,7 @@ export class NewsApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['stringGuarantee'] != null) {
-            queryParameters['string_guarantee'] = requestParameters['stringGuarantee']!.join(runtime.COLLECTION_FORMATS[""]);
+            queryParameters['string_guarantee'] = requestParameters['stringGuarantee'];
         }
 
         if (requestParameters['stringGuaranteeOp'] != null) {
@@ -376,11 +376,11 @@ export class NewsApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['reverseStringGuarantee'] != null) {
-            queryParameters['reverse_string_guarantee'] = requestParameters['reverseStringGuarantee']!.join(runtime.COLLECTION_FORMATS[""]);
+            queryParameters['reverse_string_guarantee'] = requestParameters['reverseStringGuarantee'];
         }
 
         if (requestParameters['entityGuarantee'] != null) {
-            queryParameters['entity_guarantee'] = requestParameters['entityGuarantee']!.join(runtime.COLLECTION_FORMATS[""]);
+            queryParameters['entity_guarantee'] = requestParameters['entityGuarantee'];
         }
 
         if (requestParameters['entityGuaranteeOp'] != null) {
@@ -396,15 +396,15 @@ export class NewsApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['languages'] != null) {
-            queryParameters['languages'] = requestParameters['languages']!.join(runtime.COLLECTION_FORMATS[""]);
+            queryParameters['languages'] = requestParameters['languages'];
         }
 
         if (requestParameters['countries'] != null) {
-            queryParameters['countries'] = requestParameters['countries']!.join(runtime.COLLECTION_FORMATS[""]);
+            queryParameters['countries'] = requestParameters['countries'];
         }
 
         if (requestParameters['continents'] != null) {
-            queryParameters['continents'] = requestParameters['continents']!.join(runtime.COLLECTION_FORMATS[""]);
+            queryParameters['continents'] = requestParameters['continents'];
         }
 
         if (requestParameters['sentiment'] != null) {

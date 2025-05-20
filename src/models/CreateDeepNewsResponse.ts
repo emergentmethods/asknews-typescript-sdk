@@ -13,24 +13,27 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateDeepNewsResponseChoice } from './CreateDeepNewsResponseChoice';
-import {
-    CreateDeepNewsResponseChoiceFromJSON,
-    CreateDeepNewsResponseChoiceFromJSONTyped,
-    CreateDeepNewsResponseChoiceToJSON,
-} from './CreateDeepNewsResponseChoice';
-import type { CreateDeepNewsResponseUsage } from './CreateDeepNewsResponseUsage';
-import {
-    CreateDeepNewsResponseUsageFromJSON,
-    CreateDeepNewsResponseUsageFromJSONTyped,
-    CreateDeepNewsResponseUsageToJSON,
-} from './CreateDeepNewsResponseUsage';
 import type { DeepNewsResponseSources } from './DeepNewsResponseSources';
 import {
     DeepNewsResponseSourcesFromJSON,
     DeepNewsResponseSourcesFromJSONTyped,
     DeepNewsResponseSourcesToJSON,
+    DeepNewsResponseSourcesToJSONTyped,
 } from './DeepNewsResponseSources';
+import type { CreateDeepNewsResponseUsage } from './CreateDeepNewsResponseUsage';
+import {
+    CreateDeepNewsResponseUsageFromJSON,
+    CreateDeepNewsResponseUsageFromJSONTyped,
+    CreateDeepNewsResponseUsageToJSON,
+    CreateDeepNewsResponseUsageToJSONTyped,
+} from './CreateDeepNewsResponseUsage';
+import type { CreateDeepNewsResponseChoice } from './CreateDeepNewsResponseChoice';
+import {
+    CreateDeepNewsResponseChoiceFromJSON,
+    CreateDeepNewsResponseChoiceFromJSONTyped,
+    CreateDeepNewsResponseChoiceToJSON,
+    CreateDeepNewsResponseChoiceToJSONTyped,
+} from './CreateDeepNewsResponseChoice';
 
 /**
  * 
@@ -85,12 +88,12 @@ export interface CreateDeepNewsResponse {
 /**
  * Check if a given object implements the CreateDeepNewsResponse interface.
  */
-export function instanceOfCreateDeepNewsResponse(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
-    if (!('sources' in value)) return false;
+export function instanceOfCreateDeepNewsResponse(value: object): value is CreateDeepNewsResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
+    if (!('sources' in value) || value['sources'] === undefined) return false;
     return true;
 }
 
@@ -114,10 +117,15 @@ export function CreateDeepNewsResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function CreateDeepNewsResponseToJSON(value?: CreateDeepNewsResponse | null): any {
+export function CreateDeepNewsResponseToJSON(json: any): CreateDeepNewsResponse {
+    return CreateDeepNewsResponseToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseToJSONTyped(value?: CreateDeepNewsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

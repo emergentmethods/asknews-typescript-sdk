@@ -18,6 +18,7 @@ import {
     DisplayImageUrlFromJSON,
     DisplayImageUrlFromJSONTyped,
     DisplayImageUrlToJSON,
+    DisplayImageUrlToJSONTyped,
 } from './DisplayImageUrl';
 
 /**
@@ -43,9 +44,9 @@ export interface StoryUpdateDisplayImageUrlsInner {
 /**
  * Check if a given object implements the StoryUpdateDisplayImageUrlsInner interface.
  */
-export function instanceOfStoryUpdateDisplayImageUrlsInner(value: object): boolean {
-    if (!('sourceId' in value)) return false;
-    if (!('imageUrl' in value)) return false;
+export function instanceOfStoryUpdateDisplayImageUrlsInner(value: object): value is StoryUpdateDisplayImageUrlsInner {
+    if (!('sourceId' in value) || value['sourceId'] === undefined) return false;
+    if (!('imageUrl' in value) || value['imageUrl'] === undefined) return false;
     return true;
 }
 
@@ -64,10 +65,15 @@ export function StoryUpdateDisplayImageUrlsInnerFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function StoryUpdateDisplayImageUrlsInnerToJSON(value?: StoryUpdateDisplayImageUrlsInner | null): any {
+export function StoryUpdateDisplayImageUrlsInnerToJSON(json: any): StoryUpdateDisplayImageUrlsInner {
+    return StoryUpdateDisplayImageUrlsInnerToJSONTyped(json, false);
+}
+
+export function StoryUpdateDisplayImageUrlsInnerToJSONTyped(value?: StoryUpdateDisplayImageUrlsInner | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'source_id': value['sourceId'],

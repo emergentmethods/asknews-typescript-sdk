@@ -30,8 +30,8 @@ export interface TelegramSourceParams {
 /**
  * Check if a given object implements the TelegramSourceParams interface.
  */
-export function instanceOfTelegramSourceParams(value: object): boolean {
-    if (!('channelName' in value)) return false;
+export function instanceOfTelegramSourceParams(value: object): value is TelegramSourceParams {
+    if (!('channelName' in value) || value['channelName'] === undefined) return false;
     return true;
 }
 
@@ -49,10 +49,15 @@ export function TelegramSourceParamsFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function TelegramSourceParamsToJSON(value?: TelegramSourceParams | null): any {
+export function TelegramSourceParamsToJSON(json: any): TelegramSourceParams {
+    return TelegramSourceParamsToJSONTyped(json, false);
+}
+
+export function TelegramSourceParamsToJSONTyped(value?: TelegramSourceParams | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'channel_name': value['channelName'],

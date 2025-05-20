@@ -36,9 +36,9 @@ export interface AbcAPIErrorModel9 {
 /**
  * Check if a given object implements the AbcAPIErrorModel9 interface.
  */
-export function instanceOfAbcAPIErrorModel9(value: object): boolean {
-    if (!('code' in value)) return false;
-    if (!('detail' in value)) return false;
+export function instanceOfAbcAPIErrorModel9(value: object): value is AbcAPIErrorModel9 {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('detail' in value) || value['detail'] === undefined) return false;
     return true;
 }
 
@@ -57,10 +57,15 @@ export function AbcAPIErrorModel9FromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function AbcAPIErrorModel9ToJSON(value?: AbcAPIErrorModel9 | null): any {
+export function AbcAPIErrorModel9ToJSON(json: any): AbcAPIErrorModel9 {
+    return AbcAPIErrorModel9ToJSONTyped(json, false);
+}
+
+export function AbcAPIErrorModel9ToJSONTyped(value?: AbcAPIErrorModel9 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'code': value['code'],

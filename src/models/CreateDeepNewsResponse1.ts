@@ -13,60 +13,69 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateDeepNewsResponse } from './CreateDeepNewsResponse';
-import {
-    CreateDeepNewsResponseFromJSON,
-    CreateDeepNewsResponseFromJSONTyped,
-    CreateDeepNewsResponseToJSON,
-} from './CreateDeepNewsResponse';
-import type { CreateDeepNewsResponseChoice } from './CreateDeepNewsResponseChoice';
-import {
-    CreateDeepNewsResponseChoiceFromJSON,
-    CreateDeepNewsResponseChoiceFromJSONTyped,
-    CreateDeepNewsResponseChoiceToJSON,
-} from './CreateDeepNewsResponseChoice';
-import type { CreateDeepNewsResponseChoice1 } from './CreateDeepNewsResponseChoice1';
-import {
-    CreateDeepNewsResponseChoice1FromJSON,
-    CreateDeepNewsResponseChoice1FromJSONTyped,
-    CreateDeepNewsResponseChoice1ToJSON,
-} from './CreateDeepNewsResponseChoice1';
 import type { CreateDeepNewsResponseStreamChunk } from './CreateDeepNewsResponseStreamChunk';
 import {
     CreateDeepNewsResponseStreamChunkFromJSON,
     CreateDeepNewsResponseStreamChunkFromJSONTyped,
     CreateDeepNewsResponseStreamChunkToJSON,
+    CreateDeepNewsResponseStreamChunkToJSONTyped,
 } from './CreateDeepNewsResponseStreamChunk';
-import type { CreateDeepNewsResponseStreamSource } from './CreateDeepNewsResponseStreamSource';
-import {
-    CreateDeepNewsResponseStreamSourceFromJSON,
-    CreateDeepNewsResponseStreamSourceFromJSONTyped,
-    CreateDeepNewsResponseStreamSourceToJSON,
-} from './CreateDeepNewsResponseStreamSource';
-import type { CreateDeepNewsResponseUsage } from './CreateDeepNewsResponseUsage';
-import {
-    CreateDeepNewsResponseUsageFromJSON,
-    CreateDeepNewsResponseUsageFromJSONTyped,
-    CreateDeepNewsResponseUsageToJSON,
-} from './CreateDeepNewsResponseUsage';
-import type { CreateDeepNewsResponseUsage1 } from './CreateDeepNewsResponseUsage1';
-import {
-    CreateDeepNewsResponseUsage1FromJSON,
-    CreateDeepNewsResponseUsage1FromJSONTyped,
-    CreateDeepNewsResponseUsage1ToJSON,
-} from './CreateDeepNewsResponseUsage1';
 import type { DeepNewsResponseSources } from './DeepNewsResponseSources';
 import {
     DeepNewsResponseSourcesFromJSON,
     DeepNewsResponseSourcesFromJSONTyped,
     DeepNewsResponseSourcesToJSON,
+    DeepNewsResponseSourcesToJSONTyped,
 } from './DeepNewsResponseSources';
 import type { DeepNewsResponseSources1 } from './DeepNewsResponseSources1';
 import {
     DeepNewsResponseSources1FromJSON,
     DeepNewsResponseSources1FromJSONTyped,
     DeepNewsResponseSources1ToJSON,
+    DeepNewsResponseSources1ToJSONTyped,
 } from './DeepNewsResponseSources1';
+import type { CreateDeepNewsResponseUsage } from './CreateDeepNewsResponseUsage';
+import {
+    CreateDeepNewsResponseUsageFromJSON,
+    CreateDeepNewsResponseUsageFromJSONTyped,
+    CreateDeepNewsResponseUsageToJSON,
+    CreateDeepNewsResponseUsageToJSONTyped,
+} from './CreateDeepNewsResponseUsage';
+import type { CreateDeepNewsResponseChoice } from './CreateDeepNewsResponseChoice';
+import {
+    CreateDeepNewsResponseChoiceFromJSON,
+    CreateDeepNewsResponseChoiceFromJSONTyped,
+    CreateDeepNewsResponseChoiceToJSON,
+    CreateDeepNewsResponseChoiceToJSONTyped,
+} from './CreateDeepNewsResponseChoice';
+import type { CreateDeepNewsResponseUsage1 } from './CreateDeepNewsResponseUsage1';
+import {
+    CreateDeepNewsResponseUsage1FromJSON,
+    CreateDeepNewsResponseUsage1FromJSONTyped,
+    CreateDeepNewsResponseUsage1ToJSON,
+    CreateDeepNewsResponseUsage1ToJSONTyped,
+} from './CreateDeepNewsResponseUsage1';
+import type { CreateDeepNewsResponse } from './CreateDeepNewsResponse';
+import {
+    CreateDeepNewsResponseFromJSON,
+    CreateDeepNewsResponseFromJSONTyped,
+    CreateDeepNewsResponseToJSON,
+    CreateDeepNewsResponseToJSONTyped,
+} from './CreateDeepNewsResponse';
+import type { CreateDeepNewsResponseChoice1 } from './CreateDeepNewsResponseChoice1';
+import {
+    CreateDeepNewsResponseChoice1FromJSON,
+    CreateDeepNewsResponseChoice1FromJSONTyped,
+    CreateDeepNewsResponseChoice1ToJSON,
+    CreateDeepNewsResponseChoice1ToJSONTyped,
+} from './CreateDeepNewsResponseChoice1';
+import type { CreateDeepNewsResponseStreamSource } from './CreateDeepNewsResponseStreamSource';
+import {
+    CreateDeepNewsResponseStreamSourceFromJSON,
+    CreateDeepNewsResponseStreamSourceFromJSONTyped,
+    CreateDeepNewsResponseStreamSourceToJSON,
+    CreateDeepNewsResponseStreamSourceToJSONTyped,
+} from './CreateDeepNewsResponseStreamSource';
 
 /**
  * 
@@ -121,12 +130,12 @@ export interface CreateDeepNewsResponse1 {
 /**
  * Check if a given object implements the CreateDeepNewsResponse1 interface.
  */
-export function instanceOfCreateDeepNewsResponse1(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('usage' in value)) return false;
-    if (!('choices' in value)) return false;
-    if (!('sources' in value)) return false;
+export function instanceOfCreateDeepNewsResponse1(value: object): value is CreateDeepNewsResponse1 {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('usage' in value) || value['usage'] === undefined) return false;
+    if (!('choices' in value) || value['choices'] === undefined) return false;
+    if (!('sources' in value) || value['sources'] === undefined) return false;
     return true;
 }
 
@@ -150,10 +159,15 @@ export function CreateDeepNewsResponse1FromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function CreateDeepNewsResponse1ToJSON(value?: CreateDeepNewsResponse1 | null): any {
+export function CreateDeepNewsResponse1ToJSON(json: any): CreateDeepNewsResponse1 {
+    return CreateDeepNewsResponse1ToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponse1ToJSONTyped(value?: CreateDeepNewsResponse1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

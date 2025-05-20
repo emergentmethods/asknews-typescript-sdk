@@ -24,7 +24,7 @@ export interface Continent {
 /**
  * Check if a given object implements the Continent interface.
  */
-export function instanceOfContinent(value: object): boolean {
+export function instanceOfContinent(value: object): value is Continent {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ContinentFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return json;
 }
 
-export function ContinentToJSON(value?: Continent | null): any {
+export function ContinentToJSON(json: any): Continent {
+    return ContinentToJSONTyped(json, false);
+}
+
+export function ContinentToJSONTyped(value?: Continent | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

@@ -51,27 +51,31 @@ export function SourcesInnerFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     switch (json['identifier']) {
         case 'asknews':
-            return Object.assign({}, AskNewsSourceFromJSONTyped(json, true), { identifier: 'asknews' });
+            return Object.assign({}, AskNewsSourceFromJSONTyped(json, true), { identifier: 'asknews' } as const);
         case 'bluesky':
-            return Object.assign({}, BlueskySourceFromJSONTyped(json, true), { identifier: 'bluesky' });
+            return Object.assign({}, BlueskySourceFromJSONTyped(json, true), { identifier: 'bluesky' } as const);
         case 'telegram':
-            return Object.assign({}, TelegramSourceFromJSONTyped(json, true), { identifier: 'telegram' });
+            return Object.assign({}, TelegramSourceFromJSONTyped(json, true), { identifier: 'telegram' } as const);
         default:
             throw new Error(`No variant of SourcesInner exists with 'identifier=${json['identifier']}'`);
     }
 }
 
-export function SourcesInnerToJSON(value?: SourcesInner | null): any {
+export function SourcesInnerToJSON(json: any): any {
+    return SourcesInnerToJSONTyped(json, false);
+}
+
+export function SourcesInnerToJSONTyped(value?: SourcesInner | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
     switch (value['identifier']) {
         case 'asknews':
-            return AskNewsSourceToJSON(value);
+            return Object.assign({}, AskNewsSourceToJSON(value), { identifier: 'asknews' } as const);
         case 'bluesky':
-            return BlueskySourceToJSON(value);
+            return Object.assign({}, BlueskySourceToJSON(value), { identifier: 'bluesky' } as const);
         case 'telegram':
-            return TelegramSourceToJSON(value);
+            return Object.assign({}, TelegramSourceToJSON(value), { identifier: 'telegram' } as const);
         default:
             throw new Error(`No variant of SourcesInner exists with 'identifier=${value['identifier']}'`);
     }

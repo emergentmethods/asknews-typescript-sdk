@@ -18,6 +18,7 @@ import {
     SourceFromJSON,
     SourceFromJSONTyped,
     SourceToJSON,
+    SourceToJSONTyped,
 } from './Source';
 
 /**
@@ -55,10 +56,10 @@ export interface CreateDeepNewsResponseStreamSource {
 /**
  * Check if a given object implements the CreateDeepNewsResponseStreamSource interface.
  */
-export function instanceOfCreateDeepNewsResponseStreamSource(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('created' in value)) return false;
-    if (!('source' in value)) return false;
+export function instanceOfCreateDeepNewsResponseStreamSource(value: object): value is CreateDeepNewsResponseStreamSource {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('created' in value) || value['created'] === undefined) return false;
+    if (!('source' in value) || value['source'] === undefined) return false;
     return true;
 }
 
@@ -79,10 +80,15 @@ export function CreateDeepNewsResponseStreamSourceFromJSONTyped(json: any, ignor
     };
 }
 
-export function CreateDeepNewsResponseStreamSourceToJSON(value?: CreateDeepNewsResponseStreamSource | null): any {
+export function CreateDeepNewsResponseStreamSourceToJSON(json: any): CreateDeepNewsResponseStreamSource {
+    return CreateDeepNewsResponseStreamSourceToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseStreamSourceToJSONTyped(value?: CreateDeepNewsResponseStreamSource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

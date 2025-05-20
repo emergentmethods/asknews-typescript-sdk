@@ -18,6 +18,7 @@ import {
     AlertResponseFromJSON,
     AlertResponseFromJSONTyped,
     AlertResponseToJSON,
+    AlertResponseToJSONTyped,
 } from './AlertResponse';
 
 /**
@@ -55,11 +56,11 @@ export interface PaginatedResponseAlertResponse {
 /**
  * Check if a given object implements the PaginatedResponseAlertResponse interface.
  */
-export function instanceOfPaginatedResponseAlertResponse(value: object): boolean {
-    if (!('items' in value)) return false;
-    if (!('count' in value)) return false;
-    if (!('nextPage' in value)) return false;
-    if (!('previousPage' in value)) return false;
+export function instanceOfPaginatedResponseAlertResponse(value: object): value is PaginatedResponseAlertResponse {
+    if (!('items' in value) || value['items'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('nextPage' in value) || value['nextPage'] === undefined) return false;
+    if (!('previousPage' in value) || value['previousPage'] === undefined) return false;
     return true;
 }
 
@@ -80,10 +81,15 @@ export function PaginatedResponseAlertResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function PaginatedResponseAlertResponseToJSON(value?: PaginatedResponseAlertResponse | null): any {
+export function PaginatedResponseAlertResponseToJSON(json: any): PaginatedResponseAlertResponse {
+    return PaginatedResponseAlertResponseToJSONTyped(json, false);
+}
+
+export function PaginatedResponseAlertResponseToJSONTyped(value?: PaginatedResponseAlertResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'items': ((value['items'] as Array<any>).map(AlertResponseToJSON)),

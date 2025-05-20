@@ -36,21 +36,21 @@ export interface CreateDeepNewsRequestMessage1 {
      * @type {string}
      * @memberof CreateDeepNewsRequestMessage1
      */
-    name?: string;
+    name?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {{ [key: string]: any; }}
      * @memberof CreateDeepNewsRequestMessage1
      */
-    functionCall?: object;
+    functionCall?: { [key: string]: any; } | null;
 }
 
 /**
  * Check if a given object implements the CreateDeepNewsRequestMessage1 interface.
  */
-export function instanceOfCreateDeepNewsRequestMessage1(value: object): boolean {
-    if (!('role' in value)) return false;
-    if (!('content' in value)) return false;
+export function instanceOfCreateDeepNewsRequestMessage1(value: object): value is CreateDeepNewsRequestMessage1 {
+    if (!('role' in value) || value['role'] === undefined) return false;
+    if (!('content' in value) || value['content'] === undefined) return false;
     return true;
 }
 
@@ -71,10 +71,15 @@ export function CreateDeepNewsRequestMessage1FromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function CreateDeepNewsRequestMessage1ToJSON(value?: CreateDeepNewsRequestMessage1 | null): any {
+export function CreateDeepNewsRequestMessage1ToJSON(json: any): CreateDeepNewsRequestMessage1 {
+    return CreateDeepNewsRequestMessage1ToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsRequestMessage1ToJSONTyped(value?: CreateDeepNewsRequestMessage1 | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'role': value['role'],

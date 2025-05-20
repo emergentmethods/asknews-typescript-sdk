@@ -42,10 +42,10 @@ export interface ValidationErrorItem {
 /**
  * Check if a given object implements the ValidationErrorItem interface.
  */
-export function instanceOfValidationErrorItem(value: object): boolean {
-    if (!('loc' in value)) return false;
-    if (!('msg' in value)) return false;
-    if (!('type' in value)) return false;
+export function instanceOfValidationErrorItem(value: object): value is ValidationErrorItem {
+    if (!('loc' in value) || value['loc'] === undefined) return false;
+    if (!('msg' in value) || value['msg'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
     return true;
 }
 
@@ -65,10 +65,15 @@ export function ValidationErrorItemFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function ValidationErrorItemToJSON(value?: ValidationErrorItem | null): any {
+export function ValidationErrorItemToJSON(json: any): ValidationErrorItem {
+    return ValidationErrorItemToJSONTyped(json, false);
+}
+
+export function ValidationErrorItemToJSONTyped(value?: ValidationErrorItem | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'loc': value['loc'],

@@ -24,7 +24,7 @@ export interface Sources1 {
 /**
  * Check if a given object implements the Sources1 interface.
  */
-export function instanceOfSources1(value: object): boolean {
+export function instanceOfSources1(value: object): value is Sources1 {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function Sources1FromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     return json;
 }
 
-export function Sources1ToJSON(value?: Sources1 | null): any {
+export function Sources1ToJSON(json: any): Sources1 {
+    return Sources1ToJSONTyped(json, false);
+}
+
+export function Sources1ToJSONTyped(value?: Sources1 | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

@@ -18,6 +18,7 @@ import {
     SearchResponseDictItemFromJSON,
     SearchResponseDictItemFromJSONTyped,
     SearchResponseDictItemToJSON,
+    SearchResponseDictItemToJSONTyped,
 } from './SearchResponseDictItem';
 
 /**
@@ -31,7 +32,7 @@ export interface CreateDeepNewsResponseStreamSourcesNewsSource {
      * @type {string}
      * @memberof CreateDeepNewsResponseStreamSourcesNewsSource
      */
-    kind?: string;
+    kind?: CreateDeepNewsResponseStreamSourcesNewsSourceKindEnum;
     /**
      * 
      * @type {SearchResponseDictItem}
@@ -40,11 +41,21 @@ export interface CreateDeepNewsResponseStreamSourcesNewsSource {
     data: SearchResponseDictItem;
 }
 
+
+/**
+ * @export
+ */
+export const CreateDeepNewsResponseStreamSourcesNewsSourceKindEnum = {
+    News: 'news'
+} as const;
+export type CreateDeepNewsResponseStreamSourcesNewsSourceKindEnum = typeof CreateDeepNewsResponseStreamSourcesNewsSourceKindEnum[keyof typeof CreateDeepNewsResponseStreamSourcesNewsSourceKindEnum];
+
+
 /**
  * Check if a given object implements the CreateDeepNewsResponseStreamSourcesNewsSource interface.
  */
-export function instanceOfCreateDeepNewsResponseStreamSourcesNewsSource(value: object): boolean {
-    if (!('data' in value)) return false;
+export function instanceOfCreateDeepNewsResponseStreamSourcesNewsSource(value: object): value is CreateDeepNewsResponseStreamSourcesNewsSource {
+    if (!('data' in value) || value['data'] === undefined) return false;
     return true;
 }
 
@@ -63,10 +74,15 @@ export function CreateDeepNewsResponseStreamSourcesNewsSourceFromJSONTyped(json:
     };
 }
 
-export function CreateDeepNewsResponseStreamSourcesNewsSourceToJSON(value?: CreateDeepNewsResponseStreamSourcesNewsSource | null): any {
+export function CreateDeepNewsResponseStreamSourcesNewsSourceToJSON(json: any): CreateDeepNewsResponseStreamSourcesNewsSource {
+    return CreateDeepNewsResponseStreamSourcesNewsSourceToJSONTyped(json, false);
+}
+
+export function CreateDeepNewsResponseStreamSourcesNewsSourceToJSONTyped(value?: CreateDeepNewsResponseStreamSourcesNewsSource | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'kind': value['kind'],

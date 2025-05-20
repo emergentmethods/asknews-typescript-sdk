@@ -18,6 +18,7 @@ import {
     UserProfileSubscriptionFromJSON,
     UserProfileSubscriptionFromJSONTyped,
     UserProfileSubscriptionToJSON,
+    UserProfileSubscriptionToJSONTyped,
 } from './UserProfileSubscription';
 
 /**
@@ -31,7 +32,7 @@ export interface UserProfile {
      * @type {string}
      * @memberof UserProfile
      */
-    identityType?: string;
+    identityType?: UserProfileIdentityTypeEnum;
     /**
      * 
      * @type {string}
@@ -52,12 +53,22 @@ export interface UserProfile {
     suspended?: boolean;
 }
 
+
+/**
+ * @export
+ */
+export const UserProfileIdentityTypeEnum = {
+    User: 'user'
+} as const;
+export type UserProfileIdentityTypeEnum = typeof UserProfileIdentityTypeEnum[keyof typeof UserProfileIdentityTypeEnum];
+
+
 /**
  * Check if a given object implements the UserProfile interface.
  */
-export function instanceOfUserProfile(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('subscription' in value)) return false;
+export function instanceOfUserProfile(value: object): value is UserProfile {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('subscription' in value) || value['subscription'] === undefined) return false;
     return true;
 }
 
@@ -78,10 +89,15 @@ export function UserProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function UserProfileToJSON(value?: UserProfile | null): any {
+export function UserProfileToJSON(json: any): UserProfile {
+    return UserProfileToJSONTyped(json, false);
+}
+
+export function UserProfileToJSONTyped(value?: UserProfile | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'identity_type': value['identityType'],

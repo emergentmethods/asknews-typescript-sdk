@@ -18,6 +18,7 @@ import {
     SentimentFromJSON,
     SentimentFromJSONTyped,
     SentimentToJSON,
+    SentimentToJSONTyped,
 } from './Sentiment';
 
 /**
@@ -49,10 +50,10 @@ export interface RedditPerspective {
 /**
  * Check if a given object implements the RedditPerspective interface.
  */
-export function instanceOfRedditPerspective(value: object): boolean {
-    if (!('sentiment' in value)) return false;
-    if (!('relevant' in value)) return false;
-    if (!('summary' in value)) return false;
+export function instanceOfRedditPerspective(value: object): value is RedditPerspective {
+    if (!('sentiment' in value) || value['sentiment'] === undefined) return false;
+    if (!('relevant' in value) || value['relevant'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
     return true;
 }
 
@@ -72,10 +73,15 @@ export function RedditPerspectiveFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function RedditPerspectiveToJSON(value?: RedditPerspective | null): any {
+export function RedditPerspectiveToJSON(json: any): RedditPerspective {
+    return RedditPerspectiveToJSONTyped(json, false);
+}
+
+export function RedditPerspectiveToJSONTyped(value?: RedditPerspective | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'sentiment': SentimentToJSON(value['sentiment']),

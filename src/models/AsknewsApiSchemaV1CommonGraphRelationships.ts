@@ -36,7 +36,7 @@ export interface AsknewsApiSchemaV1CommonGraphRelationships {
 /**
  * Check if a given object implements the AsknewsApiSchemaV1CommonGraphRelationships interface.
  */
-export function instanceOfAsknewsApiSchemaV1CommonGraphRelationships(value: object): boolean {
+export function instanceOfAsknewsApiSchemaV1CommonGraphRelationships(value: object): value is AsknewsApiSchemaV1CommonGraphRelationships {
     return true;
 }
 
@@ -55,10 +55,15 @@ export function AsknewsApiSchemaV1CommonGraphRelationshipsFromJSONTyped(json: an
     };
 }
 
-export function AsknewsApiSchemaV1CommonGraphRelationshipsToJSON(value?: AsknewsApiSchemaV1CommonGraphRelationships | null): any {
+export function AsknewsApiSchemaV1CommonGraphRelationshipsToJSON(json: any): AsknewsApiSchemaV1CommonGraphRelationships {
+    return AsknewsApiSchemaV1CommonGraphRelationshipsToJSONTyped(json, false);
+}
+
+export function AsknewsApiSchemaV1CommonGraphRelationshipsToJSONTyped(value?: AsknewsApiSchemaV1CommonGraphRelationships | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'nodes': value['nodes'],

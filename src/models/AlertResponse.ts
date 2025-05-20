@@ -30,19 +30,19 @@ export interface AlertResponse {
      * @type {Date}
      * @memberof AlertResponse
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof AlertResponse
      */
-    updatedAt?: Date;
+    updatedAt?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof AlertResponse
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
     /**
      * 
      * @type {string}
@@ -54,7 +54,7 @@ export interface AlertResponse {
      * @type {string}
      * @memberof AlertResponse
      */
-    query?: string;
+    query?: string | null;
     /**
      * 
      * @type {string}
@@ -72,25 +72,25 @@ export interface AlertResponse {
      * @type {string}
      * @memberof AlertResponse
      */
-    shareLink?: string;
+    shareLink?: string | null;
     /**
      * 
-     * @type {Array<{ [key: string]: any; }>}
+     * @type {Array<{ [key: string]: any; } | null>}
      * @memberof AlertResponse
      */
-    sources: Array<{ [key: string]: any; }>;
+    sources: Array<{ [key: string]: any; } | null>;
     /**
      * 
      * @type {{ [key: string]: any; }}
      * @memberof AlertResponse
      */
-    report?: { [key: string]: any; };
+    report?: { [key: string]: any; } | null;
     /**
      * 
-     * @type {Array<{ [key: string]: any; }>}
+     * @type {Array<{ [key: string]: any; } | null>}
      * @memberof AlertResponse
      */
-    triggers: Array<{ [key: string]: any; }>;
+    triggers: Array<{ [key: string]: any; } | null>;
     /**
      * 
      * @type {boolean}
@@ -114,13 +114,13 @@ export interface AlertResponse {
 /**
  * Check if a given object implements the AlertResponse interface.
  */
-export function instanceOfAlertResponse(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('userId' in value)) return false;
-    if (!('cron' in value)) return false;
-    if (!('model' in value)) return false;
-    if (!('sources' in value)) return false;
-    if (!('triggers' in value)) return false;
+export function instanceOfAlertResponse(value: object): value is AlertResponse {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('userId' in value) || value['userId'] === undefined) return false;
+    if (!('cron' in value) || value['cron'] === undefined) return false;
+    if (!('model' in value) || value['model'] === undefined) return false;
+    if (!('sources' in value) || value['sources'] === undefined) return false;
+    if (!('triggers' in value) || value['triggers'] === undefined) return false;
     return true;
 }
 
@@ -152,10 +152,15 @@ export function AlertResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function AlertResponseToJSON(value?: AlertResponse | null): any {
+export function AlertResponseToJSON(json: any): AlertResponse {
+    return AlertResponseToJSONTyped(json, false);
+}
+
+export function AlertResponseToJSONTyped(value?: AlertResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'id': value['id'],

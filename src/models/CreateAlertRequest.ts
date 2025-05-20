@@ -13,24 +13,27 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ReportRequest } from './ReportRequest';
-import {
-    ReportRequestFromJSON,
-    ReportRequestFromJSONTyped,
-    ReportRequestToJSON,
-} from './ReportRequest';
-import type { SourcesInner } from './SourcesInner';
-import {
-    SourcesInnerFromJSON,
-    SourcesInnerFromJSONTyped,
-    SourcesInnerToJSON,
-} from './SourcesInner';
 import type { TriggersInner } from './TriggersInner';
 import {
     TriggersInnerFromJSON,
     TriggersInnerFromJSONTyped,
     TriggersInnerToJSON,
+    TriggersInnerToJSONTyped,
 } from './TriggersInner';
+import type { SourcesInner } from './SourcesInner';
+import {
+    SourcesInnerFromJSON,
+    SourcesInnerFromJSONTyped,
+    SourcesInnerToJSON,
+    SourcesInnerToJSONTyped,
+} from './SourcesInner';
+import type { ReportRequest } from './ReportRequest';
+import {
+    ReportRequestFromJSON,
+    ReportRequestFromJSONTyped,
+    ReportRequestToJSON,
+    ReportRequestToJSONTyped,
+} from './ReportRequest';
 
 /**
  * 
@@ -43,7 +46,7 @@ export interface CreateAlertRequest {
      * @type {string}
      * @memberof CreateAlertRequest
      */
-    query?: string;
+    query?: string | null;
     /**
      * The cron schedule for the alert. For example hourly is '0 * * * *'. See https://crontab.run/ for more examples
      * @type {string}
@@ -61,7 +64,7 @@ export interface CreateAlertRequest {
      * @type {string}
      * @memberof CreateAlertRequest
      */
-    shareLink?: string;
+    shareLink?: string | null;
     /**
      * 
      * @type {Array<SourcesInner>}
@@ -73,7 +76,7 @@ export interface CreateAlertRequest {
      * @type {ReportRequest}
      * @memberof CreateAlertRequest
      */
-    report?: ReportRequest;
+    report?: ReportRequest | null;
     /**
      * 
      * @type {Array<TriggersInner>}
@@ -103,7 +106,7 @@ export interface CreateAlertRequest {
      * @type {Date}
      * @memberof CreateAlertRequest
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
 }
 
 
@@ -126,11 +129,11 @@ export type CreateAlertRequestModelEnum = typeof CreateAlertRequestModelEnum[key
 /**
  * Check if a given object implements the CreateAlertRequest interface.
  */
-export function instanceOfCreateAlertRequest(value: object): boolean {
-    if (!('cron' in value)) return false;
-    if (!('model' in value)) return false;
-    if (!('sources' in value)) return false;
-    if (!('triggers' in value)) return false;
+export function instanceOfCreateAlertRequest(value: object): value is CreateAlertRequest {
+    if (!('cron' in value) || value['cron'] === undefined) return false;
+    if (!('model' in value) || value['model'] === undefined) return false;
+    if (!('sources' in value) || value['sources'] === undefined) return false;
+    if (!('triggers' in value) || value['triggers'] === undefined) return false;
     return true;
 }
 
@@ -158,10 +161,15 @@ export function CreateAlertRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function CreateAlertRequestToJSON(value?: CreateAlertRequest | null): any {
+export function CreateAlertRequestToJSON(json: any): CreateAlertRequest {
+    return CreateAlertRequestToJSONTyped(json, false);
+}
+
+export function CreateAlertRequestToJSONTyped(value?: CreateAlertRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'query': value['query'],

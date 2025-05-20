@@ -24,7 +24,7 @@ export interface Choice {
 /**
  * Check if a given object implements the Choice interface.
  */
-export function instanceOfChoice(value: object): boolean {
+export function instanceOfChoice(value: object): value is Choice {
     return true;
 }
 
@@ -36,7 +36,11 @@ export function ChoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ch
     return json;
 }
 
-export function ChoiceToJSON(value?: Choice | null): any {
+export function ChoiceToJSON(json: any): Choice {
+    return ChoiceToJSONTyped(json, false);
+}
+
+export function ChoiceToJSONTyped(value?: Choice | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

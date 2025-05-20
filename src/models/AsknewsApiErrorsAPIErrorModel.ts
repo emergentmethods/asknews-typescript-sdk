@@ -36,9 +36,9 @@ export interface AsknewsApiErrorsAPIErrorModel {
 /**
  * Check if a given object implements the AsknewsApiErrorsAPIErrorModel interface.
  */
-export function instanceOfAsknewsApiErrorsAPIErrorModel(value: object): boolean {
-    if (!('code' in value)) return false;
-    if (!('detail' in value)) return false;
+export function instanceOfAsknewsApiErrorsAPIErrorModel(value: object): value is AsknewsApiErrorsAPIErrorModel {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('detail' in value) || value['detail'] === undefined) return false;
     return true;
 }
 
@@ -57,10 +57,15 @@ export function AsknewsApiErrorsAPIErrorModelFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function AsknewsApiErrorsAPIErrorModelToJSON(value?: AsknewsApiErrorsAPIErrorModel | null): any {
+export function AsknewsApiErrorsAPIErrorModelToJSON(json: any): AsknewsApiErrorsAPIErrorModel {
+    return AsknewsApiErrorsAPIErrorModelToJSONTyped(json, false);
+}
+
+export function AsknewsApiErrorsAPIErrorModelToJSONTyped(value?: AsknewsApiErrorsAPIErrorModel | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'code': value['code'],

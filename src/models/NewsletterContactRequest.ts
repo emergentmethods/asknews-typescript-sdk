@@ -30,13 +30,13 @@ export interface NewsletterContactRequest {
      * @type {string}
      * @memberof NewsletterContactRequest
      */
-    firstName?: string;
+    firstName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NewsletterContactRequest
      */
-    lastName?: string;
+    lastName?: string | null;
     /**
      * 
      * @type {boolean}
@@ -48,8 +48,8 @@ export interface NewsletterContactRequest {
 /**
  * Check if a given object implements the NewsletterContactRequest interface.
  */
-export function instanceOfNewsletterContactRequest(value: object): boolean {
-    if (!('email' in value)) return false;
+export function instanceOfNewsletterContactRequest(value: object): value is NewsletterContactRequest {
+    if (!('email' in value) || value['email'] === undefined) return false;
     return true;
 }
 
@@ -70,10 +70,15 @@ export function NewsletterContactRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function NewsletterContactRequestToJSON(value?: NewsletterContactRequest | null): any {
+export function NewsletterContactRequestToJSON(json: any): NewsletterContactRequest {
+    return NewsletterContactRequestToJSONTyped(json, false);
+}
+
+export function NewsletterContactRequestToJSONTyped(value?: NewsletterContactRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'email': value['email'],
