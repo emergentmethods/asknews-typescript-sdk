@@ -39,6 +39,12 @@ export interface WebSearchResponse {
      * @memberof WebSearchResponse
      */
     asDicts: Array<WebSearchResult>;
+    /**
+     * 
+     * @type {number}
+     * @memberof WebSearchResponse
+     */
+    offset?: number | null;
 }
 
 /**
@@ -62,6 +68,7 @@ export function WebSearchResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'asString': json['as_string'],
         'asDicts': ((json['as_dicts'] as Array<any>).map(WebSearchResultFromJSON)),
+        'offset': json['offset'] == null ? undefined : json['offset'],
     };
 }
 
@@ -78,6 +85,7 @@ export function WebSearchResponseToJSONTyped(value?: WebSearchResponse | null, i
         
         'as_string': value['asString'],
         'as_dicts': ((value['asDicts'] as Array<any>).map(WebSearchResultToJSON)),
+        'offset': value['offset'],
     };
 }
 

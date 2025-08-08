@@ -29,6 +29,8 @@ export interface LiveWebSearchRequest {
     queries: Array<string>;
     lookback?: number;
     domains?: Array<string>;
+    strict?: boolean;
+    offset?: number;
 }
 
 /**
@@ -60,6 +62,14 @@ export class WebsearchApi extends runtime.BaseAPI {
 
         if (requestParameters['domains'] != null) {
             queryParameters['domains'] = requestParameters['domains'];
+        }
+
+        if (requestParameters['strict'] != null) {
+            queryParameters['strict'] = requestParameters['strict'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

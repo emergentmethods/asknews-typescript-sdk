@@ -187,5 +187,7 @@ export * from './Value';
 export * from './WebSearchResponse';
 export * from './WebSearchResult';
 export * from './WebSearchResult1';
+export * from './WebSource';
+export * from './WebSourceParams';
 export * from './WebhookAction';
 export * from './WebhookParams';

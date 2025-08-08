@@ -33,13 +33,20 @@ import {
     TelegramSourceFromJSONTyped,
     TelegramSourceToJSON,
 } from './TelegramSource';
+import type { WebSource } from './WebSource';
+import {
+    instanceOfWebSource,
+    WebSourceFromJSON,
+    WebSourceFromJSONTyped,
+    WebSourceToJSON,
+} from './WebSource';
 
 /**
  * @type SourcesInner
  * 
  * @export
  */
-export type SourcesInner = { identifier: 'asknews' } & AskNewsSource | { identifier: 'bluesky' } & BlueskySource | { identifier: 'telegram' } & TelegramSource;
+export type SourcesInner = { identifier: 'asknews' } & AskNewsSource | { identifier: 'bluesky' } & BlueskySource | { identifier: 'telegram' } & TelegramSource | { identifier: 'web' } & WebSource;
 
 export function SourcesInnerFromJSON(json: any): SourcesInner {
     return SourcesInnerFromJSONTyped(json, false);
@@ -56,6 +63,8 @@ export function SourcesInnerFromJSONTyped(json: any, ignoreDiscriminator: boolea
             return Object.assign({}, BlueskySourceFromJSONTyped(json, true), { identifier: 'bluesky' } as const);
         case 'telegram':
             return Object.assign({}, TelegramSourceFromJSONTyped(json, true), { identifier: 'telegram' } as const);
+        case 'web':
+            return Object.assign({}, WebSourceFromJSONTyped(json, true), { identifier: 'web' } as const);
         default:
             throw new Error(`No variant of SourcesInner exists with 'identifier=${json['identifier']}'`);
     }
@@ -76,6 +85,8 @@ export function SourcesInnerToJSONTyped(value?: SourcesInner | null, ignoreDiscr
             return Object.assign({}, BlueskySourceToJSON(value), { identifier: 'bluesky' } as const);
         case 'telegram':
             return Object.assign({}, TelegramSourceToJSON(value), { identifier: 'telegram' } as const);
+        case 'web':
+            return Object.assign({}, WebSourceToJSON(value), { identifier: 'web' } as const);
         default:
             throw new Error(`No variant of SourcesInner exists with 'identifier=${value['identifier']}'`);
     }

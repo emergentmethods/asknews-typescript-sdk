@@ -122,6 +122,8 @@ export interface CreateAlertRequest {
 export const CreateAlertRequestModelEnum = {
     MetaLlamaMetaLlama318BInstruct: 'meta-llama/Meta-Llama-3.1-8B-Instruct',
     Gpt4oMini: 'gpt-4o-mini',
+    Gpt5Mini: 'gpt-5-mini',
+    Gpt5Nano: 'gpt-5-nano',
     Gpt4o: 'gpt-4o',
     O3Mini: 'o3-mini',
     MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct',
