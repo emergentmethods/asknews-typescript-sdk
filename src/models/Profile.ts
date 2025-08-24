@@ -12,13 +12,6 @@
  * Do not edit the class manually.
  */
 
-import type { ServiceAccountProfile } from './ServiceAccountProfile';
-import {
-    instanceOfServiceAccountProfile,
-    ServiceAccountProfileFromJSON,
-    ServiceAccountProfileFromJSONTyped,
-    ServiceAccountProfileToJSON,
-} from './ServiceAccountProfile';
 import type { UserProfile } from './UserProfile';
 import {
     instanceOfUserProfile,
@@ -32,7 +25,7 @@ import {
  * 
  * @export
  */
-export type Profile = { identityType: 'service_account' } & ServiceAccountProfile | { identityType: 'user' } & UserProfile;
+export type Profile = { identityType: 'user' } & UserProfile;
 
 export function ProfileFromJSON(json: any): Profile {
     return ProfileFromJSONTyped(json, false);
@@ -43,8 +36,6 @@ export function ProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         return json;
     }
     switch (json['identity_type']) {
-        case 'service_account':
-            return Object.assign({}, ServiceAccountProfileFromJSONTyped(json, true), { identityType: 'service_account' } as const);
         case 'user':
             return Object.assign({}, UserProfileFromJSONTyped(json, true), { identityType: 'user' } as const);
         default:
@@ -61,8 +52,6 @@ export function ProfileToJSONTyped(value?: Profile | null, ignoreDiscriminator: 
         return value;
     }
     switch (value['identityType']) {
-        case 'service_account':
-            return Object.assign({}, ServiceAccountProfileToJSON(value), { identityType: 'service_account' } as const);
         case 'user':
             return Object.assign({}, UserProfileToJSON(value), { identityType: 'user' } as const);
         default:

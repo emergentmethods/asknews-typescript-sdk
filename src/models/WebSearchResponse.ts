@@ -20,6 +20,13 @@ import {
     WebSearchResultToJSON,
     WebSearchResultToJSONTyped,
 } from './WebSearchResult';
+import type { Offset3 } from './Offset3';
+import {
+    Offset3FromJSON,
+    Offset3FromJSONTyped,
+    Offset3ToJSON,
+    Offset3ToJSONTyped,
+} from './Offset3';
 
 /**
  * 
@@ -41,10 +48,10 @@ export interface WebSearchResponse {
     asDicts: Array<WebSearchResult>;
     /**
      * 
-     * @type {number}
+     * @type {Offset3}
      * @memberof WebSearchResponse
      */
-    offset?: number | null;
+    offset?: Offset3 | null;
 }
 
 /**
@@ -68,7 +75,7 @@ export function WebSearchResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'asString': json['as_string'],
         'asDicts': ((json['as_dicts'] as Array<any>).map(WebSearchResultFromJSON)),
-        'offset': json['offset'] == null ? undefined : json['offset'],
+        'offset': json['offset'] == null ? undefined : Offset3FromJSON(json['offset']),
     };
 }
 
@@ -85,7 +92,7 @@ export function WebSearchResponseToJSONTyped(value?: WebSearchResponse | null, i
         
         'as_string': value['asString'],
         'as_dicts': ((value['asDicts'] as Array<any>).map(WebSearchResultToJSON)),
-        'offset': value['offset'],
+        'offset': Offset3ToJSON(value['offset']),
     };
 }
 

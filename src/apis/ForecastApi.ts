@@ -134,10 +134,13 @@ export type GetForecastMethodEnum = typeof GetForecastMethodEnum[keyof typeof Ge
 export const GetForecastModelEnum = {
     Gpt4o: 'gpt-4o',
     Gpt4oMini: 'gpt-4o-mini',
+    Gpt4120250414: 'gpt-4.1-2025-04-14',
     Claude35SonnetLatest: 'claude-3-5-sonnet-latest',
     Claude35Sonnet20240620: 'claude-3-5-sonnet-20240620',
-    O1Mini: 'o1-mini',
-    O3Mini: 'o3-mini'
+    ClaudeSonnet420250514: 'claude-sonnet-4-20250514',
+    ClaudeOpus420250514o1Mini: 'claude-opus-4-20250514o1-mini',
+    O3Mini: 'o3-mini',
+    O3: 'o3'
 } as const;
 export type GetForecastModelEnum = typeof GetForecastModelEnum[keyof typeof GetForecastModelEnum];
 /**
