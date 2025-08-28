@@ -175,7 +175,7 @@ export class BaseAPI {
                 console.log('Requesting access token using client credentials');
             }
             const token = btoa(`${this.configuration.clientId}:${this.configuration.clientSecret}`);
-            const response = await fetch(this.authUrl, {
+            const response = await fetch(this.configuration.authUrl ?? AUTH_URL, {
                 headers: new Headers({
                     'Authorization': `Basic ${token}`,
                     'Content-Type': 'application/x-www-form-urlencoded',
