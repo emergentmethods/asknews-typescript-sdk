@@ -229,6 +229,12 @@ export interface SearchResponseDictItem1 {
      * @type {string}
      * @memberof SearchResponseDictItem1
      */
+    bias?: SearchResponseDictItem1BiasEnum | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchResponseDictItem1
+     */
     asStringKey: string;
 }
 
@@ -257,6 +263,32 @@ export const SearchResponseDictItem1ContinentEnum = {
     Oceania: 'Oceania'
 } as const;
 export type SearchResponseDictItem1ContinentEnum = typeof SearchResponseDictItem1ContinentEnum[keyof typeof SearchResponseDictItem1ContinentEnum];
+
+/**
+ * @export
+ */
+export const SearchResponseDictItem1BiasEnum = {
+    Political: 'Political',
+    Gender: 'Gender',
+    Cultural: 'Cultural',
+    Age: 'Age',
+    Religious: 'Religious',
+    Statement: 'Statement',
+    IllogicalClaims: 'Illogical Claims',
+    Slant: 'Slant',
+    SourceSelection: 'Source Selection',
+    OmissionOfSourceAttribution: 'Omission of Source Attribution',
+    Spin: 'Spin',
+    Sensationalism: 'Sensationalism',
+    Negativity: 'Negativity',
+    SubjectiveAdjectives: 'Subjective Adjectives',
+    AdHominem: 'Ad Hominem',
+    MindReading: 'Mind Reading',
+    OpinionAsFact: 'Opinion-as-Fact',
+    None: 'None',
+    Unknown: 'Unknown'
+} as const;
+export type SearchResponseDictItem1BiasEnum = typeof SearchResponseDictItem1BiasEnum[keyof typeof SearchResponseDictItem1BiasEnum];
 
 
 /**
@@ -321,6 +353,7 @@ export function SearchResponseDictItem1FromJSONTyped(json: any, ignoreDiscrimina
         'continent': json['continent'] == null ? undefined : json['continent'],
         'assets': json['assets'] == null ? undefined : Assets1FromJSON(json['assets']),
         'socialEmbeds': json['social_embeds'] == null ? undefined : json['social_embeds'],
+        'bias': json['bias'] == null ? undefined : json['bias'],
         'asStringKey': json['as_string_key'],
     };
 }
@@ -363,6 +396,7 @@ export function SearchResponseDictItem1ToJSONTyped(value?: SearchResponseDictIte
         'continent': value['continent'],
         'assets': Assets1ToJSON(value['assets']),
         'social_embeds': value['socialEmbeds'],
+        'bias': value['bias'],
         'as_string_key': value['asStringKey'],
     };
 }

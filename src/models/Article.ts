@@ -224,6 +224,12 @@ export interface Article {
      * @memberof Article
      */
     socialEmbeds?: Array<string> | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Article
+     */
+    bias?: ArticleBiasEnum | null;
 }
 
 
@@ -251,6 +257,32 @@ export const ArticleContinentEnum = {
     Oceania: 'Oceania'
 } as const;
 export type ArticleContinentEnum = typeof ArticleContinentEnum[keyof typeof ArticleContinentEnum];
+
+/**
+ * @export
+ */
+export const ArticleBiasEnum = {
+    Political: 'Political',
+    Gender: 'Gender',
+    Cultural: 'Cultural',
+    Age: 'Age',
+    Religious: 'Religious',
+    Statement: 'Statement',
+    IllogicalClaims: 'Illogical Claims',
+    Slant: 'Slant',
+    SourceSelection: 'Source Selection',
+    OmissionOfSourceAttribution: 'Omission of Source Attribution',
+    Spin: 'Spin',
+    Sensationalism: 'Sensationalism',
+    Negativity: 'Negativity',
+    SubjectiveAdjectives: 'Subjective Adjectives',
+    AdHominem: 'Ad Hominem',
+    MindReading: 'Mind Reading',
+    OpinionAsFact: 'Opinion-as-Fact',
+    None: 'None',
+    Unknown: 'Unknown'
+} as const;
+export type ArticleBiasEnum = typeof ArticleBiasEnum[keyof typeof ArticleBiasEnum];
 
 
 /**
@@ -314,6 +346,7 @@ export function ArticleFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
         'continent': json['continent'] == null ? undefined : json['continent'],
         'assets': json['assets'] == null ? undefined : AssetsFromJSON(json['assets']),
         'socialEmbeds': json['social_embeds'] == null ? undefined : json['social_embeds'],
+        'bias': json['bias'] == null ? undefined : json['bias'],
     };
 }
 
@@ -355,6 +388,7 @@ export function ArticleToJSONTyped(value?: Article | null, ignoreDiscriminator: 
         'continent': value['continent'],
         'assets': AssetsToJSON(value['assets']),
         'social_embeds': value['socialEmbeds'],
+        'bias': value['bias'],
     };
 }
 

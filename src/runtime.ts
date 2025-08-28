@@ -22,6 +22,7 @@ export interface ConfigurationParameters {
     clientId?: string; // client id for oauth2 security
     clientSecret?: string; // client secret for oauth2 security
     scopes?: string[]; // scopes for oauth2 security
+    authUrl?: string; // override auth url
     middleware?: Middleware[]; // middleware to apply before/after fetch requests
     queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
     accessToken?: AccessToken; // parameter for oauth2 security
@@ -62,6 +63,10 @@ export class Configuration {
 
     get scopes(): string[] | undefined {
         return this.configuration.scopes;
+    }
+
+    get authUrl(): string {
+        return this.configuration.authUrl ?? AUTH_URL;
     }
 
     get middleware(): Middleware[] {
@@ -170,7 +175,7 @@ export class BaseAPI {
                 console.log('Requesting access token using client credentials');
             }
             const token = btoa(`${this.configuration.clientId}:${this.configuration.clientSecret}`);
-            const response = await fetch(AUTH_URL, {
+            const response = await fetch(this.authUrl, {
                 headers: new Headers({
                     'Authorization': `Basic ${token}`,
                     'Content-Type': 'application/x-www-form-urlencoded',
