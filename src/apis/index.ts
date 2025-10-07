@@ -29,6 +29,8 @@ import { StoriesApi } from "./StoriesApi";
 export * from './StoriesApi';
 import { WebsearchApi } from "./WebsearchApi";
 export * from './WebsearchApi';
+import { WikiApi } from "./WikiApi";
+export * from './WikiApi';
 
 export class AskNewsSDK {
   protected configuration: runtime.Configuration;
@@ -46,6 +48,7 @@ export class AskNewsSDK {
   public reddit: RedditApi;
   public stories: StoriesApi;
   public websearch: WebsearchApi;
+  public wiki: WikiApi;
 
   constructor(
     _configuration:
@@ -70,5 +73,6 @@ export class AskNewsSDK {
     this.reddit = new RedditApi(_configuration);
     this.stories = new StoriesApi(_configuration);
     this.websearch = new WebsearchApi(_configuration);
+    this.wiki = new WikiApi(_configuration);
   }
 }
