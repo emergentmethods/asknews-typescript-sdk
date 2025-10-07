@@ -51,12 +51,6 @@ import type {
   AbcAPIErrorModel82,
   AbcAPIErrorModel83,
   AbcAPIErrorModel84,
-  AbcAPIErrorModel85,
-  AbcAPIErrorModel86,
-  AbcAPIErrorModel87,
-  AbcAPIErrorModel88,
-  ArticleHitsResponse,
-  ArticleIds,
   AsknewsApiErrorsAPIErrorModel,
   CountResponse,
   DomainQueriesResponse,
@@ -142,18 +136,6 @@ import {
     AbcAPIErrorModel83ToJSON,
     AbcAPIErrorModel84FromJSON,
     AbcAPIErrorModel84ToJSON,
-    AbcAPIErrorModel85FromJSON,
-    AbcAPIErrorModel85ToJSON,
-    AbcAPIErrorModel86FromJSON,
-    AbcAPIErrorModel86ToJSON,
-    AbcAPIErrorModel87FromJSON,
-    AbcAPIErrorModel87ToJSON,
-    AbcAPIErrorModel88FromJSON,
-    AbcAPIErrorModel88ToJSON,
-    ArticleHitsResponseFromJSON,
-    ArticleHitsResponseToJSON,
-    ArticleIdsFromJSON,
-    ArticleIdsToJSON,
     AsknewsApiErrorsAPIErrorModelFromJSON,
     AsknewsApiErrorsAPIErrorModelToJSON,
     CountResponseFromJSON,
@@ -206,12 +188,6 @@ export interface GetDomainRequest {
 export interface GetDomainQueriesRequest {
     domainName: string;
     limit?: number;
-    startDate?: number;
-    endDate?: number;
-}
-
-export interface GetHitsForArticlesRequest {
-    articleIds: ArticleIds;
     startDate?: number;
     endDate?: number;
 }
@@ -481,54 +457,6 @@ export class DistributionApi extends runtime.BaseAPI {
      */
     async getDomainQueries(requestParameters: GetDomainQueriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DomainQueriesResponse> {
         const response = await this.getDomainQueriesRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Get article hits.
-     * Get hits for articles
-     */
-    async getHitsForArticlesRaw(requestParameters: GetHitsForArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ArticleHitsResponse> > {
-        if (requestParameters['articleIds'] == null) {
-            throw new runtime.RequiredError(
-                'articleIds',
-                'Required parameter "articleIds" was null or undefined when calling getHitsForArticles().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['articleIds'] != null) {
-            queryParameters['article_ids'] = requestParameters['articleIds'];
-        }
-
-        if (requestParameters['startDate'] != null) {
-            queryParameters['start_date'] = requestParameters['startDate'];
-        }
-
-        if (requestParameters['endDate'] != null) {
-            queryParameters['end_date'] = requestParameters['endDate'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/v1/distribution/articles/article_hits`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => ArticleHitsResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Get article hits.
-     * Get hits for articles
-     */
-    async getHitsForArticles(requestParameters: GetHitsForArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ArticleHitsResponse> {
-        const response = await this.getHitsForArticlesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
