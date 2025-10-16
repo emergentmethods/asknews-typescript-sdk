@@ -51,6 +51,7 @@ export const ReportRequestModelEnum = {
     O3Mini: 'o3-mini',
     Claude35SonnetLatest: 'claude-3-5-sonnet-latest',
     ClaudeSonnet420250514: 'claude-sonnet-4-20250514',
+    ClaudeSonnet4520250929: 'claude-sonnet-4-5-20250929',
     MetaLlamaMetaLlama31405BInstruct: 'meta-llama/Meta-Llama-3.1-405B-Instruct',
     MetaLlamaMetaLlama3370BInstruct: 'meta-llama/Meta-Llama-3.3-70B-Instruct'
 } as const;

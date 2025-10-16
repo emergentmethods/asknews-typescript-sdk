@@ -28,12 +28,17 @@ import type {
   AbcAPIErrorModel19,
   AbcAPIErrorModel2,
   AbcAPIErrorModel20,
+  AbcAPIErrorModel21,
+  AbcAPIErrorModel22,
+  AbcAPIErrorModel23,
+  AbcAPIErrorModel24,
   AbcAPIErrorModel3,
   AbcAPIErrorModel4,
   AbcAPIErrorModel9,
   AsknewsApiErrorsAPIErrorModel,
   BadDomainUrl,
   DomainUrl,
+  IndexCountItem,
   Offset,
   ReportingVoice,
   SearchResponse,
@@ -68,6 +73,14 @@ import {
     AbcAPIErrorModel2ToJSON,
     AbcAPIErrorModel20FromJSON,
     AbcAPIErrorModel20ToJSON,
+    AbcAPIErrorModel21FromJSON,
+    AbcAPIErrorModel21ToJSON,
+    AbcAPIErrorModel22FromJSON,
+    AbcAPIErrorModel22ToJSON,
+    AbcAPIErrorModel23FromJSON,
+    AbcAPIErrorModel23ToJSON,
+    AbcAPIErrorModel24FromJSON,
+    AbcAPIErrorModel24ToJSON,
     AbcAPIErrorModel3FromJSON,
     AbcAPIErrorModel3ToJSON,
     AbcAPIErrorModel4FromJSON,
@@ -80,6 +93,8 @@ import {
     BadDomainUrlToJSON,
     DomainUrlFromJSON,
     DomainUrlToJSON,
+    IndexCountItemFromJSON,
+    IndexCountItemToJSON,
     OffsetFromJSON,
     OffsetToJSON,
     ReportingVoiceFromJSON,
@@ -100,6 +115,13 @@ export interface GetArticleRequest {
 
 export interface GetArticlesRequest {
     articleIds: Array<string>;
+}
+
+export interface GetIndexCountsRequest {
+    domains: Array<string>;
+    startDatetime?: Date;
+    endDatetime?: Date;
+    sampling?: GetIndexCountsSamplingEnum;
 }
 
 export interface GetSourcesReportRequest {
@@ -225,6 +247,58 @@ export class NewsApi extends runtime.BaseAPI {
      */
     async getArticles(requestParameters: GetArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SearchResponseDictItem>> {
         const response = await this.getArticlesRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This endpoint is primarly used for the publisher dashboard, to show the number of articles indexed per source.
+     * Get the index counts underlying AskNews
+     */
+    async getIndexCountsRaw(requestParameters: GetIndexCountsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<IndexCountItem>> > {
+        if (requestParameters['domains'] == null) {
+            throw new runtime.RequiredError(
+                'domains',
+                'Required parameter "domains" was null or undefined when calling getIndexCounts().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['domains'] != null) {
+            queryParameters['domains'] = requestParameters['domains'];
+        }
+
+        if (requestParameters['startDatetime'] != null) {
+            queryParameters['start_datetime'] = (requestParameters['startDatetime'] as any).toISOString();
+        }
+
+        if (requestParameters['endDatetime'] != null) {
+            queryParameters['end_datetime'] = (requestParameters['endDatetime'] as any).toISOString();
+        }
+
+        if (requestParameters['sampling'] != null) {
+            queryParameters['sampling'] = requestParameters['sampling'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/v1/index_counts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IndexCountItemFromJSON));
+    }
+
+    /**
+     * This endpoint is primarly used for the publisher dashboard, to show the number of articles indexed per source.
+     * Get the index counts underlying AskNews
+     */
+    async getIndexCounts(requestParameters: GetIndexCountsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<IndexCountItem>> {
+        const response = await this.getIndexCountsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -444,6 +518,16 @@ export class NewsApi extends runtime.BaseAPI {
 
 }
 
+/**
+ * @export
+ */
+export const GetIndexCountsSamplingEnum = {
+    _5m: '5m',
+    _1h: '1h',
+    _4h: '4h',
+    _1d: '1d'
+} as const;
+export type GetIndexCountsSamplingEnum = typeof GetIndexCountsSamplingEnum[keyof typeof GetIndexCountsSamplingEnum];
 /**
  * @export
  */

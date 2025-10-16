@@ -81,6 +81,11 @@ export interface PutAlertRequest {
     updateAlertRequest: UpdateAlertRequest;
 }
 
+export interface RunAlertRequest {
+    alertId: string;
+    userId?: string;
+}
+
 /**
  * 
  */
@@ -407,6 +412,46 @@ export class AlertsApi extends runtime.BaseAPI {
      */
     async putAlert(requestParameters: PutAlertRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AlertResponse | ReadableStream<any>> {
         const response = await this.putAlertRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get an alert.
+     * Run an existing alert
+     */
+    async runAlertRaw(requestParameters: RunAlertRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AlertResponse> > {
+        if (requestParameters['alertId'] == null) {
+            throw new runtime.RequiredError(
+                'alertId',
+                'Required parameter "alertId" was null or undefined when calling runAlert().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['userId'] != null) {
+            queryParameters['user_id'] = requestParameters['userId'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/v1/chat/alerts/{alert_id}/run`.replace(`{${"alert_id"}}`, encodeURIComponent(String(requestParameters['alertId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AlertResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Get an alert.
+     * Run an existing alert
+     */
+    async runAlert(requestParameters: RunAlertRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AlertResponse> {
+        const response = await this.runAlertRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
