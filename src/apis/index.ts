@@ -7,6 +7,8 @@ import { AnalyticsApi } from "./AnalyticsApi";
 export * from './AnalyticsApi';
 import { AutofilterApi } from "./AutofilterApi";
 export * from './AutofilterApi';
+import { ChartsApi } from "./ChartsApi";
+export * from './ChartsApi';
 import { ChatApi } from "./ChatApi";
 export * from './ChatApi';
 import { DistributionApi } from "./DistributionApi";
@@ -37,6 +39,7 @@ export class AskNewsSDK {
   public alerts: AlertsApi;
   public analytics: AnalyticsApi;
   public autofilter: AutofilterApi;
+  public charts: ChartsApi;
   public chat: ChatApi;
   public distribution: DistributionApi;
   public forecast: ForecastApi;
@@ -62,6 +65,7 @@ export class AskNewsSDK {
     this.alerts = new AlertsApi(_configuration);
     this.analytics = new AnalyticsApi(_configuration);
     this.autofilter = new AutofilterApi(_configuration);
+    this.charts = new ChartsApi(_configuration);
     this.chat = new ChatApi(_configuration);
     this.distribution = new DistributionApi(_configuration);
     this.forecast = new ForecastApi(_configuration);
