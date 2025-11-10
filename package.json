@@ -1,6 +1,6 @@
 {
   "name": "@emergentmethods/asknews-typescript-sdk",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Typescript SDK for AskNews API",
   "author": "Emergent Methods <contact@emergentmethods.ai>",
   "license": "MIT",

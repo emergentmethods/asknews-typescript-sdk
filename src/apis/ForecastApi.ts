@@ -138,7 +138,8 @@ export const GetForecastModelEnum = {
     Claude35SonnetLatest: 'claude-3-5-sonnet-latest',
     Claude35Sonnet20240620: 'claude-3-5-sonnet-20240620',
     ClaudeSonnet420250514: 'claude-sonnet-4-20250514',
-    ClaudeOpus420250514claudeSonnet4520250929: 'claude-opus-4-20250514claude-sonnet-4-5-20250929',
+    ClaudeOpus420250514: 'claude-opus-4-20250514',
+    ClaudeSonnet4520250929: 'claude-sonnet-4-5-20250929',
     O1Mini: 'o1-mini',
     O3Mini: 'o3-mini',
     O3: 'o3'

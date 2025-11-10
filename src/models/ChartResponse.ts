@@ -81,6 +81,24 @@ export interface ChartResponse {
      * @memberof ChartResponse
      */
     lastParameters?: ChartParameters | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChartResponse
+     */
+    pngData?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChartResponse
+     */
+    pngUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChartResponse
+     */
+    chartUrl?: string | null;
 }
 
 /**
@@ -111,6 +129,9 @@ export function ChartResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         'iterationsUsed': json['iterations_used'] == null ? undefined : json['iterations_used'],
         'lastReasoning': json['last_reasoning'] == null ? undefined : json['last_reasoning'],
         'lastParameters': json['last_parameters'] == null ? undefined : ChartParametersFromJSON(json['last_parameters']),
+        'pngData': json['png_data'] == null ? undefined : json['png_data'],
+        'pngUrl': json['png_url'] == null ? undefined : json['png_url'],
+        'chartUrl': json['chart_url'] == null ? undefined : json['chart_url'],
     };
 }
 
@@ -134,6 +155,9 @@ export function ChartResponseToJSONTyped(value?: ChartResponse | null, ignoreDis
         'iterations_used': value['iterationsUsed'],
         'last_reasoning': value['lastReasoning'],
         'last_parameters': ChartParametersToJSON(value['lastParameters']),
+        'png_data': value['pngData'],
+        'png_url': value['pngUrl'],
+        'chart_url': value['chartUrl'],
     };
 }
 
