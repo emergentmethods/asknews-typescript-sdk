@@ -17,6 +17,8 @@ import { ForecastApi } from "./ForecastApi";
 export * from './ForecastApi';
 import { GraphApi } from "./GraphApi";
 export * from './GraphApi';
+import { IndexUrlsApi } from "./IndexUrlsApi";
+export * from './IndexUrlsApi';
 import { NewsApi } from "./NewsApi";
 export * from './NewsApi';
 import { NewslettersApi } from "./NewslettersApi";
@@ -44,6 +46,7 @@ export class AskNewsSDK {
   public distribution: DistributionApi;
   public forecast: ForecastApi;
   public graph: GraphApi;
+  public indexUrls: IndexUrlsApi;
   public news: NewsApi;
   public newsletters: NewslettersApi;
   public ping: PingApi;
@@ -70,6 +73,7 @@ export class AskNewsSDK {
     this.distribution = new DistributionApi(_configuration);
     this.forecast = new ForecastApi(_configuration);
     this.graph = new GraphApi(_configuration);
+    this.indexUrls = new IndexUrlsApi(_configuration);
     this.news = new NewsApi(_configuration);
     this.newsletters = new NewslettersApi(_configuration);
     this.ping = new PingApi(_configuration);
