@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "https://api.asknews.dev".replace(/\/+$/, "");
+export const BASE_PATH = "https://api.asknews.app".replace(/\/+$/, "");
 export const AUTH_URL = "https://auth.asknews.app/oauth2/token";
 
 export interface ConfigurationParameters {
