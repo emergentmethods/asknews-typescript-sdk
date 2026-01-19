@@ -2,6 +2,7 @@
 /* eslint-disable */
 export * from './AbcAPIErrorModel1';
 export * from './AbcAPIErrorModel10';
+export * from './AbcAPIErrorModel100';
 export * from './AbcAPIErrorModel11';
 export * from './AbcAPIErrorModel12';
 export * from './AbcAPIErrorModel13';
@@ -96,6 +97,9 @@ export * from './AbcAPIErrorModel93';
 export * from './AbcAPIErrorModel94';
 export * from './AbcAPIErrorModel95';
 export * from './AbcAPIErrorModel96';
+export * from './AbcAPIErrorModel97';
+export * from './AbcAPIErrorModel98';
+export * from './AbcAPIErrorModel99';
 export * from './AlertLog';
 export * from './AlertResponse';
 export * from './Article';
@@ -252,6 +256,9 @@ export * from './TopNArticlesByHitsItem';
 export * from './TopNArticlesByHitsResponse';
 export * from './TopNArticlesForDomainItem';
 export * from './TopNArticlesForDomainResponse';
+export * from './TopNArticlesTimeseriesDayItem';
+export * from './TopNArticlesTimeseriesItem';
+export * from './TopNArticlesTimeseriesResponse';
 export * from './TopNDomainsByHitsItem';
 export * from './TopNDomainsByHitsResponse';
 export * from './TriggersInner';
