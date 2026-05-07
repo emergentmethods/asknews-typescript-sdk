@@ -7,6 +7,8 @@ import { AnalyticsApi } from "./AnalyticsApi";
 export * from './AnalyticsApi';
 import { AutofilterApi } from "./AutofilterApi";
 export * from './AutofilterApi';
+import { ByokApi } from "./ByokApi";
+export * from './ByokApi';
 import { ChartsApi } from "./ChartsApi";
 export * from './ChartsApi';
 import { ChatApi } from "./ChatApi";
@@ -41,6 +43,7 @@ export class AskNewsSDK {
   public alerts: AlertsApi;
   public analytics: AnalyticsApi;
   public autofilter: AutofilterApi;
+  public byok: ByokApi;
   public charts: ChartsApi;
   public chat: ChatApi;
   public distribution: DistributionApi;
@@ -68,6 +71,7 @@ export class AskNewsSDK {
     this.alerts = new AlertsApi(_configuration);
     this.analytics = new AnalyticsApi(_configuration);
     this.autofilter = new AutofilterApi(_configuration);
+    this.byok = new ByokApi(_configuration);
     this.charts = new ChartsApi(_configuration);
     this.chat = new ChatApi(_configuration);
     this.distribution = new DistributionApi(_configuration);
