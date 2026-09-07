@@ -45,6 +45,7 @@ export const DeepNewsModel = {
     ClaudeFable5: 'claude-fable-5',
     Gpt56Terra: 'gpt-5.6-terra',
     Gpt56Sol: 'gpt-5.6-sol',
+    Gpt6Astra: 'gpt-6-astra',
     Deepseek: 'deepseek',
     DeepseekBasic: 'deepseek-basic',
     DeepseekR10528: 'deepseek-r1-0528',
